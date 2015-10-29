@@ -1,10 +1,3 @@
-/*
- * Oficina.h
- *
- *  Created on: 27/10/2015
- *      Author: Inês
- */
-
 #ifndef SRC_OFICINA_H_
 #define SRC_OFICINA_H_
 
@@ -13,31 +6,6 @@
 #include <vector>
 
 using namespace std;
-
-class Cliente{
-	string nome;
-	int id;
-	vector <Veiculo *> veiculos;
-
-public:
-	Cliente(string nome, int id);
-	string getNome() const;
-	int getId() const;
-	vector <Veiculo*> getVeiculos() const;
-	bool addVeiculo(Veiculo v1);
-	bool removeVeiculo (Veiculo v1);
-
-};
-
-class Servico{
-	string nome;
-};
-
-class Standard: public Servico{
-
-};
-
-
 
 class Veiculo{
 
@@ -51,14 +19,26 @@ public:
 
 };
 
-class Automoveis: public Veiculo{
-	vector <Servico> servicos;
+class Servico{
+	string nome;
+};
+
+class Standard: public Servico{
+
+};
+
+class Cliente{
+	string nome;
+	int id;
+	vector <Veiculo *> veiculos;
 
 public:
-	Automoveis(string marca, string matricula);
-	vector <Servico> getServicos();
-	bool addServico(Servico s1);
-	bool removeServico(Servico s1);
+	Cliente(string nome, int id);
+	string getNome() const;
+	int getId() const;
+	vector <Veiculo*> getVeiculos() const;
+	bool addVeiculo(Veiculo v1);
+	bool removeVeiculo (Veiculo v1);
 
 };
 
@@ -92,7 +72,16 @@ public:
 	bool removeServico(Servico s1);
 };
 
+class Automoveis: public Veiculo{
+	vector <Servico> servicos;
 
+public:
+	Automoveis(string marca, string matricula);
+	vector <Servico> getServicos();
+	bool addServico(Servico s1);
+	bool removeServico(Servico s1);
+
+};
 
 class Funcionario {
 
