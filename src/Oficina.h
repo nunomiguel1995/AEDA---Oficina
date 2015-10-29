@@ -14,6 +14,7 @@
 
 using namespace std;
 
+//oi kridos
 class Cliente{
 	string nome;
 	int id;
