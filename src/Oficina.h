@@ -88,6 +88,28 @@ public:
 
 class Funcionario {};
 
-class Oficina{};
+class Oficina{
+	string nome;
+	vector<Funcionario *> funcionarios;
+	vector<Veiculo *> veiculos;
+	vector<Cliente *> clientes;
+	vector<Servico *> servicos;
+public:
+	Oficina(string nome);
+	~Oficina();
+	string getNome() const;
+	vector<Funcionario *> getFuncionarios() const;
+	vector<Veiculo *> getVeiculos() const;
+	vector<Cliente *> getClientes() const;
+	vector<Servico *> getServicos() const;
+	void addFuncionario(const Funcionario & f);
+	void addCliente(const Cliente & c);
+	void addVeiculo(const Veiculo & v);
+	void addServico(const Servico & s);
+	void removeFuncionario(const Funcionario & f);
+	void removeCliente(const Cliente & c);
+	void removeVeiculo(const Veiculo & v);
+	void removeServico(const Servico & s);
+};
 
 #endif /* SRC_OFICINA_H_ */
