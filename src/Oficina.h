@@ -71,22 +71,19 @@ public:
 	vector <Veiculo*> getVeiculos() const;
 	void addVeiculo(Veiculo *v1);
 	void removeVeiculo (Veiculo *v1);
-	class VeiculoExistente{
-		string matricula;
-	public:
-		VeiculoExistente(string mt){ matricula= mt;}
-		string getMatricula() const{ return matricula;}
-	};
-	class VeiculoInexistente{
-		string matricula;
-	public:
-		VeiculoInexistente(string mt){ matricula=mt;}
-		string getMatricula() const{ return matricula;}
-	};
 };
 
 
-class Funcionario {};
+class Funcionario {
+	string nome;
+	vector<Veiculo *> veiculos;
+
+public:
+	Funcionario(string n);
+	vector <Veiculo *> getVeiculos() const;
+	void addVeiculo(Veiculo *v1);
+	void removeVeiculo(Veiculo *v1);
+};
 
 class Oficina{
 	string nome;
@@ -111,5 +108,18 @@ public:
 	void removeVeiculo(const Veiculo & v);
 	void removeServico(const Servico & s);
 };
+
+class VeiculoExistente{
+			string matricula;
+		public:
+			VeiculoExistente(string mt){ matricula= mt;}
+			string getMatricula() const{ return matricula;}
+		};
+		class VeiculoInexistente{
+			string matricula;
+		public:
+			VeiculoInexistente(string mt){ matricula=mt;}
+			string getMatricula() const{ return matricula;}
+		};
 
 #endif /* SRC_OFICINA_H_ */
