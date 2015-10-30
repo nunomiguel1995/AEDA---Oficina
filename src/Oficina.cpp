@@ -102,3 +102,11 @@ void Cliente:: removeVeiculo (Veiculo *v1){
 
 	if(!existe) throw(VeiculoInexistente(v1->getMatricula()));
 }
+
+/**
+ * Funcionario
+ */
+
+/**
+ * Oficina
+ */
