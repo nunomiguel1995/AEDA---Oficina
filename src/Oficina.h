@@ -7,20 +7,58 @@
 
 using namespace std;
 
-class Veiculo{
-	string marca;
-	string matricula;
-public:
-	Veiculo (string marca, string matricula);
-	string getMarca();
-	string getMatricula();
-};
-
 class Servico{
 	string nome;
 };
 
 class Standard: public Servico{};
+
+class Veiculo{
+	string marca;
+	string matricula;
+public:
+	Veiculo (string marca, string matricula);
+	~Veiculo();
+	string getMarca() const;
+	string getMatricula() const;
+};
+
+class Motorizada: public Veiculo{
+	vector<Servico> servicos;
+public:
+	Motorizada(string marca, string matricula);
+	~Motorizada();
+	vector<Servico> getServicos() const;
+	void addServico(const Servico & s);
+};
+
+class Camiao: public Veiculo{
+	vector<Servico> servicos;
+public:
+	Camiao(string marca, string matricula);
+	~Camiao();
+	vector<Servico> getServicos() const;
+	void addServico(const Servico & s);
+};
+
+class Autocarro: public Veiculo{
+	vector<Servico> servicos;
+public:
+	Autocarro(string marca, string matricula);
+	~Autocarro();
+	vector<Servico> getServicos() const;
+	void addServico(const Servico & s);
+};
+
+class Automovel: public Veiculo{
+	vector<Servico> servicos;
+public:
+	Automovel(string marca, string matricula);
+	~Automovel();
+	vector<Servico> getServicos() const;
+	void addServico(const Servico & s);
+};
+
 
 class Cliente{
 	string nome;
@@ -35,41 +73,6 @@ public:
 	bool removeVeiculo (Veiculo v1);
 };
 
-class Motorizadas: public Veiculo{
-	vector<Servico> servicos;
-public:
-	Motorizadas(string marca, string matricula);
-	vector <Servico> getServicos();
-	bool addServico(Servico s1);
-	bool removeServico(Servico s1);
-};
-
-class Camiao: public Veiculo{
-	vector<Servico> servicos;
-public:
-	Camiao(string marca, string matricula);
-	vector <Servico> getServicos();
-	bool addServico(Servico s1);
-	bool removeServico(Servico s1);
-};
-
-class Autocarro: public Veiculo{
-	vector <Servico> servicos;
-public:
-	Autocarro(string marca, string matricula);
-	vector <Servico> getServicos();
-	bool addServico(Servico s1);
-	bool removeServico(Servico s1);
-};
-
-class Automoveis: public Veiculo{
-	vector <Servico> servicos;
-public:
-	Automoveis(string marca, string matricula);
-	vector <Servico> getServicos();
-	bool addServico(Servico s1);
-	bool removeServico(Servico s1);
-};
 
 class Funcionario {};
 
