@@ -31,8 +31,20 @@ public:
 	string getNome() const;
 	int getId() const;
 	vector <Veiculo*> getVeiculos() const;
-	bool addVeiculo(Veiculo v1);
-	bool removeVeiculo (Veiculo v1);
+	void addVeiculo(Veiculo *v1);
+	void removeVeiculo (Veiculo *v1);
+	class VeiculoExistente{
+		string matricula;
+	public:
+		VeiculoExistente(string mt){ matricula= mt;}
+		string getMatricula() const{ return matricula;}
+	};
+	class VeiculoInexistente{
+		string matricula;
+	public:
+		VeiculoInexistente(string mt){ matricula=mt;}
+		string getMatricula() const{ return matricula;}
+	};
 };
 
 class Motorizadas: public Veiculo{
