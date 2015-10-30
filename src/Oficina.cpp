@@ -110,3 +110,19 @@ void Cliente:: removeVeiculo (Veiculo *v1){
 /**
  * Oficina
  */
+
+Oficina::Oficina(string n) : nome(n){}
+Oficina::~Oficina(){}
+//string getNome() const;
+//vector<Funcionario *> getFuncionarios() const;
+//vector<Veiculo *> getVeiculos() const;
+//vector<Cliente *> getClientes() const;
+//vector<Servico *> getServicos() const;
+//void addFuncionario(const Funcionario & f);
+//void addCliente(const Cliente & c);
+//void addVeiculo(const Veiculo & v);
+//void addServico(const Servico & s);
+//void removeFuncionario(const Funcionario & f);
+//void removeCliente(const Cliente & c);
+//void removeVeiculo(const Veiculo & v);
+//void removeServico(const Servico & s);
