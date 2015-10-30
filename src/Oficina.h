@@ -65,7 +65,7 @@ class Cliente{
 	int id;
 	vector<Veiculo *> veiculos;
 public:
-	Cliente(string nome, int id);
+	Cliente(string nome);
 	string getNome() const;
 	int getId() const;
 	vector <Veiculo*> getVeiculos() const;

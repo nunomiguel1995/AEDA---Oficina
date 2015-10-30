@@ -18,7 +18,7 @@ string Veiculo::getMatricula() const {return matricula;}
  */
 Motorizada::Motorizada(string m, string mt) : Veiculo(m,mt){}
 
-Motorizada::~Motorizada(){}
+Motorizada::~Motorizada(){servicos.erase(servicos.begin(),servicos.end());}
 
 vector<Servico> Motorizada::getServicos() const{return servicos;}
 
@@ -29,20 +29,42 @@ void Motorizada::addServico(const Servico & s){servicos.push_back(s);}
  */
 Camiao::Camiao(string m, string mt) : Veiculo(m,mt){}
 
-Camiao::~Camiao(){}
+Camiao::~Camiao(){servicos.erase(servicos.begin(),servicos.end());}
 
 vector<Servico> Camiao::getServicos() const{return servicos;}
 
 void Camiao::addServico(const Servico & s){servicos.push_back(s);}
+
+/**
+ * Autocarro
+ */
+Autocarro::Autocarro(string m, string mt) : Veiculo(m,mt){}
+
+Autocarro::~Autocarro(){servicos.erase(servicos.begin(),servicos.end());}
+
+vector<Servico> Autocarro::getServicos() const{return servicos;}
+
+void Autocarro::addServico(const Servico & s){servicos.push_back(s);}
+
+/**
+ * Automóvel
+ */
+Automovel::Automovel(string m, string mt) : Veiculo(m,mt){}
+
+Automovel::~Automovel(){servicos.erase(servicos.begin(),servicos.end());}
+
+vector<Servico> Automovel::getServicos() const{return servicos;}
+
+void Automovel::addServico(const Servico & s){servicos.push_back(s);}
 
 /*
  * Cliente
  */
 static int ID=1;
 
-Cliente:: Cliente(string nome, int id){
+Cliente:: Cliente(string nome){
 	this->nome=nome;
-	id=ID;
+	this->id=ID;
 	ID++;
 }
 
@@ -69,15 +91,14 @@ void Cliente:: addVeiculo(Veiculo *v1){
 
 void Cliente:: removeVeiculo (Veiculo *v1){
 	bool existe=false;
-	int pos;
+	unsigned int pos;
 	for(pos=0; pos<veiculos.size();pos++){
 		if(veiculos[pos]->getMatricula()==v1->getMatricula()){
 			existe=true;
+			veiculos.erase(veiculos.begin()+pos);
 			break;
 		}
 	}
 
 	if(!existe) throw(VeiculoInexistente(v1->getMatricula()));
-
-	veiculos.erase(veiculos.begin()+pos);
 }
