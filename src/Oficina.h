@@ -4,104 +4,12 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "Excepcoes.h"
+#include "Funcionario.h"
+#include "Veiculo.h"
+#include "Cliente.h"
 
 using namespace std;
-
-class Servico{
-	string nome;
-public:
-	Servico (string nome);
-	string getNome();
-};
-
-class Standard: public Servico{
-	float preco;
-	int duracao;
-	vector <string> descricao;
-public:
-	Standard (string nome);
-};
-
-
-class naoStandard: public Servico{
-	float preco;
-	int duracao;
-	vector <string> descricao;
-public:
-	naoStandard (string nome, float preco, int duracao, vector<string> descricao);
-};
-
-class Veiculo{
-	string marca;
-	string matricula;
-public:
-	Veiculo (string marca, string matricula);
-	~Veiculo();
-	string getMarca() const;
-	string getMatricula() const;
-};
-
-class Motorizada: public Veiculo{
-	vector<Servico> servicos;
-public:
-	Motorizada(string marca, string matricula);
-	~Motorizada();
-	vector<Servico> getServicos() const;
-	void addServico(const Servico & s);
-};
-
-class Camiao: public Veiculo{
-	vector<Servico> servicos;
-public:
-	Camiao(string marca, string matricula);
-	~Camiao();
-	vector<Servico> getServicos() const;
-	void addServico(const Servico & s);
-};
-
-class Autocarro: public Veiculo{
-	vector<Servico> servicos;
-public:
-	Autocarro(string marca, string matricula);
-	~Autocarro();
-	vector<Servico> getServicos() const;
-	void addServico(const Servico & s);
-};
-
-class Automovel: public Veiculo{
-	vector<Servico> servicos;
-public:
-	Automovel(string marca, string matricula);
-	~Automovel();
-	vector<Servico> getServicos() const;
-	void addServico(const Servico & s);
-};
-
-
-class Cliente{
-	string nome;
-	int id;
-	vector<Veiculo *> veiculos;
-public:
-	Cliente(string nome);
-	string getNome() const;
-	int getId() const;
-	vector <Veiculo*> getVeiculos() const;
-	void addVeiculo(Veiculo *v1);
-	void removeVeiculo (Veiculo *v1);
-};
-
-
-class Funcionario {
-	string nome;
-	vector<Veiculo *> veiculos;
-public:
-	Funcionario(string n);
-	vector <Veiculo *> getVeiculos() const;
-	void addVeiculo(Veiculo *v1);
-	void removeVeiculo(Veiculo *v1);
-	string getNome();
-};
 
 class Oficina{
 	string nome;
@@ -124,46 +32,5 @@ public:
 	void removeVeiculo(Veiculo *v);
 };
 
-class ClienteExistente{
-	string nome;
-public:
-	ClienteExistente(string nome){ this->nome = nome;}
-	string getNome() const{return nome;}
-};
-
-class ClienteInexistente{
-	string nome;
-public:
-	ClienteInexistente(string nome){ this->nome = nome;}
-	string getNome() const{return nome;}
-};
-
-class FuncionarioExistente{
-	string nome;
-public:
-	FuncionarioExistente(string nome){this->nome = nome;}
-	string getNome() const{return nome;}
-};
-
-class FuncionarioInexistente{
-	string nome;
-public:
-	FuncionarioInexistente(string nome){this->nome = nome;}
-	string getNome() const{return nome;}
-};
-
-class VeiculoExistente{
-			string matricula;
-		public:
-			VeiculoExistente(string mt){ matricula= mt;}
-			string getMatricula() const{ return matricula;}
-		};
-
-class VeiculoInexistente{
-	string matricula;
-public:
-	VeiculoInexistente(string mt){ matricula=mt;}
-	string getMatricula() const{ return matricula;}
-};
 
 #endif /* SRC_OFICINA_H_ */
