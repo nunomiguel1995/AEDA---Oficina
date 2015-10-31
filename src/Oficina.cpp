@@ -138,7 +138,6 @@ string Funcionario:: getNome(){
 /**
  * Oficina
  */
-
 Oficina::Oficina(string n) : nome(n){}
 
 Oficina::~Oficina(){
