@@ -131,6 +131,10 @@ void Funcionario:: removeVeiculo(Veiculo *v1){
 		if(!existe) throw(VeiculoInexistente(v1->getMatricula()));
 }
 
+string Funcionario:: getNome(){
+	return nome;
+}
+
 /**
  * Oficina
  */
@@ -150,6 +154,3 @@ Oficina::~Oficina(){}
 //void removeCliente(const Cliente & c);
 //void removeVeiculo(const Veiculo & v);
 //void removeServico(const Servico & s);
-
-
-//oigatinhos

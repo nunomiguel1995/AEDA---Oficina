@@ -83,6 +83,7 @@ public:
 	vector <Veiculo *> getVeiculos() const;
 	void addVeiculo(Veiculo *v1);
 	void removeVeiculo(Veiculo *v1);
+	string getNome();
 };
 
 class Oficina{
