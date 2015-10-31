@@ -136,17 +136,42 @@ void Funcionario:: removeVeiculo(Veiculo *v1){
  */
 
 Oficina::Oficina(string n) : nome(n){}
-Oficina::~Oficina(){}
-//string getNome() const;
-//vector<Funcionario *> getFuncionarios() const;
-//vector<Veiculo *> getVeiculos() const;
-//vector<Cliente *> getClientes() const;
-//vector<Servico *> getServicos() const;
-//void addFuncionario(const Funcionario & f);
-//void addCliente(const Cliente & c);
-//void addVeiculo(const Veiculo & v);
-//void addServico(const Servico & s);
-//void removeFuncionario(const Funcionario & f);
-//void removeCliente(const Cliente & c);
-//void removeVeiculo(const Veiculo & v);
-//void removeServico(const Servico & s);
+
+Oficina::~Oficina(){
+	funcionarios.erase(funcionarios.begin(),funcionarios.end());
+	veiculos.erase(veiculos.begin(),veiculos.end());
+	clientes.erase(clientes.begin(),clientes.end());
+}
+
+string Oficina::getNome() const{return nome;}
+
+vector<Funcionario> Oficina::getFuncionarios() const{return funcionarios;}
+
+vector<Veiculo *> Oficina::getVeiculos() const{return veiculos;}
+
+vector<Cliente> Oficina::getClientes() const{return clientes;}
+
+void Oficina::addFuncionario(Funcionario f){
+	for(unsigned int i=0; i<funcionarios.size();i++){
+		if(funcionarios[i].getNome() == f.getNome()) throw(FuncionarioExistente(f.getNome()));
+	}
+	funcionarios.push_back(f);
+}
+
+void Oficina::addCliente(Cliente c){
+	for(unsigned int i=0; i<clientes.size();i++){
+		if(clientes[i].getNome() == c.getNome()) throw(ClienteExistente(c.getNome()));
+	}
+	clientes.push_back(c);
+}
+
+void Oficina::addVeiculo(Veiculo * v){
+	for(unsigned int i=0; i<veiculos.size();i++){
+		if(veiculos[i]->getMatricula() ==v->getMatricula()) throw(VeiculoExistente(v->getMatricula()));
+	}
+	veiculos.push_back(v);
+}
+
+//void Oficina::removeFuncionario(Funcionario f){}
+//void Oficina::removeCliente(Cliente c){}
+//void Oficina::removeVeiculo(Veiculo * v){}

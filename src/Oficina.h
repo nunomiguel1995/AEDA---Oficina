@@ -77,7 +77,6 @@ public:
 class Funcionario {
 	string nome;
 	vector<Veiculo *> veiculos;
-
 public:
 	Funcionario(string n);
 	vector <Veiculo *> getVeiculos() const;
@@ -87,39 +86,51 @@ public:
 
 class Oficina{
 	string nome;
-	vector<Funcionario *> funcionarios;
+	vector<Funcionario> funcionarios;
 	vector<Veiculo *> veiculos;
-	vector<Cliente *> clientes;
-	vector<Servico *> servicos;
+	vector<Cliente> clientes;
 public:
 	Oficina(string nome);
 	~Oficina();
 	string getNome() const;
-	vector<Funcionario *> getFuncionarios() const;
+	vector<Funcionario> getFuncionarios() const;
 	vector<Veiculo *> getVeiculos() const;
-	vector<Cliente *> getClientes() const;
+	vector<Cliente> getClientes() const;
 	vector<Servico *> getServicos() const;
-	void addFuncionario(const Funcionario & f);
-	void addCliente(const Cliente & c);
-	void addVeiculo(const Veiculo & v);
-	void addServico(const Servico & s);
-	void removeFuncionario(const Funcionario & f);
-	void removeCliente(const Cliente & c);
-	void removeVeiculo(const Veiculo & v);
-	void removeServico(const Servico & s);
+	void addFuncionario(Funcionario f);
+	void addCliente(Cliente c);
+	void addVeiculo(Veiculo *v);
+	void removeFuncionario(Funcionario f);
+	void removeCliente(Cliente c);
+	void removeVeiculo(Veiculo *v);
+};
+
+class ClienteExistente{
+	string nome;
+public:
+	ClienteExistente(string nome){ this->nome = nome;}
+	string getNome() const{return nome;}
+};
+
+class FuncionarioExistente{
+	string nome;
+public:
+	FuncionarioExistente(string nome){this->nome = nome;}
+	string getNome() const{return nome;}
 };
 
 class VeiculoExistente{
-			string matricula;
-		public:
-			VeiculoExistente(string mt){ matricula= mt;}
-			string getMatricula() const{ return matricula;}
-		};
-		class VeiculoInexistente{
-			string matricula;
-		public:
-			VeiculoInexistente(string mt){ matricula=mt;}
-			string getMatricula() const{ return matricula;}
-		};
+	string matricula;
+public:
+	VeiculoExistente(string mt){ matricula= mt;}
+	string getMatricula() const{ return matricula;}
+};
+
+class VeiculoInexistente{
+	string matricula;
+public:
+	VeiculoInexistente(string mt){ matricula=mt;}
+	string getMatricula() const{ return matricula;}
+};
 
 #endif /* SRC_OFICINA_H_ */
