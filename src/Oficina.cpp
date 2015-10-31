@@ -131,6 +131,10 @@ void Funcionario:: removeVeiculo(Veiculo *v1){
 	if(!existe) throw(VeiculoInexistente(v1->getMatricula()));
 }
 
+string Funcionario:: getNome(){
+	return nome;
+}
+
 /**
  * Oficina
  */
