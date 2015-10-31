@@ -112,10 +112,24 @@ public:
 	string getNome() const{return nome;}
 };
 
+class ClienteInexistente{
+	string nome;
+public:
+	ClienteInexistente(string nome){ this->nome = nome;}
+	string getNome() const{return nome;}
+};
+
 class FuncionarioExistente{
 	string nome;
 public:
 	FuncionarioExistente(string nome){this->nome = nome;}
+	string getNome() const{return nome;}
+};
+
+class FuncionarioInexistente{
+	string nome;
+public:
+	FuncionarioInexistente(string nome){this->nome = nome;}
 	string getNome() const{return nome;}
 };
 
