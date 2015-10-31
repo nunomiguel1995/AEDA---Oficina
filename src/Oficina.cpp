@@ -135,6 +135,28 @@ string Funcionario:: getNome(){
 	return nome;
 }
 
+
+
+
+/**
+ * Servico
+ */
+
+Servico:: Servico(string nome){
+	this-> nome =nome;
+}
+
+
+string Servico::getNome(){
+	return nome;
+}
+
+
+
+
+
+
+
 /**
  * Oficina
  */
@@ -216,3 +238,4 @@ void Oficina::removeVeiculo(Veiculo * v){
 
 	if(!existe) throw(VeiculoInexistente(v->getMatricula()));
 }
+

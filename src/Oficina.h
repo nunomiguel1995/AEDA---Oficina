@@ -9,9 +9,27 @@ using namespace std;
 
 class Servico{
 	string nome;
+public:
+	Servico (string nome);
+	string getNome();
 };
 
-class Standard: public Servico{};
+class Standard: public Servico{
+	float preco;
+	int duracao;
+	vector <string> descricao;
+public:
+	Standard (string nome);
+};
+
+
+class naoStandard: public Servico{
+	float preco;
+	int duracao;
+	vector <string> descricao;
+public:
+	naoStandard (string nome, float preco, int duracao, vector<string> descricao);
+};
 
 class Veiculo{
 	string marca;
@@ -135,11 +153,11 @@ public:
 };
 
 class VeiculoExistente{
-	string matricula;
-public:
-	VeiculoExistente(string mt){ matricula= mt;}
-	string getMatricula() const{ return matricula;}
-};
+			string matricula;
+		public:
+			VeiculoExistente(string mt){ matricula= mt;}
+			string getMatricula() const{ return matricula;}
+		};
 
 class VeiculoInexistente{
 	string matricula;
