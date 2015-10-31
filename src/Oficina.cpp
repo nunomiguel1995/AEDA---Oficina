@@ -172,6 +172,7 @@ void Oficina::addVeiculo(Veiculo * v){
 	veiculos.push_back(v);
 }
 
+
 //void Oficina::removeFuncionario(Funcionario f){}
 //void Oficina::removeCliente(Cliente c){}
 //void Oficina::removeVeiculo(Veiculo * v){}
