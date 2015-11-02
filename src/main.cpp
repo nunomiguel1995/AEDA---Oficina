@@ -43,6 +43,7 @@ int main(){
 	Funcionario f1("Joao Pires");
 	Funcionario f2("Joao Silva");
 	Funcionario f3("Joao Silva");
+	Funcionario f4("Rey Mysterio");
 
 	oficina.addFuncionario(f1);
 	oficina.addFuncionario(f2);
@@ -51,6 +52,14 @@ int main(){
 		oficina.addFuncionario(f3);
 	}catch(FuncionarioExistente &e){
 		cout << "Funcionario com o nome " << e.getNome() << " já existe.\n";
+	}
+
+	oficina.removeFuncionario(f1);
+
+	try{
+		oficina.removeFuncionario(f4);
+	}catch(FuncionarioInexistente &e){
+		cout << "Funcionario com o nome " << e.getNome() << " não existe.\n";
 	}
 
 	vector<Funcionario> funcionarios = oficina.getFuncionarios();
@@ -62,6 +71,7 @@ int main(){
 	Cliente c1("Jorge Sousa");
 	Cliente c2("Jorge Silva");
 	Cliente c3("Jorge Silva");
+	Cliente c4("João Pedro");
 
 	oficina.addCliente(c1);
 	oficina.addCliente(c2);
@@ -72,10 +82,51 @@ int main(){
 		cout << "Cliente com o nome " << e.getNome() << " já existe.\n";
 	}
 
+	oficina.removeCliente(c1);
+
+	try{
+		oficina.removeCliente(c4);
+	}catch(ClienteInexistente &e){
+		cout << "Cliente com o nome " << e.getNome() << " não existe.\n";
+	}
+
 	vector<Cliente> clientes = oficina.getClientes();
 
 	for(unsigned int i = 0; i < clientes.size(); i++){
 		cout << "Nome do cliente: " << clientes[i].getNome() << endl;
+	}
+
+	vector<Veiculo *> vecF1 = f1.getVeiculos();
+
+	for(unsigned int i=0; i<vecF1.size();i++){
+		cout << "Veiculo: " << f1.getVeiculos()[i]->getMarca() << " ; " << f1.getVeiculos()[i]->getMatricula() << endl;
+	}
+
+	f1.addVeiculo(v1);
+	f1.addVeiculo(v3);
+
+	try{
+		f1.addVeiculo(v2);
+	}catch(VeiculoExistente &e){
+		cout << "Veiculo com a matricula " << e.getMatricula() << " já existe na lista de veiculos do funcionário.\n";
+	}
+
+	cout << "Veiculo(s) do funcionário " << f1.getNome() << ": \n";
+	for(unsigned int i = 0; i < f1.getVeiculos().size(); i++){
+		cout << f1.getVeiculos()[i]->getMarca() << " ; " << f1.getVeiculos()[i]->getMatricula() << endl;
+	}
+
+	f1.removeVeiculo(v1);
+
+	try{
+		f1.removeVeiculo(v1);
+	}catch(VeiculoInexistente &e){
+		cout << "Veiculo com a matricula " << e.getMatricula() << " não existe na lista de veiculos do funcionário.\n";
+	}
+
+	cout << "Veiculo(s) do funcionário " << f1.getNome() << ": \n";
+	for(unsigned int i = 0; i < f1.getVeiculos().size(); i++){
+		cout << f1.getVeiculos()[i]->getMarca() << " ; " << f1.getVeiculos()[i]->getMatricula() << endl;
 	}
 
 	return 0;
