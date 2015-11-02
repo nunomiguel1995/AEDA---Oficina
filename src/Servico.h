@@ -20,6 +20,12 @@ class Standard: public Servico{
 	vector <string> descricao;
 public:
 	Standard (string nome);
+	void setPreco(float p1);
+	void setDuracao(int d1);
+	void setDescricao(vector<string> d1);
+	float getPreco() const;
+	int getDuracao() const;
+	vector<string> getDescricao() const;
 };
 
 
@@ -29,6 +35,9 @@ class naoStandard: public Servico{
 	vector <string> descricao;
 public:
 	naoStandard (string nome, float preco, int duracao, vector<string> descricao);
+	float getPreco() const;
+	int getDuracao() const;
+	vector<string> getDescricao() const;
 };
 
 

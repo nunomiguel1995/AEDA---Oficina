@@ -30,6 +30,14 @@ public:
 	void removeFuncionario(Funcionario f);
 	void removeCliente(Cliente c);
 	void removeVeiculo(Veiculo *v);
+
+	bool guardaFuncionarios();
+	bool guardaVeiculos();
+	bool guardaClientes();
+	bool leFuncionarios();
+	bool leVeiculos();
+	bool leClientes();
+
 };
 
 
