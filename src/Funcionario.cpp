@@ -26,10 +26,16 @@ void Funcionario:: removeVeiculo(Veiculo *v1){
 	if(!existe) throw(VeiculoInexistente(v1->getMatricula()));
 }
 
-string Funcionario:: getNome(){
+string Funcionario:: getNome() const{
 	return nome;
 }
 
+void Funcionario::displayVeiculos() const{
+	cout << "Veiculo(s) do funcionário " << nome << ": \n";
+	for(unsigned int i = 0; i < veiculos.size(); i++){
+		cout << veiculos[i]->getMarca() << " ; " << veiculos[i]->getMatricula() << endl;
+	}
+}
 
 
 

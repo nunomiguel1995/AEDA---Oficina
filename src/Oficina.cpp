@@ -81,3 +81,23 @@ void Oficina::removeVeiculo(Veiculo *v){
 	veiculos.erase(veiculos.begin()+pos);
 }
 
+void Oficina::displayFuncionarios() const{
+	cout << "Funcionário(s) da oficina: \n";
+	for(unsigned int i = 0; i < funcionarios.size(); i++){
+		cout << funcionarios[i].getNome() << endl;
+	}
+}
+
+void Oficina::displayVeiculos() const{
+	cout << "Veiculo(s) da oficina: \n";
+	for(unsigned int i = 0; i < veiculos.size(); i++){
+		cout << veiculos[i]->getMarca() << " ; " << veiculos[i]->getMatricula() << endl;
+	}
+}
+void Oficina::displayClientes() const{
+	cout << "Cliente(s) da oficina: \n";
+	for(unsigned int i = 0; i < clientes.size(); i++){
+		cout << clientes[i].getNome() << endl;
+	}
+}
+

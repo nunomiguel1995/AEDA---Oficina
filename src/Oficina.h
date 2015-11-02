@@ -31,6 +31,10 @@ public:
 	void removeCliente(Cliente c);
 	void removeVeiculo(Veiculo *v);
 
+	void displayFuncionarios() const;
+	void displayVeiculos() const;
+	void displayClientes() const;
+
 	bool guardaFuncionarios();
 	bool guardaVeiculos();
 	bool guardaClientes();
