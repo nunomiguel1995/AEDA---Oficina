@@ -68,17 +68,16 @@ void Oficina::removeCliente(Cliente c){
 	if(!existe) throw(ClienteInexistente(c.getNome()));
 }
 
-void Oficina::removeVeiculo(Veiculo * v){
+void Oficina::removeVeiculo(Veiculo *v){
 	bool existe=false;
 	unsigned int pos;
-	for(pos=0; pos<veiculos.size();pos++){
+	for(pos = 0; pos < veiculos.size();pos++){
 		if(veiculos[pos]->getMatricula()==v->getMatricula()){
 			existe=true;
-			veiculos.erase(veiculos.begin()+pos);
 			break;
 		}
 	}
-
 	if(!existe) throw(VeiculoInexistente(v->getMatricula()));
+	veiculos.erase(veiculos.begin()+pos);
 }
 
