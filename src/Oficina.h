@@ -16,6 +16,7 @@ class Oficina{
 	vector<Funcionario> funcionarios;
 	vector<Veiculo *> veiculos;
 	vector<Cliente> clientes;
+
 public:
 	Oficina(string nome);
 	~Oficina();
