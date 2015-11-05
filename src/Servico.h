@@ -9,6 +9,7 @@ using namespace std;
 
 class Servico{
 	string nome;
+
 public:
 	Servico (string nome);
 	string getNome();
