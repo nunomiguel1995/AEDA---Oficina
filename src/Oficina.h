@@ -24,6 +24,7 @@ public:
 	string getNome() const;
 	vector<Funcionario> getFuncionarios() const;
 	void setFuncionarios(vector<Funcionario> func);
+	void setClientes(vector<Cliente> clnts);
 	vector<Veiculo *> getVeiculos() const;
 	vector<Cliente> getClientes() const;
 	vector<Servico *> getServicos() const;

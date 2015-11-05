@@ -19,6 +19,10 @@ void Oficina::setFuncionarios(vector<Funcionario> func){
 	funcionarios = func;
 }
 
+void Oficina::setClientes(vector<Cliente> clnts){
+	clientes = clnts;
+}
+
 vector<Veiculo *> Oficina::getVeiculos() const{return veiculos;}
 
 vector<Cliente> Oficina::getClientes() const{return clientes;}
@@ -120,5 +124,20 @@ bool Oficina::guardaFuncionarios(){
 		funcFile << endl;
 	}
 	funcFile.close();
+	return true;
+}
+
+bool Oficina::guardaClientes(){
+	ofstream clientFile;
+	clientFile.open("clientes.txt");
+	for(unsigned int i = 0; i < clientes.size();i++){
+		vector<Veiculo *> veic = clientes[i].getVeiculos();
+		clientFile << clientes[i].getId() << " " << clientes[i].getNome() << "; veículos: ";
+		for(unsigned int j = 0; j < veic.size(); j++){
+			clientFile << j+1 << " " << veic[j]->getMarca() << " " << veic[j]->getMatricula() << "; ";
+		}
+		clientFile << endl;
+	}
+	clientFile.close();
 	return true;
 }
