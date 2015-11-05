@@ -10,11 +10,11 @@ using namespace std;
 int main(){
 	Oficina oficina("Oficina");
 
-	Veiculo *v1 = new Motorizada("Honda","11-22-AA");
-	Veiculo *v2 = new Camiao("Mercedes","11-22-AA");
-	Veiculo *v3 = new Autocarro("Opel","11-22-BB");
-	Veiculo *v4 = new Automovel("Ford","11-22-CC");
-	Veiculo *v5 = new Camiao("Fiat","11-22-DD");
+	Veiculo *v1 = new Motorizada("Honda","11-22-AA",2009);
+	Veiculo *v2 = new Camiao("Mercedes","11-22-AA",2008);
+	Veiculo *v3 = new Autocarro("Opel","11-22-BB",2009);
+	Veiculo *v4 = new Automovel("Ford","11-22-CC",2007);
+	Veiculo *v5 = new Camiao("Fiat","11-22-DD",2006);
 	Funcionario f1("Joao Pires");
 	Funcionario f2("Joao Silva");
 	Funcionario f3("Joao Silva");
@@ -63,17 +63,6 @@ int main(){
 	/**
 	 *
 	 */
-	oficina.removeFuncionario(f1);
-	try{
-		oficina.removeFuncionario(f4);
-	}catch(FuncionarioInexistente &e){
-		cout << "Funcionario com o nome " << e.getNome() << " não existe.\n";
-	}
-	oficina.displayFuncionarios();
-
-	/**
-	 *
-	 */
 	oficina.addCliente(c1);
 	oficina.addCliente(c2);
 	try{
@@ -116,6 +105,8 @@ int main(){
 		cout << "Veiculo com a matricula " << e.getMatricula() << " não existe na lista de veiculos do funcionário.\n";
 	}
 	f1.displayVeiculos();
+
+	oficina.guardaFuncionarios();
 
 	return 0;
 }

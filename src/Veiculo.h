@@ -11,8 +11,9 @@ using namespace std;
 class Veiculo{
 	string marca;
 	string matricula;
+	int ano;
 public:
-	Veiculo (string marca, string matricula);
+	Veiculo (string marca, string matricula, int ano);
 	~Veiculo();
 	string getMarca() const;
 	string getMatricula() const;
@@ -21,7 +22,7 @@ public:
 class Motorizada: public Veiculo{
 	vector<Servico> servicos;
 public:
-	Motorizada(string marca, string matricula);
+	Motorizada(string marca, string matricula, int ano);
 	~Motorizada();
 	vector<Servico> getServicos() const;
 	void addServico(const Servico & s);
@@ -30,7 +31,7 @@ public:
 class Camiao: public Veiculo{
 	vector<Servico> servicos;
 public:
-	Camiao(string marca, string matricula);
+	Camiao(string marca, string matricula, int ano);
 	~Camiao();
 	vector<Servico> getServicos() const;
 	void addServico(const Servico & s);
@@ -39,7 +40,7 @@ public:
 class Autocarro: public Veiculo{
 	vector<Servico> servicos;
 public:
-	Autocarro(string marca, string matricula);
+	Autocarro(string marca, string matricula, int ano);
 	~Autocarro();
 	vector<Servico> getServicos() const;
 	void addServico(const Servico & s);
@@ -48,7 +49,7 @@ public:
 class Automovel: public Veiculo{
 	vector<Servico> servicos;
 public:
-	Automovel(string marca, string matricula);
+	Automovel(string marca, string matricula, int anoS);
 	~Automovel();
 	vector<Servico> getServicos() const;
 	void addServico(const Servico & s);

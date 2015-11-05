@@ -101,3 +101,12 @@ void Oficina::displayClientes() const{
 	}
 }
 
+bool Oficina::guardaFuncionarios(){
+	ofstream funcFile;
+	funcFile.open("funcionarios.txt");
+	for(unsigned int i = 0; i< funcionarios.size();i++){
+		funcFile << funcionarios[i].getNome() << endl;
+	}
+	funcFile.close();
+	return true;
+}

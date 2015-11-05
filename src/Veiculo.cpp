@@ -3,7 +3,7 @@
 /**
  * Classe Veículo
  */
-Veiculo::Veiculo(string m, string mt) : marca(m), matricula(mt){}
+Veiculo::Veiculo(string m, string mt, int a) : marca(m), matricula(mt), ano(a){}
 
 Veiculo::~Veiculo(){}
 
@@ -14,7 +14,7 @@ string Veiculo::getMatricula() const {return matricula;}
 /**
  * Motorizada
  */
-Motorizada::Motorizada(string m, string mt) : Veiculo(m,mt){}
+Motorizada::Motorizada(string m, string mt, int a) : Veiculo(m,mt,a){}
 
 Motorizada::~Motorizada(){servicos.erase(servicos.begin(),servicos.end());}
 
@@ -25,7 +25,7 @@ void Motorizada::addServico(const Servico & s){servicos.push_back(s);}
 /**
  * Camiao
  */
-Camiao::Camiao(string m, string mt) : Veiculo(m,mt){}
+Camiao::Camiao(string m, string mt,int a) : Veiculo(m,mt,a){}
 
 Camiao::~Camiao(){servicos.erase(servicos.begin(),servicos.end());}
 
@@ -36,7 +36,7 @@ void Camiao::addServico(const Servico & s){servicos.push_back(s);}
 /**
  * Autocarro
  */
-Autocarro::Autocarro(string m, string mt) : Veiculo(m,mt){}
+Autocarro::Autocarro(string m, string mt,int a) : Veiculo(m,mt,a){}
 
 Autocarro::~Autocarro(){servicos.erase(servicos.begin(),servicos.end());}
 
@@ -47,7 +47,7 @@ void Autocarro::addServico(const Servico & s){servicos.push_back(s);}
 /**
  * Automóvel
  */
-Automovel::Automovel(string m, string mt) : Veiculo(m,mt){}
+Automovel::Automovel(string m, string mt,int a) : Veiculo(m,mt,a){}
 
 Automovel::~Automovel(){servicos.erase(servicos.begin(),servicos.end());}
 
