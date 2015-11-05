@@ -68,17 +68,36 @@ void Oficina::removeCliente(Cliente c){
 	if(!existe) throw(ClienteInexistente(c.getNome()));
 }
 
-void Oficina::removeVeiculo(Veiculo * v){
+void Oficina::removeVeiculo(Veiculo *v){
 	bool existe=false;
 	unsigned int pos;
-	for(pos=0; pos<veiculos.size();pos++){
+	for(pos = 0; pos < veiculos.size();pos++){
 		if(veiculos[pos]->getMatricula()==v->getMatricula()){
 			existe=true;
-			veiculos.erase(veiculos.begin()+pos);
 			break;
 		}
 	}
-
 	if(!existe) throw(VeiculoInexistente(v->getMatricula()));
+	veiculos.erase(veiculos.begin()+pos);
+}
+
+void Oficina::displayFuncionarios() const{
+	cout << "Funcionário(s) da oficina: \n";
+	for(unsigned int i = 0; i < funcionarios.size(); i++){
+		cout << funcionarios[i].getNome() << endl;
+	}
+}
+
+void Oficina::displayVeiculos() const{
+	cout << "Veiculo(s) da oficina: \n";
+	for(unsigned int i = 0; i < veiculos.size(); i++){
+		cout << veiculos[i]->getMarca() << " ; " << veiculos[i]->getMatricula() << endl;
+	}
+}
+void Oficina::displayClientes() const{
+	cout << "Cliente(s) da oficina: \n";
+	for(unsigned int i = 0; i < clientes.size(); i++){
+		cout << clientes[i].getNome() << endl;
+	}
 }
 
