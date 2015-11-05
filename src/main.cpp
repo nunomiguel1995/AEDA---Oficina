@@ -35,6 +35,7 @@ int main(){
 	}catch(VeiculoExistente &e){
 		cout << "Veiculo com a matricula " << e.getMatricula() << " já existe.\n";
 	}
+	oficina.guardaVeiculos();
 
 	/**
 	 *
