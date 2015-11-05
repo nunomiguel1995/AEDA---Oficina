@@ -142,7 +142,6 @@ bool Oficina::guardaClientes(){
 	return true;
 }
 
-
 bool Oficina::guardaVeiculos(){
 	ofstream veicFile;
 	veicFile.open("veiculos.txt");
@@ -150,5 +149,13 @@ bool Oficina::guardaVeiculos(){
 		veicFile << veiculos[i]->getMarca() << " " << veiculos[i]->getMatricula() << ";\n";
 	}
 	veicFile.close();
+	return true;
+}
+
+bool Oficina::leVeiculos(){
+	ifstream veicFile("veiculos.txt");
+	if(veicFile.is_open()){
+		veicFile.close();
+	}
 	return true;
 }
