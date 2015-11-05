@@ -15,7 +15,7 @@ class Funcionario {
 public:
 	Funcionario(string n);
 	vector <Veiculo *> getVeiculos() const;
-	void addVeiculo(Veiculo *v1);
+	void addVeiculo(Veiculo * v1);
 	void removeVeiculo(Veiculo *v1);
 	string getNome() const;
 	void displayVeiculos() const;

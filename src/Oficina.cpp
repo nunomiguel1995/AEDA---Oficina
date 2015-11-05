@@ -15,11 +15,15 @@ string Oficina::getNome() const{return nome;}
 
 vector<Funcionario> Oficina::getFuncionarios() const{return funcionarios;}
 
+void Oficina::setFuncionarios(vector<Funcionario> func){
+	funcionarios = func;
+}
+
 vector<Veiculo *> Oficina::getVeiculos() const{return veiculos;}
 
 vector<Cliente> Oficina::getClientes() const{return clientes;}
 
-void Oficina::addFuncionario(Funcionario f){
+void Oficina::addFuncionario(Funcionario & f){
 	for(unsigned int i=0; i<funcionarios.size();i++){
 		if(funcionarios[i].getNome() == f.getNome()) throw(FuncionarioExistente(f.getNome()));
 	}
@@ -86,6 +90,8 @@ void Oficina::displayFuncionarios() const{
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
 		cout << funcionarios[i].getNome() << endl;
 	}
+
+
 }
 
 void Oficina::displayVeiculos() const{
@@ -104,8 +110,14 @@ void Oficina::displayClientes() const{
 bool Oficina::guardaFuncionarios(){
 	ofstream funcFile;
 	funcFile.open("funcionarios.txt");
-	for(unsigned int i = 0; i< funcionarios.size();i++){
-		funcFile << funcionarios[i].getNome() << endl;
+	for(unsigned int i = 0; i < funcionarios.size();i++){
+		vector<Veiculo *> veic = funcionarios[i].getVeiculos();
+		funcFile << funcionarios[i].getNome() << "; veículos: ";
+		for(unsigned int j= 0; j < veic.size();j++){
+			funcFile << j+1 << " "
+					<< veic[j]->getMarca() << " " << veic[j]->getMatricula() << "; ";
+		}
+		funcFile << endl;
 	}
 	funcFile.close();
 	return true;
