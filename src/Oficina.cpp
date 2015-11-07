@@ -143,9 +143,9 @@ bool Oficina::guardaClientes(){
 	for(unsigned int i = 0; i < clientes.size();i++){
 		vector<Veiculo *> veic = clientes[i].getVeiculos();
 		if(i!=0){clientFile << endl;}
-		clientFile << clientes[i].getId() << " " << veic.size() << " " << clientes[i].getNome() << " ";
+		clientFile << clientes[i].getId() << " " << veic.size() << " " << clientes[i].getNome();
 		for(unsigned int j = 0; j < veic.size(); j++){
-			clientFile << veic[j]->getMarca() << " " << veic[j]->getAno() << " " << veic[j]->getMatricula() ;
+			clientFile << " " << veic[j]->getMarca() << " " << veic[j]->getAno() << " " << veic[j]->getMatricula() ;
 		}
 	}
 	clientFile.close();

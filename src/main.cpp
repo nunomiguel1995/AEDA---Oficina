@@ -32,23 +32,23 @@ int main(){
 	}
 	oficina.guardaVeiculos();
 
-	//f1.addVeiculo(v1);
-	//f1.addVeiculo(v3);
-	//f2.addVeiculo(v4);
-	//try{
-	//	oficina.addFuncionario(f1);
-	//	oficina.addFuncionario(f2);
-	//	oficina.addFuncionario(f3);
-	//}catch(FuncionarioExistente &e){
-	//	cout << e.getNome() << " já existe" << endl;
-	//}
-
-	//oficina.guardaFuncionarios();
+//	c1.addVeiculo(v1);
+//	c1.addVeiculo(v3);
+//	c2.addVeiculo(v4);
+//	try{
+//		oficina.addCliente(c1);
+//		oficina.addCliente(c2);
+//		oficina.addCliente(c3);
+//	}catch(ClienteExistente &e){
+//		cout << e.getNome() << " já existe" << endl;
+//	}
+//
+//	oficina.guardaClientes();
 
 	oficina.leClientes();
 	vector<Cliente> func = oficina.getClientes();
 	for(unsigned int i = 0; i < func.size(); i++){
-
+		func[i].displayCliente();
 	}
 
 	return 0;

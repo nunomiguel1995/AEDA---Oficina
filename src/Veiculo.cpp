@@ -25,17 +25,10 @@ bool operator <(const Veiculo v1, const Veiculo v2){
 		}
 }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 void Veiculo::displayVeiculo() const{
 	cout<<marca<< "; "<< matricula<<"; "<<ano<<endl;
 }
 
-=======
->>>>>>> 3ce1fbd9676c55264a36a4eeb11577adc8e4de51
->>>>>>> 2d389e19e7452db7db8dac5548cd0afb1db4c896
->>>>>>> f6f320839700073dedc96dc76609f4f3d1cb6649
 /**
  * Motorizada
  */

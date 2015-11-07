@@ -61,11 +61,8 @@ bool operator <(const Cliente c1, const Cliente c2){
 }
 
 void Cliente:: displayCliente() const{
-	cout<<nome<<"; "<<id<<"veiculos: ";
-
+	cout << "Cliente nº" << id << " -> "<<  nome << ";\nVeiculos: \n";
 	for(unsigned int i=0; i< veiculos.size();i++){
 		veiculos[i]->displayVeiculo();
-		cout<<", ";
 	}
-	cout<<endl;
 }
