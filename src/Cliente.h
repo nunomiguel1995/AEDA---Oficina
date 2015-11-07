@@ -17,9 +17,12 @@ public:
 	Cliente(string nome);
 	string getNome() const;
 	int getId() const;
+	void setId(unsigned int id);
 	vector <Veiculo*> getVeiculos() const;
 	void addVeiculo(Veiculo *v1);
 	void removeVeiculo (Veiculo *v1);
+	friend bool operator <(const Cliente c1, const Cliente c2);
+	void displayCliente() const;
 };
 
 #endif /* SRC_CLIENTE_H_ */

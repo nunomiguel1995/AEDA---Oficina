@@ -34,11 +34,11 @@ public:
 };
 
 class VeiculoExistente{
-			string matricula;
-		public:
-			VeiculoExistente(string mt){ matricula= mt;}
-			string getMatricula() const{ return matricula;}
-		};
+	string matricula;
+public:
+	VeiculoExistente(string mt){ matricula= mt;}
+	string getMatricula() const{ return matricula;}
+};
 
 class VeiculoInexistente{
 	string matricula;

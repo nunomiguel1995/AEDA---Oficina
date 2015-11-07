@@ -9,9 +9,12 @@ using namespace std;
 
 class Servico{
 	string nome;
+
 public:
 	Servico (string nome);
 	string getNome();
+	virtual void displayServico() const;
+	virtual void addtaxa(float tx);
 };
 
 class Standard: public Servico{
@@ -20,6 +23,14 @@ class Standard: public Servico{
 	vector <string> descricao;
 public:
 	Standard (string nome);
+	void setPreco(float p1);
+	void setDuracao(int d1);
+	void setDescricao(vector<string> d1);
+	float getPreco() const;
+	int getDuracao() const;
+	vector<string> getDescricao() const;
+	void displayServico() const;
+	void addtaxa(float tx);
 };
 
 
@@ -29,6 +40,11 @@ class naoStandard: public Servico{
 	vector <string> descricao;
 public:
 	naoStandard (string nome, float preco, int duracao, vector<string> descricao);
+	float getPreco() const;
+	int getDuracao() const;
+	vector<string> getDescricao() const;
+	void displayServico() const;
+	void addtaxa(float tx);
 };
 
 
