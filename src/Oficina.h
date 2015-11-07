@@ -23,10 +23,12 @@ public:
 	~Oficina();
 	string getNome() const;
 	vector<Funcionario> getFuncionarios() const;
+	void setFuncionarios(vector<Funcionario> func);
+	void setClientes(vector<Cliente> clnts);
 	vector<Veiculo *> getVeiculos() const;
 	vector<Cliente> getClientes() const;
 	vector<Servico *> getServicos() const;
-	void addFuncionario(Funcionario f);
+	void addFuncionario(Funcionario & f);
 	void addCliente(Cliente c);
 	void addVeiculo(Veiculo *v);
 	void removeFuncionario(Funcionario f);

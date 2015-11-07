@@ -35,18 +35,7 @@ int main(){
 	}catch(VeiculoExistente &e){
 		cout << "Veiculo com a matricula " << e.getMatricula() << " já existe.\n";
 	}
-	oficina.displayVeiculos();
-
-	/**
-	 *
-	 */
-	oficina.removeVeiculo(v4);
-	try{
-		oficina.removeVeiculo(v5);
-	}catch(VeiculoInexistente &e){
-		cout << "Veiculo com a matricula " << e.getMatricula() << " não existe.\n";
-	}
-	oficina.displayVeiculos();
+	oficina.guardaVeiculos();
 
 	/**
 	 *
@@ -58,11 +47,7 @@ int main(){
 	}catch(FuncionarioExistente &e){
 		cout << "Funcionario com o nome " << e.getNome() << " já existe.\n";
 	}
-	oficina.displayFuncionarios();
 
-	/**
-	 *
-	 */
 	oficina.addCliente(c1);
 	oficina.addCliente(c2);
 	try{
@@ -70,43 +55,27 @@ int main(){
 	}catch(ClienteExistente &e){
 		cout << "Cliente com o nome " << e.getNome() << " já existe.\n";
 	}
-	oficina.displayClientes();
+	oficina.guardaClientes();
 
-	/**
-	 *
-	 */
-	oficina.removeCliente(c1);
-	try{
-		oficina.removeCliente(c4);
-	}catch(ClienteInexistente &e){
-		cout << "Cliente com o nome " << e.getNome() << " não existe.\n";
-	}
-	oficina.displayClientes();
 
-	/**
-	 *
-	 */
-	f1.addVeiculo(v1);
-	f1.addVeiculo(v3);
+	vector<Funcionario> func = oficina.getFuncionarios();
+	func[0].addVeiculo(v1); //joão pires
+	func[0].addVeiculo(v3); //joão pires
+	func[1].addVeiculo(v4); //o outro
 	try{
-		f1.addVeiculo(v2);
+		func[0].addVeiculo(v3);
 	}catch(VeiculoExistente &e){
 		cout << "Veiculo com a matricula " << e.getMatricula() << " já existe na lista de veiculos do funcionário.\n";
 	}
-	f1.displayVeiculos();
-
-	/**
-	 *
-	 */
-	f1.removeVeiculo(v1);
-	try{
-		f1.removeVeiculo(v1);
-	}catch(VeiculoInexistente &e){
-		cout << "Veiculo com a matricula " << e.getMatricula() << " não existe na lista de veiculos do funcionário.\n";
-	}
-	f1.displayVeiculos();
-
+	oficina.setFuncionarios(func);
 	oficina.guardaFuncionarios();
+
+	vector<Cliente> client = oficina.getClientes();
+	client[0].addVeiculo(v1);
+	client[0].addVeiculo(v3);
+	client[1].addVeiculo(v4);
+	oficina.setClientes(client);
+	oficina.guardaClientes();
 
 	return 0;
 }
