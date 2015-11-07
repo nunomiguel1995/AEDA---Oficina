@@ -10,6 +10,8 @@
 #include "Veiculo.h"
 #include "Cliente.h"
 #include "insertionSort.h"
+#include <typeinfo>
+
 
 using namespace std;
 
