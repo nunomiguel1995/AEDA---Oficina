@@ -17,6 +17,10 @@ int Cliente:: getId() const{
 	return id;
 }
 
+void Cliente::setId(unsigned int id){
+	this->id = id;
+}
+
 vector <Veiculo*> Cliente:: getVeiculos() const{
 	return veiculos;
 }

@@ -17,6 +17,7 @@ public:
 	Cliente(string nome);
 	string getNome() const;
 	int getId() const;
+	void setId(unsigned int id);
 	vector <Veiculo*> getVeiculos() const;
 	void addVeiculo(Veiculo *v1);
 	void removeVeiculo (Veiculo *v1);
