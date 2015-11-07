@@ -13,6 +13,7 @@ string Veiculo::getMatricula() const {return matricula;}
 
 int Veiculo::getAno() const{return ano;}
 
+
 bool operator <(const Veiculo v1, const Veiculo v2){
 	int ano1= v1.getAno();
 	int ano2= v2.getAno();
@@ -38,7 +39,9 @@ Motorizada::~Motorizada(){servicos.erase(servicos.begin(),servicos.end());}
 
 vector<Servico> Motorizada::getServicos() const{return servicos;}
 
-void Motorizada::addServico(const Servico & s){servicos.push_back(s);}
+void Motorizada::addServico(Servico & s){
+	s.addtaxa(taxa);
+	servicos.push_back(s);}
 
 /**
  * Camiao
@@ -49,7 +52,9 @@ Camiao::~Camiao(){servicos.erase(servicos.begin(),servicos.end());}
 
 vector<Servico> Camiao::getServicos() const{return servicos;}
 
-void Camiao::addServico(const Servico & s){servicos.push_back(s);}
+void Camiao::addServico(Servico & s){
+	s.addtaxa(taxa);
+	servicos.push_back(s);}
 
 /**
  * Autocarro
@@ -60,7 +65,9 @@ Autocarro::~Autocarro(){servicos.erase(servicos.begin(),servicos.end());}
 
 vector<Servico> Autocarro::getServicos() const{return servicos;}
 
-void Autocarro::addServico(const Servico & s){servicos.push_back(s);}
+void Autocarro::addServico(Servico & s){
+	s.addtaxa(taxa);
+	servicos.push_back(s);}
 
 /**
  * Automóvel
@@ -71,7 +78,9 @@ Automovel::~Automovel(){servicos.erase(servicos.begin(),servicos.end());}
 
 vector<Servico> Automovel::getServicos() const{return servicos;}
 
-void Automovel::addServico(const Servico & s){servicos.push_back(s);}
+void Automovel::addServico(Servico & s){
+	s.addtaxa(taxa);
+	servicos.push_back(s);}
 
 
 
