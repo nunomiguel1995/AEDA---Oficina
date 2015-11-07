@@ -17,6 +17,8 @@ public:
 	~Veiculo();
 	string getMarca() const;
 	string getMatricula() const;
+	int getAno() const;
+	friend bool operator <(const Veiculo v1, const Veiculo v2);
 };
 
 class Motorizada: public Veiculo{

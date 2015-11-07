@@ -44,6 +44,9 @@ public:
 	bool leVeiculos();
 	bool leClientes();
 
+	void ordenaFuncionarios();
+	void ordenaVeiculos();
+	void ordenaClientes();
 };
 
 

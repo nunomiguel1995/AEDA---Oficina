@@ -11,6 +11,20 @@ string Veiculo::getMarca() const {return marca;}
 
 string Veiculo::getMatricula() const {return matricula;}
 
+int Veiculo:: getAno() const {return ano;}
+
+bool operator <(const Veiculo v1, const Veiculo v2){
+	int ano1= v1.getAno();
+	int ano2= v2.getAno();
+
+		if(ano1 < ano2) return true;
+		if(ano1> ano2) return false;
+		if(ano1 == ano2){
+			if(v1.getMarca()<v2.getMarca()) return true;
+			else return false;
+		}
+}
+
 /**
  * Motorizada
  */

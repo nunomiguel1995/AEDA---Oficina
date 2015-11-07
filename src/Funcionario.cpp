@@ -37,5 +37,15 @@ void Funcionario::displayVeiculos() const{
 	}
 }
 
+bool operator<(const Funcionario f1, const Funcionario f2){
+	int size1= f1.getVeiculos().size();
+	int size2= f2.getVeiculos().size();
 
+	if(size1 < size2) return true;
+	if(size1> size2) return false;
+	if(size1 == size2){
+		if(f1.getNome()<f2.getNome()) return true;
+		else return false;
+	}
+}
 

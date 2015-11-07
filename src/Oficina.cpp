@@ -101,6 +101,10 @@ void Oficina::displayClientes() const{
 	}
 }
 
+void Oficina:: ordenaFuncionarios(){
+	insertionSort(funcionarios);
+}
+
 bool Oficina::guardaFuncionarios(){
 	ofstream funcFile;
 	funcFile.open("funcionarios.txt");

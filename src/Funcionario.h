@@ -19,6 +19,7 @@ public:
 	void removeVeiculo(Veiculo *v1);
 	string getNome() const;
 	void displayVeiculos() const;
+	friend bool operator<(const Funcionario f1, const Funcionario f2);
 };
 
 
