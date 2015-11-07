@@ -99,9 +99,10 @@ void Oficina::displayFuncionarios() const{
 void Oficina::displayVeiculos() const{
 	cout << "Veiculo(s) da oficina: \n";
 	for(unsigned int i = 0; i < veiculos.size(); i++){
-		cout << veiculos[i]->getMarca() << " ; " << veiculos[i]->getMatricula() << endl;
+		cout << veiculos[i]->getMarca() << " ; " << veiculos[i]->getMatricula() << " ; " << veiculos[i]->getAno() << endl;
 	}
 }
+
 void Oficina::displayClientes() const{
 	cout << "Cliente(s) da oficina: \n";
 	for(unsigned int i = 0; i < clientes.size(); i++){
@@ -126,12 +127,11 @@ bool Oficina::guardaFuncionarios(){
 	funcFile.open("funcionarios.txt");
 	for(unsigned int i = 0; i < funcionarios.size();i++){
 		vector<Veiculo *> veic = funcionarios[i].getVeiculos();
-		funcFile << funcionarios[i].getNome() << "; veículos: ";
+		if(i!=0){funcFile << endl;}
+		funcFile << funcionarios[i].getNome() << " ";
 		for(unsigned int j= 0; j < veic.size();j++){
-			funcFile << j+1 << " "
-					<< veic[j]->getMarca() << " " << veic[j]->getMatricula() << "; ";
+			funcFile << " " << veic[j]->getMarca() << " " << veic[j]->getMatricula() << " " << veic[j]->getAno();
 		}
-		funcFile << endl;
 	}
 	funcFile.close();
 	return true;
@@ -142,11 +142,11 @@ bool Oficina::guardaClientes(){
 	clientFile.open("clientes.txt");
 	for(unsigned int i = 0; i < clientes.size();i++){
 		vector<Veiculo *> veic = clientes[i].getVeiculos();
-		clientFile << clientes[i].getId() << " " << clientes[i].getNome() << "; veículos: ";
+		if(i!=0){clientFile << endl;}
+		clientFile << clientes[i].getId() << " " << clientes[i].getNome() << " ";
 		for(unsigned int j = 0; j < veic.size(); j++){
-			clientFile << j+1 << " " << veic[j]->getMarca() << " " << veic[j]->getMatricula() << "; ";
+			clientFile << " " << veic[j]->getMarca() << " " << veic[j]->getMatricula() << " " << veic[j]->getAno();
 		}
-		clientFile << endl;
 	}
 	clientFile.close();
 	return true;
@@ -156,7 +156,9 @@ bool Oficina::guardaVeiculos(){
 	ofstream veicFile;
 	veicFile.open("veiculos.txt");
 	for(unsigned int i = 0; i < veiculos.size(); i++){
-		veicFile << veiculos[i]->getMarca() << " " << veiculos[i]->getMatricula() << ";\n";
+		if(i!=0){veicFile << endl;}
+		veicFile << veiculos[i]->getMarca() << " " << veiculos[i]->getMatricula() <<
+				" " << veiculos[i]->getAno();
 	}
 	veicFile.close();
 	return true;
@@ -165,7 +167,26 @@ bool Oficina::guardaVeiculos(){
 bool Oficina::leVeiculos(){
 	ifstream veicFile("veiculos.txt");
 	if(veicFile.is_open()){
+		string marca, matricula;
+		int ano;
+		while(veicFile >> marca >> matricula >> ano){
+			Veiculo *v = new Veiculo(marca,matricula,ano);
+			veiculos.push_back(v);
+		}
 		veicFile.close();
+	}
+	return true;
+}
+
+bool Oficina::leFuncionarios(){
+	ifstream funcFile("funcionarios.txt");
+	string Pnome, Unome, marca, matricula, input;
+	int ano;
+	if(!funcFile.eof()){
+		while(getline(funcFile,input)){
+
+		}
+		funcFile.close();
 	}
 	return true;
 }
