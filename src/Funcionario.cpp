@@ -31,9 +31,8 @@ string Funcionario:: getNome() const{
 }
 
 void Funcionario::displayVeiculos() const{
-	cout << "Veiculo(s) do funcionário " << nome << ": \n";
 	for(unsigned int i = 0; i < veiculos.size(); i++){
-		cout << veiculos[i]->getMarca() << " ; " << veiculos[i]->getMatricula() << endl;
+		veiculos[i]->displayVeiculo();
 	}
 }
 
@@ -53,3 +52,7 @@ bool operator<(const Funcionario f1, const Funcionario f2){
 	}
 }
 
+void Funcionario:: displayFuncionario() const{
+	cout<<nome<< "veiculos: ";
+	this->displayVeiculos();
+}

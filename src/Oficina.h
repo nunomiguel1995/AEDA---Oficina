@@ -10,7 +10,10 @@
 #include "Veiculo.h"
 #include "Cliente.h"
 #include "insertionSort.h"
+<<<<<<< HEAD
 #include <sstream>
+=======
+>>>>>>> f6f320839700073dedc96dc76609f4f3d1cb6649
 
 using namespace std;
 

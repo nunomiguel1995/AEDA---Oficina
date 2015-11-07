@@ -114,6 +114,14 @@ void Oficina:: ordenaFuncionarios(){
 	insertionSort(funcionarios);
 }
 
+void Oficina:: ordenaVeiculos(){
+	insertionSort(veiculos);
+}
+
+void Oficina:: ordenaClientes(){
+	insertionSort(clientes);
+}
+
 bool Oficina::guardaFuncionarios(){
 	ofstream funcFile;
 	funcFile.open("funcionarios.txt");

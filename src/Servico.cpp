@@ -11,6 +11,10 @@ string Servico::getNome(){
 	return nome;
 }
 
+void Servico:: displayServico() const{
+	cout<<nome<< " ";
+}
+
 /*
  * Standard
  */
@@ -46,6 +50,13 @@ vector<string> Standard:: getDescricao() const{
 	return descricao;
 }
 
+void Standard:: displayServico() const{
+	cout<<"preco: "<< preco<<"duracao: "<< duracao<<"descricao: ";
+	for(unsigned int i=0; i< descricao.size();i++){
+		cout<<descricao[i]<<", ";
+	}
+	cout<<endl;
+}
 
 /*
  * NaoStandard
@@ -66,4 +77,12 @@ int naoStandard:: getDuracao() const{
 
 vector<string> naoStandard:: getDescricao() const{
 	return descricao;
+}
+
+void naoStandard:: displayServico() const{
+	cout<<"preco: "<< preco<<"duracao: "<< duracao<<"descricao: ";
+	for(unsigned int i=0; i< descricao.size();i++){
+		cout<<descricao[i]<<", ";
+	}
+	cout<<endl;
 }
