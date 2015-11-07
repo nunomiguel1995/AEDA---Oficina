@@ -11,9 +11,6 @@ string Veiculo::getMarca() const {return marca;}
 
 string Veiculo::getMatricula() const {return matricula;}
 
-<<<<<<< HEAD
-int Veiculo::getAno() const{return ano;}
-=======
 int Veiculo:: getAno() const {return ano;}
 
 bool operator <(const Veiculo v1, const Veiculo v2){
@@ -28,14 +25,10 @@ bool operator <(const Veiculo v1, const Veiculo v2){
 		}
 }
 
-<<<<<<< HEAD
 void Veiculo::displayVeiculo() const{
 	cout<<marca<< "; "<< matricula<<"; "<<ano<<endl;
 }
 
-=======
->>>>>>> 3ce1fbd9676c55264a36a4eeb11577adc8e4de51
->>>>>>> 2d389e19e7452db7db8dac5548cd0afb1db4c896
 /**
  * Motorizada
  */
