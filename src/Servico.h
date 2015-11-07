@@ -14,6 +14,7 @@ public:
 	Servico (string nome);
 	string getNome();
 	virtual void displayServico() const;
+	virtual void addtaxa(float tx);
 };
 
 class Standard: public Servico{
@@ -29,6 +30,7 @@ public:
 	int getDuracao() const;
 	vector<string> getDescricao() const;
 	void displayServico() const;
+	void addtaxa(float tx);
 };
 
 
@@ -42,6 +44,7 @@ public:
 	int getDuracao() const;
 	vector<string> getDescricao() const;
 	void displayServico() const;
+	void addtaxa(float tx);
 };
 
 

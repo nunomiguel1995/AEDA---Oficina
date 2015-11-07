@@ -15,6 +15,7 @@ void Servico:: displayServico() const{
 	cout<<nome<< " ";
 }
 
+void Servico:: addtaxa(float tx){}
 /*
  * Standard
  */
@@ -58,6 +59,10 @@ void Standard:: displayServico() const{
 	cout<<endl;
 }
 
+void Standard:: addtaxa(float tx){
+	preco=preco+ preco*tx;
+}
+
 /*
  * NaoStandard
  */
@@ -85,4 +90,8 @@ void naoStandard:: displayServico() const{
 		cout<<descricao[i]<<", ";
 	}
 	cout<<endl;
+}
+
+void naoStandard:: addtaxa(float tx){
+	preco=preco+ preco*tx;
 }
