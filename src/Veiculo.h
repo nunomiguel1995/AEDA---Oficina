@@ -17,6 +17,7 @@ public:
 	~Veiculo();
 	string getMarca() const;
 	string getMatricula() const;
+	int getAno() const;
 };
 
 class Motorizada: public Veiculo{

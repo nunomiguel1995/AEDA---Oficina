@@ -11,6 +11,7 @@ string Veiculo::getMarca() const {return marca;}
 
 string Veiculo::getMatricula() const {return matricula;}
 
+int Veiculo::getAno() const{return ano;}
 /**
  * Motorizada
  */
