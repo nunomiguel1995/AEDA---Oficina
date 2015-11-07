@@ -18,6 +18,10 @@ public:
 	string getMarca() const;
 	string getMatricula() const;
 	int getAno() const;
+<<<<<<< HEAD
+=======
+	friend bool operator <(const Veiculo v1, const Veiculo v2);
+>>>>>>> 3ce1fbd9676c55264a36a4eeb11577adc8e4de51
 };
 
 class Motorizada: public Veiculo{
