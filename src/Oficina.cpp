@@ -94,8 +94,6 @@ void Oficina::displayFuncionarios() const{
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
 		cout << funcionarios[i].getNome() << endl;
 	}
-
-
 }
 
 void Oficina::displayVeiculos() const{
@@ -113,6 +111,14 @@ void Oficina::displayClientes() const{
 
 void Oficina:: ordenaFuncionarios(){
 	insertionSort(funcionarios);
+}
+
+void Oficina:: ordenaVeiculos(){
+	insertionSort(veiculos);
+}
+
+void Oficina:: ordenaClientes(){
+	insertionSort(clientes);
 }
 
 bool Oficina::guardaFuncionarios(){

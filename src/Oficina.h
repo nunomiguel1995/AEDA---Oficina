@@ -9,6 +9,7 @@
 #include "Funcionario.h"
 #include "Veiculo.h"
 #include "Cliente.h"
+#include "insertionSort.h"
 
 using namespace std;
 
