@@ -36,6 +36,10 @@ void Funcionario::displayVeiculos() const{
 	}
 }
 
+void Funcionario::setVeiculos(vector<Veiculo*> veic){
+	veiculos = veic;
+}
+
 bool operator<(const Funcionario f1, const Funcionario f2){
 	int size1= f1.getVeiculos().size();
 	int size2= f2.getVeiculos().size();

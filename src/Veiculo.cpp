@@ -11,7 +11,11 @@ string Veiculo::getMarca() const {return marca;}
 
 string Veiculo::getMatricula() const {return matricula;}
 
+<<<<<<< HEAD
 int Veiculo:: getAno() const {return ano;}
+=======
+int Veiculo::getAno() const{return ano;}
+>>>>>>> 371aca2d380cf9c492e620d60ae93ec428693df3
 
 bool operator <(const Veiculo v1, const Veiculo v2){
 	int ano1= v1.getAno();
