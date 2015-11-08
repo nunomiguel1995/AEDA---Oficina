@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "Excepcoes.h"
 
 using namespace std;
 

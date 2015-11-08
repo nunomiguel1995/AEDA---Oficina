@@ -47,7 +47,22 @@ public:
 	string getMatricula() const{ return matricula;}
 };
 
+class ServicoExistente{
+	string nome;
 
+public:
+	ServicoExistente(string nome){this->nome=nome;}
+	string getNome() const{ return nome;}
+};
+
+class ServicoInexistente{
+	string nome;
+
+public:
+	ServicoInexistente(string nome){this->nome=nome;}
+	string getNome() const{ return nome;}
+
+};
 
 
 #endif /* SRC_EXCEPCOES_H_ */
