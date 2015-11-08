@@ -441,11 +441,30 @@ bool Oficina::guardaFuncionarios(){
 
 bool Oficina::leServicos(){
 	ifstream servFile;
-
+	servFile.open("standard.txt",ifstream::in);
+	if(servFile.is_open()){
+		string n;
+		float preco;
+		int duracao;
+		while(servFile >> n >> preco >> duracao){
+			Servico *s = new Standard(n,preco,duracao);
+			addServicoStandard(s);
+		}
+		servFile.close();
+	}
+	return true;
 }
 
 bool Oficina::guardaServicos(){
-
+	ofstream servFile;
+	servFile.open("standard.txt");
+	for(unsigned int i = 0; i < servicosStandard.size(); i++){
+		if(i!=0){servFile << endl;}
+		servFile << servicosStandard[i].getNome() << " " << servicosStandard[i].getPreco() << " "
+				<< servicosStandard[i].getDuracao();
+	}
+	servFile.close();
+	return true;
 }
 
 int Oficina:: posVeiculo(string mt){

@@ -37,6 +37,7 @@ int Cliente:: getId() const{
 
 void Cliente::setId(unsigned int id){
 	this->id = id;
+	ID = id;
 }
 
 /**
