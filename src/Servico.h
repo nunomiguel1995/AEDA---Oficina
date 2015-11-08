@@ -8,7 +8,9 @@
 
 using namespace std;
 
-
+/**
+ * Classe Serviço- classe base
+ */
 class Servico{
 	string nome;
 	float preco;
@@ -24,6 +26,9 @@ public:
 	virtual string classname() const;
 };
 
+/**
+ * Classe Standard- classe derivada
+ */
 class Standard: public Servico{
 
 public:
@@ -33,6 +38,9 @@ public:
 };
 
 
+/**
+ * Classe não Standard- classe derivada
+ */
 class naoStandard: public Servico{
 
 public:

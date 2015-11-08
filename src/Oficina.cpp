@@ -3,18 +3,35 @@
 
 using namespace std;
 
+/**
+ * Construtor da Oficina
+ * @param n nome da oficina
+ */
 Oficina::Oficina(string n) : nome(n){}
 
+/**
+ * Destrutor da classe Oficina
+ */
 Oficina::~Oficina(){
 	funcionarios.erase(funcionarios.begin(),funcionarios.end());
 	veiculos.erase(veiculos.begin(),veiculos.end());
 	clientes.erase(clientes.begin(),clientes.end());
 }
 
+/**
+ * Retirna o nome da Oficina
+ */
 string Oficina::getNome() const{return nome;}
 
+/**
+ * Retorna os funcionários da Oficina
+ */
 vector<Funcionario> Oficina::getFuncionarios() const{return funcionarios;}
 
+/**
+ * Retorna um Funcionário com o nome passado como parametro
+ * @param nome nome do Funcionário a procurar
+ */
 Funcionario Oficina::getFuncionarioNome(string nome) const{
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
 		if(funcionarios[i].getNome() == nome){
@@ -24,6 +41,10 @@ Funcionario Oficina::getFuncionarioNome(string nome) const{
 	throw FuncionarioInexistente(nome);
 }
 
+/**
+ * Retorna o Cliente com nome passado como parametro
+ * @param nome nome do Cliente a procurar
+ */
 Cliente Oficina::getClienteNome(string nome) const{
 	for(unsigned int i = 0; i < clientes.size(); i++){
 		if(clientes[i].getNome() == nome){
@@ -32,24 +53,48 @@ Cliente Oficina::getClienteNome(string nome) const{
 	}
 	throw ClienteInexistente(nome);
 }
+
+/*
+ * Atribui ao vetor funcionarios o vetor passado como parametro
+ * @param func
+ */
 void Oficina::setFuncionarios(vector<Funcionario> func){
 	funcionarios = func;
 }
 
+/*
+ * Atribui ao vetor clientes o vetor passado como parametro
+ * @param clnts
+ */
 void Oficina::setClientes(vector<Cliente> clnts){
 	clientes = clnts;
 }
 
+/*
+ * Atribui ao vetor veiculos o vetor passado como parametro
+ * @param veic
+ */
 void Oficina:: setVeiculos(vector <Veiculo *> veic){
 	veiculos=veic;
 }
 
+/*
+ * Atribui ao vetor servicosStandard o vetor passado como parametro
+ * @param stand
+ */
 void Oficina:: setServicosStandard(vector <Standard *> stand){
 	servicosStandard= stand;
 }
 
+/**
+ * Retorna o vetor veiculos
+ */
 vector<Veiculo *> Oficina::getVeiculos() const{return veiculos;}
 
+/**
+ * Retorna o Veiculo com a matricula passada como parametro
+ * @param mt matricula do veiculo a procurar
+ */
 Veiculo * Oficina::getVeiculoMatricula(string mt) const{
 	for(unsigned int i = 0; i < veiculos.size(); i++){
 		if(veiculos[i]->getMatricula() == mt){
@@ -59,6 +104,10 @@ Veiculo * Oficina::getVeiculoMatricula(string mt) const{
 	throw VeiculoInexistente(mt);
 }
 
+/**
+ * Retorna os Funcionários responsável pelo Veiculo passado como parametro
+ * @param v
+ */
 vector<Funcionario> Oficina::getFuncionariosVeiculo(Veiculo *v) const{
 	vector<Funcionario> f;
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
@@ -71,6 +120,9 @@ vector<Funcionario> Oficina::getFuncionariosVeiculo(Veiculo *v) const{
 	return f;
 }
 
+/**
+ * Retorna os clientes da Oficina
+ */
 vector<Cliente> Oficina::getClientes() const{return clientes;}
 
 void Oficina::addFuncionario(Funcionario & f){
@@ -80,10 +132,17 @@ void Oficina::addFuncionario(Funcionario & f){
 	funcionarios.push_back(f);
 }
 
+/**
+ * Retorna os serviços standard oferecidos pela Oficina
+ */
 vector <Standard *> Oficina:: getServicosStandard() const{
 	return servicosStandard;
 }
 
+/**
+ * Adiciona um cliente; lança uma excepção caso esse cliente já exista
+ * @param c cliente a adicionar
+ */
 void Oficina::addCliente(Cliente &c){
 	for(unsigned int i=0; i<clientes.size();i++){
 		if(clientes[i].getNome() == c.getNome()) throw(ClienteExistente(c.getNome()));
@@ -91,6 +150,11 @@ void Oficina::addCliente(Cliente &c){
 	clientes.push_back(c);
 }
 
+/**
+ * Adiciona um Veiculo a um cliente
+ * @param v veiculo a adicionar
+ * @param nome nome do Cliente a adicionar o veiculo
+ */
 void Oficina::addVeiculoCliente(Veiculo *&v,string nome){
 	for(unsigned int i = 0; i < clientes.size();i++){
 		if(clientes[i].getNome() == nome){
@@ -99,6 +163,11 @@ void Oficina::addVeiculoCliente(Veiculo *&v,string nome){
 	}
 }
 
+/**
+ * Adiciona um Veiculo a um funcionario
+ * @param v veiculo
+ * @param nome nome do Funcionario
+ */
 void Oficina::addVeiculoFuncionario(Veiculo *&v, string nome){
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
 		if(funcionarios[i].getNome() == nome){
@@ -107,6 +176,10 @@ void Oficina::addVeiculoFuncionario(Veiculo *&v, string nome){
 	}
 }
 
+/**
+ * Adiciona veiculo ao vetor veiculos da oficina
+ * @param v veiculo a adicionar
+ */
 void Oficina::addVeiculo(Veiculo *&v){
 	for(unsigned int i=0; i<veiculos.size();i++){
 		if(veiculos[i]->getMatricula() ==v->getMatricula()) throw(VeiculoExistente(v->getMatricula()));
@@ -114,6 +187,10 @@ void Oficina::addVeiculo(Veiculo *&v){
 	veiculos.push_back(v);
 }
 
+/**
+ * Adiciona serviço standar à Oficina
+ * @param s serviço stantard a adicionar
+ */
 void Oficina:: addServicoStandard(Standard *s){
 	bool existe= false;
 	string nome= s->getNome();
@@ -130,7 +207,10 @@ void Oficina:: addServicoStandard(Standard *s){
 	}
 
 
-
+/**
+ * Remove Funcionario fa oficina, lança exepção caso não exista
+ * @param f
+ */
 void Oficina::removeFuncionario(Funcionario & f){
 
 	bool existe=false;
@@ -147,6 +227,11 @@ void Oficina::removeFuncionario(Funcionario & f){
 	if(!existe) throw(FuncionarioInexistente(f.getNome()));
 }
 
+/**
+ * Remove um Veiculo de Funcionario
+ * @param v
+ * @param nome
+ */
 void Oficina::removeVeiculoFuncionario(Veiculo *&v, string nome){
 	bool existeF = false, existeV = false;
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
@@ -166,6 +251,9 @@ void Oficina::removeVeiculoFuncionario(Veiculo *&v, string nome){
 	if(!existeV) throw (VeiculoInexistente(v->getMatricula()));
 }
 
+/**
+ * Remove um cliente da oficina
+ */
 void Oficina::removeCliente(Cliente &c){
 	bool existe=false;
 	unsigned int pos;
@@ -187,6 +275,11 @@ void Oficina::removeCliente(Cliente &c){
 	if(!existe) throw(ClienteInexistente(c.getNome()));
 }
 
+/**
+ * Remove um veiculo de um cliente, lança excepção caso o cliente ou veiculo não existam
+ *  @param v
+ *  @param nome
+ */
 void Oficina::removeVeiculoCliente(Veiculo *&v, string nome){
 	bool existeC = false, existeV = false;
 	for(unsigned int i = 0; i < clientes.size(); i++){
@@ -207,6 +300,9 @@ void Oficina::removeVeiculoCliente(Veiculo *&v, string nome){
 	if(!existeV) throw (VeiculoInexistente(v->getMatricula()));
 }
 
+/**
+ * Remove veiculo da oficina, lança excepção caso não exista
+ */
 void Oficina::removeVeiculo(Veiculo *&v){
 	bool existe=false;
 	unsigned int pos;
@@ -220,6 +316,9 @@ void Oficina::removeVeiculo(Veiculo *&v){
 	veiculos.erase(veiculos.begin()+pos);
 }
 
+/**
+ * Remove um serviço standard da oficina, lança excepção caso não exista
+ */
 void Oficina:: removeServicoStandard(Standard *s){
 	bool existe= false;
 	string nome= s->getNome();
@@ -236,6 +335,9 @@ void Oficina:: removeServicoStandard(Standard *s){
 	servicosStandard.erase(servicosStandard.begin()+i);
 }
 
+/**
+ * Mostra os funcionários da Oficina
+ */
 void Oficina::displayFuncionarios() const{
 	cout << "Funcionário(s) da oficina: \n";
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
@@ -243,6 +345,9 @@ void Oficina::displayFuncionarios() const{
 	}
 }
 
+/**
+ * Mostra os veiculos da Oficina
+ */
 void Oficina::displayVeiculos() const{
 	cout << "Veiculo(s) da oficina: \n";
 	for(unsigned int i = 0; i < veiculos.size(); i++){
@@ -250,6 +355,9 @@ void Oficina::displayVeiculos() const{
 	}
 }
 
+/**
+ * Mostra os clientes da Oficina
+ */
 void Oficina::displayClientes() const{
 	cout << "Cliente(s) da oficina: \n";
 	for(unsigned int i = 0; i < clientes.size(); i++){
@@ -257,6 +365,9 @@ void Oficina::displayClientes() const{
 	}
 }
 
+/**
+ * Mostra os serviços standard da Oficina
+ */
 void Oficina:: displayServicosStandard() {
 	for(unsigned int i=0; i< servicosStandard.size();i++){
 		string n = servicosStandard[i]->getNome();
@@ -267,18 +378,30 @@ void Oficina:: displayServicosStandard() {
 	}
 }
 
+/**
+ * Ordena os funcionários da oficina por número crescente de veiculos a ele associado
+ */
 void Oficina:: ordenaFuncionarios(){
 	insertionSort(funcionarios);
 }
 
+/**
+ * Ordena os veiculos por ordem crecente de ano
+ */
 void Oficina:: ordenaVeiculos(){
 	insertionSort(veiculos);
 }
 
+/**
+ * Ordena os clientes por ordem crescente de veiculos
+ */
 void Oficina:: ordenaClientes(){
 	insertionSort(clientes);
 }
 
+/**
+ * Lê veiculos de um ficheiro de texto e guarda-os na Oficina
+ */
 bool Oficina::leVeiculos(){
 	ifstream veicFile;
 	veicFile.open("veiculos.txt",ifstream::in);
@@ -358,6 +481,9 @@ bool Oficina::leVeiculos(){
 	return true;
 }
 
+/**
+ * Guarda os veiculos num ficheiro de texto
+ */
 bool Oficina::guardaVeiculos(){
 	ofstream veicFile;
 	veicFile.open("veiculos.txt");
@@ -393,6 +519,9 @@ bool Oficina::guardaVeiculos(){
 	return true;
 }
 
+/**
+ * Lê clientes de um ficheiro de texto e guarda-os na Oficina
+ */
 bool Oficina::leClientes(){
 	ifstream clienteFile;
 	clienteFile.open("clientes.txt",ifstream::in);
@@ -442,6 +571,9 @@ bool Oficina::leClientes(){
 	return true;
 }
 
+/**
+ * Guarda os clintes num ficheiro de texto
+ */
 bool Oficina::guardaClientes(){
 	ofstream clientFile;
 	clientFile.open("clientes.txt");
@@ -467,6 +599,9 @@ bool Oficina::guardaClientes(){
 	return true;
 }
 
+/**
+ * Lê funcionários de um ficheiro de texto e guarda-os na Oficina
+ */
 bool Oficina::leFuncionarios(){
 	ifstream funcFile;
 	funcFile.open("funcionarios.txt",ifstream::in);
@@ -515,6 +650,9 @@ bool Oficina::leFuncionarios(){
 	return true;
 }
 
+/**
+ * Guarda os funcionários num ficheiro de texto
+ */
 bool Oficina::guardaFuncionarios(){
 	ofstream funcFile;
 	funcFile.open("funcionarios.txt");
@@ -540,6 +678,9 @@ bool Oficina::guardaFuncionarios(){
 	return true;
 }
 
+/**
+ * Lê serviços de um ficheiro de texto e guarda-os na Oficina
+ */
 bool Oficina::leServicos(){
 	ifstream servFile;
 	servFile.open("standard.txt",ifstream::in);
@@ -556,6 +697,9 @@ bool Oficina::leServicos(){
 	return true;
 }
 
+/**
+ * Guarda os serviços standard num ficheiro de texto
+ */
 bool Oficina::guardaServicos(){
 	ofstream servFile;
 	servFile.open("standard.txt");
@@ -568,6 +712,10 @@ bool Oficina::guardaServicos(){
 	return true;
 }
 
+/**
+ * Retorna a posição de um veiculo no vetor veiculos; retorna -1 caso não exista
+ * @param mt matricula do veiculo a procurar
+ */
 int Oficina:: posVeiculo(string mt){
 
 	for(unsigned int i=0; i< veiculos.size();i++){
@@ -577,6 +725,10 @@ int Oficina:: posVeiculo(string mt){
 	return -1;
 }
 
+/**
+ * Retorna a posição de um serviço standard no vetor veiculos; retorna -1 caso não exista
+ * @param nome nome do serviço a procurar
+ */
 int Oficina:: isStandard(string nome){
 	for(unsigned int i=0; i< servicosStandard.size();i++){
 			if(servicosStandard[i]->getNome() == nome) return i;
