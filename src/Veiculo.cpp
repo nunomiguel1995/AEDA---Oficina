@@ -40,7 +40,7 @@ Motorizada::~Motorizada(){servicos.erase(servicos.begin(),servicos.end());}
 vector<Servico> Motorizada::getServicos() const{return servicos;}
 
 void Motorizada::addServico(Servico & s){
-	s.addtaxa(taxa);
+	s.addTaxa(taxa);
 	servicos.push_back(s);}
 
 /**
@@ -53,7 +53,7 @@ Camiao::~Camiao(){servicos.erase(servicos.begin(),servicos.end());}
 vector<Servico> Camiao::getServicos() const{return servicos;}
 
 void Camiao::addServico(Servico & s){
-	s.addtaxa(taxa);
+	s.addTaxa(taxa);
 	servicos.push_back(s);}
 
 /**
@@ -66,7 +66,7 @@ Autocarro::~Autocarro(){servicos.erase(servicos.begin(),servicos.end());}
 vector<Servico> Autocarro::getServicos() const{return servicos;}
 
 void Autocarro::addServico(Servico & s){
-	s.addtaxa(taxa);
+	s.addTaxa(taxa);
 	servicos.push_back(s);}
 
 /**
@@ -79,7 +79,7 @@ Automovel::~Automovel(){servicos.erase(servicos.begin(),servicos.end());}
 vector<Servico> Automovel::getServicos() const{return servicos;}
 
 void Automovel::addServico(Servico & s){
-	s.addtaxa(taxa);
+	s.addTaxa(taxa);
 	servicos.push_back(s);}
 
 
