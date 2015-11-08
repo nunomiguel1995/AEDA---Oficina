@@ -76,14 +76,14 @@ void Oficina::addFuncionario(Funcionario & f){
 	funcionarios.push_back(f);
 }
 
-void Oficina::addCliente(Cliente c){
+void Oficina::addCliente(Cliente &c){
 	for(unsigned int i=0; i<clientes.size();i++){
 		if(clientes[i].getNome() == c.getNome()) throw(ClienteExistente(c.getNome()));
 	}
 	clientes.push_back(c);
 }
 
-void Oficina::addVeiculoCliente(Veiculo *v,string nome){
+void Oficina::addVeiculoCliente(Veiculo *&v,string nome){
 	for(unsigned int i = 0; i < clientes.size();i++){
 		if(clientes[i].getNome() == nome){
 			clientes[i].addVeiculo(v);
@@ -91,7 +91,7 @@ void Oficina::addVeiculoCliente(Veiculo *v,string nome){
 	}
 }
 
-void Oficina::addVeiculoFuncionario(Veiculo *v, string nome){
+void Oficina::addVeiculoFuncionario(Veiculo *&v, string nome){
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
 		if(funcionarios[i].getNome() == nome){
 			funcionarios[i].addVeiculo(v);
@@ -99,31 +99,14 @@ void Oficina::addVeiculoFuncionario(Veiculo *v, string nome){
 	}
 }
 
-void Oficina::addVeiculo(Veiculo * v){
+void Oficina::addVeiculo(Veiculo *&v){
 	for(unsigned int i=0; i<veiculos.size();i++){
 		if(veiculos[i]->getMatricula() ==v->getMatricula()) throw(VeiculoExistente(v->getMatricula()));
 	}
 	veiculos.push_back(v);
 }
 
-void Oficina::addServicoVeiculo(Servico *&s, Veiculo *v){
-	for(unsigned int i = 0; i < veiculos.size(); i++){
-		if(veiculos[i]->getMatricula() == v->getMatricula()){
-			if(veiculos[i]->classname() == "Motorizada"){
-
-			}else if(veiculos[i]->classname() == "Camiao"){
-
-			}else if(veiculos[i]->classname() == "Autocarro"){
-
-			}else if(veiculos[i]->classname() == "Automovel"){
-
-			}
-		}
-	}
-	throw (VeiculoInexistente(v->getMatricula()));
-}
-
-void Oficina::removeFuncionario(Funcionario f){
+void Oficina::removeFuncionario(Funcionario & f){
 
 	bool existe=false;
 	unsigned int pos;
@@ -139,17 +122,16 @@ void Oficina::removeFuncionario(Funcionario f){
 	if(!existe) throw(FuncionarioInexistente(f.getNome()));
 }
 
-void Oficina::removeVeiculoFuncionario(Veiculo *v, string nome){
+void Oficina::removeVeiculoFuncionario(Veiculo *&v, string nome){
 	bool existeF = false, existeV = false;
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
 		if(funcionarios[i].getNome() == nome){
 			existeF = true;
-			for(unsigned int j = 0; j < funcionarios[i].getVeiculos().size(); j++){
-				if(funcionarios[i].getVeiculos()[j]->getMatricula() == v->getMatricula()){
+			vector<Veiculo *> veic = funcionarios[i].getVeiculos();
+			for(unsigned int j = 0; j < veic.size(); j++){
+				if(veic[j]->getMatricula() == v->getMatricula()){
 					existeV = true;
-					vector<Veiculo *> veic = funcionarios[i].getVeiculos();
-					veic.erase(veic.begin() + j);
-					funcionarios[i].setVeiculos(veic);
+					funcionarios[i].removeVeiculo(v);
 					break;
 				}
 			}
@@ -159,13 +141,20 @@ void Oficina::removeVeiculoFuncionario(Veiculo *v, string nome){
 	if(!existeV) throw (VeiculoInexistente(v->getMatricula()));
 }
 
-void Oficina::removeCliente(Cliente c){
+void Oficina::removeCliente(Cliente &c){
 	bool existe=false;
 	unsigned int pos;
 	for(pos=0; pos<clientes.size();pos++){
 		if(clientes[pos].getNome()==c.getNome()){
 			existe=true;
+			vector<Veiculo *> v = clientes[pos].getVeiculos();
 			clientes.erase(clientes.begin()+pos);
+			for(unsigned int i = 0; i < funcionarios.size(); i++){
+				for(unsigned int j = 0; j < v.size(); j++){
+					removeVeiculoFuncionario(v[j],funcionarios[i].getNome());
+					removeVeiculo(v[j]);
+				}
+			}
 			break;
 		}
 	}
@@ -173,7 +162,7 @@ void Oficina::removeCliente(Cliente c){
 	if(!existe) throw(ClienteInexistente(c.getNome()));
 }
 
-void Oficina::removeVeiculoCliente(Veiculo *v, string nome){
+void Oficina::removeVeiculoCliente(Veiculo *&v, string nome){
 	bool existeC = false, existeV = false;
 	for(unsigned int i = 0; i < clientes.size(); i++){
 		if(clientes[i].getNome() == nome){
@@ -193,7 +182,7 @@ void Oficina::removeVeiculoCliente(Veiculo *v, string nome){
 	if(!existeV) throw (VeiculoInexistente(v->getMatricula()));
 }
 
-void Oficina::removeVeiculo(Veiculo *v){
+void Oficina::removeVeiculo(Veiculo *&v){
 	bool existe=false;
 	unsigned int pos;
 	for(pos = 0; pos < veiculos.size();pos++){
@@ -247,28 +236,28 @@ bool Oficina::leVeiculos(){
 		int ano;
 		while(veicFile >> tipo >> marca >> matricula >> ano){
 			if(tipo == "m"){
-				Motorizada *m = new Motorizada(marca,matricula,ano);
+				Veiculo *m = new Motorizada(marca,matricula,ano);
 				try{
 					addVeiculo(m);
 				}catch(VeiculoExistente &e){
 					cout << e.getMatricula() << " já é um veículo existente.\n";
 				}
 			}else if(tipo == "c"){
-				Camiao *c = new Camiao(marca,matricula,ano);
+				Veiculo *c = new Camiao(marca,matricula,ano);
 				try{
 					addVeiculo(c);
 				}catch(VeiculoExistente &e){
 					cout << e.getMatricula() << " já é um veículo existente.\n";
 				}
 			}else if(tipo == "at"){
-				Autocarro *at = new Autocarro(marca,matricula,ano);
+				Veiculo *at = new Autocarro(marca,matricula,ano);
 				try{
 					addVeiculo(at);
 				}catch(VeiculoExistente &e){
 					cout << e.getMatricula() << " já é um veículo existente.\n";
 				}
 			}else if(tipo == "am"){
-				Automovel *am = new Automovel(marca,matricula,ano);
+				Veiculo *am = new Automovel(marca,matricula,ano);
 				try{
 					addVeiculo(am);
 				}catch(VeiculoExistente &e){

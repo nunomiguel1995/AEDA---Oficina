@@ -110,19 +110,19 @@ void addMenu(Oficina &oficina, int opcao){
 			cin >> ano;
 			oficina.getClienteNome(nome);
 			if(tipo == "Motorizada"){
-				Motorizada *m = new Motorizada(marca,matricula,ano);
+				Veiculo *m = new Motorizada(marca,matricula,ano);
 				oficina.addVeiculo(m);
 				oficina.addVeiculoCliente(m,nome);
 			}else if(tipo == "Camião" || tipo == "Camiao"){
-				Camiao *c = new Camiao(marca,matricula,ano);
+				Veiculo *c = new Camiao(marca,matricula,ano);
 				oficina.addVeiculo(c);
 				oficina.addVeiculoCliente(c,nome);
 			}else if(tipo == "Autocarro"){
-				Autocarro *at = new Autocarro(marca,matricula,ano);
+				Veiculo *at = new Autocarro(marca,matricula,ano);
 				oficina.addVeiculo(at);
 				oficina.addVeiculoCliente(at,nome);
 			}else if(tipo == "Automóvel" || tipo == "Automovel"){
-				Automovel *am = new Automovel(marca,matricula,ano);
+				Veiculo *am = new Automovel(marca,matricula,ano);
 				oficina.addVeiculo(am);
 				oficina.addVeiculoCliente(am,nome);
 			}else{
@@ -233,7 +233,8 @@ void removeMenu(Oficina &oficina, int opcao){
 				oficina.getFuncionarioNome(nome);
 				cout << "Insira a matrícula do veículo: ";
 				cin >> matricula;
-				oficina.removeVeiculoFuncionario(oficina.getVeiculoMatricula(matricula),nome);
+				Veiculo *v = oficina.getVeiculoMatricula(matricula);
+				oficina.removeVeiculoFuncionario(v,nome);
 			}catch(FuncionarioInexistente &e){
 				cout << e.getNome() << " não é um funcionário.\n";
 			}catch(VeiculoInexistente &e){
@@ -247,20 +248,14 @@ void removeMenu(Oficina &oficina, int opcao){
 			cin.sync();
 			cout << "Insira o nome do cliente: ";
 			getline(cin,nome);
-			Cliente c(nome);
-			vector<Veiculo*> veic = c.getVeiculos();
-			vector<Funcionario> f;
 			try{
-				for(unsigned int i = 0; i < veic.size(); i++){
-					f = oficina.getFuncionariosVeiculo(oficina.getVeiculoMatricula(veic[i]->getMatricula()));
-					for(unsigned int j = 0; j < f.size(); j++){
-						oficina.removeVeiculoFuncionario(oficina.getVeiculoMatricula(veic[i]->getMatricula()),f[j].getNome());
-					}
-					oficina.removeVeiculo(veic[i]);
-				}
+				oficina.getClienteNome(nome);
+				Cliente c(nome);
 				oficina.removeCliente(c);
 			}catch(ClienteInexistente &e){
 				cout << e.getNome() << " não é um cliente.\n";
+			}catch(VeiculoInexistente &e){
+				cout << e.getMatricula() << " não existe.\n";
 			}
 		}
 		break;
@@ -275,11 +270,12 @@ void removeMenu(Oficina &oficina, int opcao){
 				cout << "Insira a matrícula do veículo: ";
 				cin >> matricula;
 				vector<Funcionario> f = oficina.getFuncionariosVeiculo(oficina.getVeiculoMatricula(matricula));
+				Veiculo *v = oficina.getVeiculoMatricula(matricula);
 				for(unsigned int i = 0; i < f.size(); i++){
-					oficina.removeVeiculoFuncionario(oficina.getVeiculoMatricula(matricula),f[i].getNome());
+					oficina.removeVeiculoFuncionario(v,f[i].getNome());
 				}
-				oficina.removeVeiculoCliente(oficina.getVeiculoMatricula(matricula),nome);
-				oficina.removeVeiculo(oficina.getVeiculoMatricula(matricula));
+				oficina.removeVeiculoCliente(v,nome);
+				oficina.removeVeiculo(v);
 			}catch(ClienteInexistente &e){
 				cout << e.getNome() << " não é um funcionário.\n";
 			}catch(VeiculoInexistente &e){
