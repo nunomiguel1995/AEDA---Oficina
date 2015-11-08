@@ -31,7 +31,7 @@ public:
 	Motorizada(string marca, string matricula, int ano);
 	~Motorizada();
 	vector<Servico> getServicos() const;
-	void addServico(Servico & s);
+	void addServico(Servico  &s);
 	string classname() const;
 };
 

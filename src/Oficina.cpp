@@ -526,3 +526,11 @@ int Oficina:: posVeiculo(string mt){
 
 	return -1;
 }
+
+int Oficina:: isStandard(string nome){
+	for(unsigned int i=0; i< servicosStandard.size();i++){
+			if(servicosStandard[i].getNome() == nome) return i;
+		}
+
+		return -1;
+}

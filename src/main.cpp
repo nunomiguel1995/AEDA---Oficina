@@ -155,23 +155,26 @@ void addMenu(Oficina &oficina, int opcao){
 		switch(tiposervico){
 		case 1:
 		{
-			/*
-			string nome;
-			cout<<"Escolha um nome para o serviço: ";
-			cin>>nome;
 
-			Standard s1(nome);
+			string nome;
+			cout<<"Qual o nome para o Serviço Standard: ";
+			cin>>nome;
+			int i= oficina.isStandard(nome);
+			if(i==-1){
+				cout<<"Serviço Standard não oferecido pela oficina! \n";
+				break;
+			}
+			Standard s= oficina.getServicosStandard().at(i);
 			vector <Veiculo *> veic= oficina.getVeiculos();
-			veic[pos]->addServico(s1);
+			veic[pos]->addServico(s);
 			oficina.setVeiculos(veic);
 			cout<<"Serviço adicionado com sucesso! \n";
 
 			break;
-			*/
+
 		}
 		case 2:
 		{
-			/*
 			string nome;
 			int duracao;
 			float preco;
@@ -185,22 +188,13 @@ void addMenu(Oficina &oficina, int opcao){
 			cout<<"Qual o preço do serviço: ";
 			cin>>preco;
 			cout<<"Qual a descrição do serviço (0 para terminar): ";
-			do{
-				string d;
-				cin>>d;
-				if(d == "0"){
-					continua=false;
-					break;
-				}
-				descricao.push_back(d);
-			}while(continua);
 
-			naoStandard s1(nome,preco,duracao,descricao);
+			naoStandard s1(nome,preco,duracao);
 			vector <Veiculo *> veic= oficina.getVeiculos();
 			veic[pos]->addServico(s1);
 			oficina.setVeiculos(veic);
 			cout<<"Serviço adicionado com sucesso! \n";
-			*/
+
 		}
 		break;
 		default:

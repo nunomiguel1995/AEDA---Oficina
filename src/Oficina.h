@@ -75,6 +75,7 @@ public:
 	void ordenaClientes();
 
 	int posVeiculo(string mt);
+	int isStandard(string nome);
 };
 
 
