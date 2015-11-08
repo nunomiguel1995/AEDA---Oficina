@@ -163,6 +163,7 @@ void addMenu(Oficina &oficina, int opcao){
 			vector <Veiculo *> veic= oficina.getVeiculos();
 			veic[pos]->addServico(s1);
 			oficina.setVeiculos(veic);
+			cout<<"Serviço adicionado com sucesso! \n";
 
 			break;
 
@@ -196,6 +197,7 @@ void addMenu(Oficina &oficina, int opcao){
 			vector <Veiculo *> veic= oficina.getVeiculos();
 			veic[pos]->addServico(s1);
 			oficina.setVeiculos(veic);
+			cout<<"Serviço adicionado com sucesso! \n";
 		}
 		break;
 		default:
