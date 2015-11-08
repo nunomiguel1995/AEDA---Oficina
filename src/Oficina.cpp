@@ -44,6 +44,10 @@ void Oficina:: setVeiculos(vector <Veiculo *> veic){
 	veiculos=veic;
 }
 
+void Oficina:: setServicosStandard(vector <Standard> stand){
+	servicosStandard= stand;
+}
+
 vector<Veiculo *> Oficina::getVeiculos() const{return veiculos;}
 
 Veiculo * Oficina::getVeiculoMatricula(string mt) const{
@@ -76,6 +80,10 @@ void Oficina::addFuncionario(Funcionario & f){
 	funcionarios.push_back(f);
 }
 
+vector <Standard> Oficina:: getServicosStandard() const{
+	return servicosStandard;
+}
+
 void Oficina::addCliente(Cliente &c){
 	for(unsigned int i=0; i<clientes.size();i++){
 		if(clientes[i].getNome() == c.getNome()) throw(ClienteExistente(c.getNome()));
@@ -105,6 +113,23 @@ void Oficina::addVeiculo(Veiculo *&v){
 	}
 	veiculos.push_back(v);
 }
+
+void Oficina:: addServicoStandard(Standard s){
+	bool existe= false;
+	string nome= s.getNome();
+	for(unsigned int i=0; i< servicosStandard.size(); i++){
+		if(servicosStandard[i].getNome()==s.getNome()){
+			existe=true;
+			break;
+		}
+	}
+
+	if(existe== true) throw (ServicoExistente(nome));
+
+	servicosStandard.push_back(s);
+	}
+
+
 
 void Oficina::removeFuncionario(Funcionario & f){
 
@@ -195,6 +220,22 @@ void Oficina::removeVeiculo(Veiculo *&v){
 	veiculos.erase(veiculos.begin()+pos);
 }
 
+void Oficina:: removeServicoStandard(Standard s){
+	bool existe= false;
+	string nome= s.getNome();
+	unsigned int i;
+
+	for(i=0; i<servicosStandard.size();i++){
+		if(servicosStandard[i].getNome()==nome){
+			existe=true;
+		}
+	}
+
+	if(existe==false) throw(ServicoInexistente(nome));
+
+	servicosStandard.erase(servicosStandard.begin()+i);
+}
+
 void Oficina::displayFuncionarios() const{
 	cout << "Funcionário(s) da oficina: \n";
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
@@ -213,6 +254,16 @@ void Oficina::displayClientes() const{
 	cout << "Cliente(s) da oficina: \n";
 	for(unsigned int i = 0; i < clientes.size(); i++){
 		cout << clientes[i].getNome() << endl;
+	}
+}
+
+void Oficina:: displayServicosStandard() {
+	for(unsigned int i=0; i< servicosStandard.size();i++){
+		string n = servicosStandard[i].getNome();
+		float preco= servicosStandard[i].getPreco();
+		int duracao= servicosStandard[i].getDuracao();
+
+		cout<<"nome: "<<nome<<"preco: "<<preco<<"duração: "<<duracao << endl;
 	}
 }
 
