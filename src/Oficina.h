@@ -24,28 +24,35 @@ class Oficina{
 public:
 	Oficina(string nome);
 	~Oficina();
+
 	string getNome() const;
 	vector<Funcionario> getFuncionarios() const;
 	Funcionario getFuncionarioNome(string nome) const;
 	Cliente getClienteNome(string nome) const;
+
 	void setFuncionarios(vector<Funcionario> func);
 	void setClientes(vector<Cliente> clnts);
+	void setVeiculos(vector <Veiculo *> veic);
+
 	vector<Veiculo *> getVeiculos() const;
 	Veiculo * getVeiculoMatricula(string mt) const;
 	vector<Funcionario> getFuncionariosVeiculo(Veiculo *v) const;
 	vector<Cliente> getClientes() const;
 	vector<Servico *> getServicos() const;
+
 	void addFuncionario(Funcionario & f);
 	void addCliente(Cliente c);
 	void addVeiculo(Veiculo *v);
 	void addVeiculoCliente(Veiculo *v,string nome);
 	void addVeiculoFuncionario(Veiculo *v, string nome);
 	void addServicoVeiculo(Servico *&s, Veiculo *v);
+
 	void removeFuncionario(Funcionario f);
 	void removeCliente(Cliente c);
 	void removeVeiculo(Veiculo *v);
 	void removeVeiculoFuncionario(Veiculo *v, string nome);
 	void removeVeiculoCliente(Veiculo *v, string nome);
+
 	void displayFuncionarios() const;
 	void displayVeiculos() const;
 	void displayClientes() const;
@@ -60,6 +67,8 @@ public:
 	void ordenaFuncionarios();
 	void ordenaVeiculos();
 	void ordenaClientes();
+
+	int posVeiculo(string mt);
 };
 
 

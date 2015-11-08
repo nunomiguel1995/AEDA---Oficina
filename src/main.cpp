@@ -138,13 +138,70 @@ void addMenu(Oficina &oficina, int opcao){
 	break;
 	case 5: //adicionar serviço a veículo
 	{
-		/**
-		 * FALTA FAZER
-		 */
-	}
-	break;
-	default:
+		string matricula;
+		cout<<"Insira a matricula do Veiculo: ";
+		cin>>matricula;
+
+		int pos= oficina.posVeiculo(matricula);
+		if(pos==-1){
+			cout<<"Veiculo não existe na Oficina! \n";
+			break;
+		}
+
+		int tiposervico;
+		cout<<"Que tipo de serviço deseja adicionar? \n"<<"1 Standard \n"<<"2 Não Standard\n "<<"Opcção: ";
+		cin>>tiposervico;
+
+		switch(tiposervico){
+		case 1:
+		{
+			string nome;
+			cout<<"Escolha um nome para o serviço: ";
+			cin>>nome;
+
+			Standard s1(nome);
+			vector <Veiculo *> veic= oficina.getVeiculos();
+			veic[pos]->addServico(s1);
+			oficina.setVeiculos(veic);
+
+			break;
+
+		}
+		case 2:
+		{
+			string nome;
+			int duracao;
+			float preco;
+			vector <string> descricao;
+			bool continua= true;
+
+			cout<<"Escolha um nome para o serviço: ";
+			cin>>nome;
+			cout<<"Qual a duração do serviço: ";
+			cin>>duracao;
+			cout<<"Qual o preço do serviço: ";
+			cin>>preco;
+			cout<<"Qual a descrição do serviço (0 para terminar): ";
+			do{
+				string d;
+				cin>>d;
+				if(d == "0"){
+					continua=false;
+					break;
+				}
+				descricao.push_back(d);
+			}while(continua);
+
+			naoStandard s1(nome,preco,duracao,descricao);
+			vector <Veiculo *> veic= oficina.getVeiculos();
+			veic[pos]->addServico(s1);
+			oficina.setVeiculos(veic);
+		}
 		break;
+		default:
+			break;
+		}
+	}
 	}
 }
 

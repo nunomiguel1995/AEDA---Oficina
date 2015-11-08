@@ -31,6 +31,8 @@ void Veiculo::displayVeiculo() const{
 
 string Veiculo::classname() const{return "Veiculo";}
 
+void Veiculo:: addServico(Servico &s){}
+
 /**
  * Motorizada
  */
