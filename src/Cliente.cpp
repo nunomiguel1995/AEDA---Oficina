@@ -39,26 +39,21 @@ void Cliente::setId(unsigned int id){
 	this->id = id;
 }
 
-<<<<<<< HEAD
 /**
  * Retorna o vetor de veículos do cliente
  */
-=======
 void Cliente::setVeiculos(vector<Veiculo*> veiculos){
 	this->veiculos = veiculos;
 }
->>>>>>> 41424a8c60163e2566de67a1a4f2dfc359c8b104
 
 vector <Veiculo*> Cliente:: getVeiculos() const{
 	return veiculos;
 }
 
-<<<<<<< HEAD
 /**
  * Adiciona o veículo ao vetor de veículos do cliente e lança uma exceção, caso o veículo já lá exista
  * @param *v1
  */
-=======
 Veiculo * Cliente::getVeiculoMatricula(string mt) const{
 	for(unsigned int i = 0; i < veiculos.size(); i++){
 		if(veiculos[i]->getMatricula() == mt){
@@ -67,7 +62,6 @@ Veiculo * Cliente::getVeiculoMatricula(string mt) const{
 	}
 	throw VeiculoInexistente(mt);
 }
->>>>>>> 41424a8c60163e2566de67a1a4f2dfc359c8b104
 
 void Cliente:: addVeiculo(Veiculo *v1){
 	for(unsigned int i=0; i<veiculos.size();i++){

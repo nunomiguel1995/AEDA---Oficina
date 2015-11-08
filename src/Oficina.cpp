@@ -440,7 +440,7 @@ bool Oficina::guardaFuncionarios(){
 }
 
 bool Oficina::leServicos(){
-
+	ifstream servFile;
 
 }
 
