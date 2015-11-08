@@ -21,6 +21,10 @@ void Cliente::setId(unsigned int id){
 	this->id = id;
 }
 
+void Cliente::setVeiculos(vector<Veiculo*> veiculos){
+	this->veiculos = veiculos;
+}
+
 vector <Veiculo*> Cliente:: getVeiculos() const{
 	return veiculos;
 }

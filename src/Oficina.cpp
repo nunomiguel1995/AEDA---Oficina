@@ -15,6 +15,23 @@ string Oficina::getNome() const{return nome;}
 
 vector<Funcionario> Oficina::getFuncionarios() const{return funcionarios;}
 
+Funcionario Oficina::getFuncionarioNome(string nome) const{
+	for(unsigned int i = 0; i < funcionarios.size(); i++){
+		if(funcionarios[i].getNome() == nome){
+			return funcionarios[i];
+		}
+	}
+	throw FuncionarioInexistente(nome);
+}
+
+Cliente Oficina::getClienteNome(string nome) const{
+	for(unsigned int i = 0; i < clientes.size(); i++){
+		if(clientes[i].getNome() == nome){
+			return clientes[i];
+		}
+	}
+	throw ClienteInexistente(nome);
+}
 void Oficina::setFuncionarios(vector<Funcionario> func){
 	funcionarios = func;
 }
@@ -24,6 +41,15 @@ void Oficina::setClientes(vector<Cliente> clnts){
 }
 
 vector<Veiculo *> Oficina::getVeiculos() const{return veiculos;}
+
+Veiculo * Oficina::getVeiculoMatricula(string mt) const{
+	for(unsigned int i = 0; i < veiculos.size(); i++){
+		if(veiculos[i]->getMatricula() == mt){
+			return veiculos[i];
+		}
+	}
+	throw VeiculoInexistente(mt);
+}
 
 vector<Cliente> Oficina::getClientes() const{return clientes;}
 
@@ -39,6 +65,22 @@ void Oficina::addCliente(Cliente c){
 		if(clientes[i].getNome() == c.getNome()) throw(ClienteExistente(c.getNome()));
 	}
 	clientes.push_back(c);
+}
+
+void Oficina::addVeiculoCliente(Veiculo *v,string nome){
+	for(unsigned int i = 0; i < clientes.size();i++){
+		if(clientes[i].getNome() == nome){
+			clientes[i].addVeiculo(v);
+		}
+	}
+}
+
+void Oficina::addVeiculoFuncionario(Veiculo *v, string nome){
+	for(unsigned int i = 0; i < funcionarios.size(); i++){
+		if(funcionarios[i].getNome() == nome){
+			funcionarios[i].addVeiculo(v);
+		}
+	}
 }
 
 void Oficina::addVeiculo(Veiculo * v){
@@ -62,6 +104,26 @@ void Oficina::removeFuncionario(Funcionario f){
 	if(!existe) throw(FuncionarioInexistente(f.getNome()));
 }
 
+void Oficina::removeVeiculoFuncionario(Veiculo *v, string nome){
+	bool existeF = false, existeV = false;
+	for(unsigned int i = 0; i < funcionarios.size(); i++){
+		if(funcionarios[i].getNome() == nome){
+			existeF = true;
+			for(unsigned int j = 0; j < funcionarios[i].getVeiculos().size(); j++){
+				if(funcionarios[i].getVeiculos()[j]->getMatricula() == v->getMatricula()){
+					existeV = true;
+					vector<Veiculo *> veic = funcionarios[i].getVeiculos();
+					veic.erase(veic.begin() + j);
+					funcionarios[i].setVeiculos(veic);
+					break;
+				}
+			}
+		}
+	}
+	if(!existeF) throw (FuncionarioInexistente(nome));
+	if(!existeV) throw (VeiculoInexistente(v->getMatricula()));
+}
+
 void Oficina::removeCliente(Cliente c){
 	bool existe=false;
 	unsigned int pos;
@@ -74,6 +136,26 @@ void Oficina::removeCliente(Cliente c){
 	}
 
 	if(!existe) throw(ClienteInexistente(c.getNome()));
+}
+
+void Oficina::removeVeiculoCliente(Veiculo *v, string nome){
+	bool existeC = false, existeV = false;
+	for(unsigned int i = 0; i < clientes.size(); i++){
+		if(clientes[i].getNome() == nome){
+			existeC = true;
+			for(unsigned int j = 0; j < clientes[i].getVeiculos().size(); j++){
+				if(clientes[i].getVeiculos()[j]->getMatricula() == v->getMatricula()){
+					existeV = true;
+					vector<Veiculo *> veic = clientes[i].getVeiculos();
+					veic.erase(veic.begin() + j);
+					clientes[i].setVeiculos(veic);
+					break;
+				}
+			}
+		}
+	}
+	if(!existeC) throw (ClienteInexistente(nome));
+	if(!existeV) throw (VeiculoInexistente(v->getMatricula()));
 }
 
 void Oficina::removeVeiculo(Veiculo *v){
@@ -123,13 +205,9 @@ void Oficina:: ordenaClientes(){
 }
 
 bool Oficina::leVeiculos(){
-	ifstream veicFile("veiculos.txt");
+	ifstream veicFile;
+	veicFile.open("veiculos.txt",ifstream::in);
 	if(veicFile.is_open()){
-		if(veicFile.eof()){
-			cout << "Ficheiro vazio.";
-			veicFile.close();
-			return true;
-		}
 		string marca, matricula, tipo;
 		int ano;
 		while(veicFile >> tipo >> marca >> matricula >> ano){
@@ -174,13 +252,13 @@ bool Oficina::guardaVeiculos(){
 	for(unsigned int i = 0; i < veiculos.size(); i++){
 		string tipo;
 		if(i!=0){veicFile << endl;}
-		if(typeid(veiculos[i]) == typeid(Motorizada)){
+		if(veiculos[i]->classname() == "Motorizada"){
 			tipo = "m";
-		}else if(typeid(veiculos[i]) == typeid(Camiao)){
+		}else if(veiculos[i]->classname() == "Camiao"){
 			tipo = "c";
-		}else if(typeid(veiculos[i]) == typeid(Autocarro)){
+		}else if(veiculos[i]->classname() == "Autocarro"){
 			tipo = "ac";
-		}else if(typeid(veiculos[i]) == typeid(Automovel)){
+		}else if(veiculos[i]->classname() == "Automovel"){
 			tipo = "am";
 		}
 		veicFile << tipo << " " << veiculos[i]->getMarca() << " " << veiculos[i]->getMatricula() <<
@@ -191,19 +269,15 @@ bool Oficina::guardaVeiculos(){
 }
 
 bool Oficina::leClientes(){
-	ifstream clienteFile("clientes.txt");
+	ifstream clienteFile;
+	clienteFile.open("clientes.txt",ifstream::in);
 	if(clienteFile.is_open()){
-		if(clienteFile.eof()){
-			cout << "Ficheiro vazio.";
-			clienteFile.close();
-			return true;
-		}
 		unsigned int numVeiculos, ano, id;
 		string primNome, ultNome, marca, matricula, tipo;
 		while(clienteFile >> id >> numVeiculos >> primNome >> ultNome){
 			Cliente cl(primNome + " " + ultNome);
 			cl.setId(id);
-			do{
+			while(numVeiculos != 0){
 				clienteFile >> tipo >> marca >> ano >> matricula;
 				if(tipo == "m"){
 					Motorizada *m = new Motorizada(marca,matricula,ano);
@@ -235,7 +309,7 @@ bool Oficina::leClientes(){
 					}
 				}
 				numVeiculos--;
-			}while(numVeiculos != 0);
+			}
 			clientes.push_back(cl);
 		}
 		clienteFile.close();
@@ -252,13 +326,13 @@ bool Oficina::guardaClientes(){
 		clientFile << clientes[i].getId() << " " << veic.size() << " " << clientes[i].getNome();
 		for(unsigned int j = 0; j < veic.size(); j++){
 			string tipo;
-			if(typeid(veiculos[i]) == typeid(Motorizada)){
+			if(veiculos[i]->classname() == "Motorizada"){
 				tipo = "m";
-			}else if(typeid(veiculos[i]) == typeid(Camiao)){
+			}else if(veiculos[i]->classname() == "Camiao"){
 				tipo = "c";
-			}else if(typeid(veiculos[i]) == typeid(Autocarro)){
+			}else if(veiculos[i]->classname() == "Autocarro"){
 				tipo = "ac";
-			}else if(typeid(veiculos[i]) == typeid(Automovel)){
+			}else if(veiculos[i]->classname() == "Automovel"){
 				tipo = "am";
 			}
 			clientFile << " " << tipo << " " << veic[j]->getMarca() << " " << veic[j]->getAno() << " " << veic[j]->getMatricula() ;
@@ -269,19 +343,14 @@ bool Oficina::guardaClientes(){
 }
 
 bool Oficina::leFuncionarios(){
-	ifstream funcFile("funcionarios.txt");
-
+	ifstream funcFile;
+	funcFile.open("funcionarios.txt",ifstream::in);
 	if(funcFile.is_open()){
-		if(funcFile.eof()){
-			cout << "Ficheiro vazio.";
-			funcFile.close();
-			return true;
-		}
 		unsigned int numVeiculos, ano;
 		string primNome, ultNome, marca, matricula, tipo;
 		while(funcFile >> numVeiculos >> primNome >> ultNome){
 			Funcionario f(primNome + " " + ultNome);
-			do{
+			while(numVeiculos != 0){
 				funcFile >> tipo >> marca >> ano >> matricula;
 				if(tipo == "m"){
 					Motorizada *m = new Motorizada(marca,matricula,ano);
@@ -313,7 +382,7 @@ bool Oficina::leFuncionarios(){
 					}
 				}
 				numVeiculos--;
-			}while(numVeiculos != 0);
+			}
 			funcionarios.push_back(f);
 		}
 		funcFile.close();
@@ -330,13 +399,13 @@ bool Oficina::guardaFuncionarios(){
 		funcFile << veic.size() << " " << funcionarios[i].getNome();
 		for(unsigned int j= 0; j < veic.size();j++){
 			string tipo;
-			if(typeid(veiculos[i]) == typeid(Motorizada)){
+			if(veiculos[i]->classname() == "Motorizada"){
 				tipo = "m";
-			}else if(typeid(veiculos[i]) == typeid(Camiao)){
+			}else if(veiculos[i]->classname() == "Camiao"){
 				tipo = "c";
-			}else if(typeid(veiculos[i]) == typeid(Autocarro)){
+			}else if(veiculos[i]->classname() == "Autocarro"){
 				tipo = "ac";
-			}else if(typeid(veiculos[i]) == typeid(Automovel)){
+			}else if(veiculos[i]->classname() == "Automovel"){
 				tipo = "am";
 			}
 			funcFile << " " << tipo << " " <<  veic[j]->getMarca() << " " << veic[j]->getAno() << " " << veic[j]->getMatricula();

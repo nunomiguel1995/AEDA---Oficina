@@ -14,12 +14,13 @@ class Veiculo{
 	int ano;
 public:
 	Veiculo (string marca, string matricula, int ano);
-	~Veiculo();
+	virtual ~Veiculo();
 	string getMarca() const;
 	string getMatricula() const;
 	int getAno() const;
 	friend bool operator <(const Veiculo v1, const Veiculo v2);
 	void displayVeiculo() const;
+	virtual string classname() const;
 };
 
 class Motorizada: public Veiculo{
@@ -30,6 +31,7 @@ public:
 	~Motorizada();
 	vector<Servico> getServicos() const;
 	void addServico(Servico & s);
+	string classname() const;
 };
 
 class Camiao: public Veiculo{
@@ -40,6 +42,7 @@ public:
 	~Camiao();
 	vector<Servico> getServicos() const;
 	void addServico(Servico & s);
+	string classname() const;
 };
 
 class Autocarro: public Veiculo{
@@ -50,6 +53,7 @@ public:
 	~Autocarro();
 	vector<Servico> getServicos() const;
 	void addServico(Servico & s);
+	string classname() const;
 };
 
 class Automovel: public Veiculo{
@@ -60,6 +64,7 @@ public:
 	~Automovel();
 	vector<Servico> getServicos() const;
 	void addServico(Servico & s);
+	string classname() const;
 };
 
 #endif /* SRC_VEICULO_H_ */

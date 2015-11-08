@@ -13,7 +13,6 @@ string Veiculo::getMatricula() const {return matricula;}
 
 int Veiculo::getAno() const{return ano;}
 
-
 bool operator <(const Veiculo v1, const Veiculo v2){
 	int ano1= v1.getAno();
 	int ano2= v2.getAno();
@@ -27,8 +26,10 @@ bool operator <(const Veiculo v1, const Veiculo v2){
 }
 
 void Veiculo::displayVeiculo() const{
-	cout<<marca<< "; "<< matricula<<"; "<<ano<<endl;
+	cout<< marca << "; "<< matricula <<"; " << ano << endl;
 }
+
+string Veiculo::classname() const{return "Veiculo";}
 
 /**
  * Motorizada
@@ -43,6 +44,7 @@ void Motorizada::addServico(Servico & s){
 	s.addtaxa(taxa);
 	servicos.push_back(s);}
 
+string Motorizada::classname() const{return "Motorizada";}
 /**
  * Camiao
  */
@@ -56,6 +58,7 @@ void Camiao::addServico(Servico & s){
 	s.addtaxa(taxa);
 	servicos.push_back(s);}
 
+string Camiao::classname() const{return "Camiao";}
 /**
  * Autocarro
  */
@@ -69,6 +72,7 @@ void Autocarro::addServico(Servico & s){
 	s.addtaxa(taxa);
 	servicos.push_back(s);}
 
+string Autocarro::classname() const{return "Autocarro";}
 /**
  * Automóvel
  */
@@ -82,5 +86,6 @@ void Automovel::addServico(Servico & s){
 	s.addtaxa(taxa);
 	servicos.push_back(s);}
 
+string Automovel::classname() const{return "Automovel";}
 
 

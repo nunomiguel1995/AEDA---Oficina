@@ -53,6 +53,6 @@ bool operator<(const Funcionario f1, const Funcionario f2){
 }
 
 void Funcionario:: displayFuncionario() const{
-	cout<<nome<< "veiculos: ";
+	cout<< nome << " ";
 	this->displayVeiculos();
 }
