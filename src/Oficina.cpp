@@ -498,7 +498,7 @@ bool Oficina::leServicos(){
 		float preco;
 		int duracao;
 		while(servFile >> n >> preco >> duracao){
-			Servico *s = new Standard(n,preco,duracao);
+			Standard s(n,preco,duracao);
 			addServicoStandard(s);
 		}
 		servFile.close();
