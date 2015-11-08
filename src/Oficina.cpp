@@ -44,7 +44,7 @@ void Oficina:: setVeiculos(vector <Veiculo *> veic){
 	veiculos=veic;
 }
 
-void Oficina:: setServicosStandard(vector <Standard> stand){
+void Oficina:: setServicosStandard(vector <Standard *> stand){
 	servicosStandard= stand;
 }
 
@@ -80,7 +80,7 @@ void Oficina::addFuncionario(Funcionario & f){
 	funcionarios.push_back(f);
 }
 
-vector <Standard> Oficina:: getServicosStandard() const{
+vector <Standard *> Oficina:: getServicosStandard() const{
 	return servicosStandard;
 }
 
@@ -114,11 +114,11 @@ void Oficina::addVeiculo(Veiculo *&v){
 	veiculos.push_back(v);
 }
 
-void Oficina:: addServicoStandard(Standard s){
+void Oficina:: addServicoStandard(Standard *s){
 	bool existe= false;
-	string nome= s.getNome();
+	string nome= s->getNome();
 	for(unsigned int i=0; i< servicosStandard.size(); i++){
-		if(servicosStandard[i].getNome()==s.getNome()){
+		if(servicosStandard[i]->getNome()==s->getNome()){
 			existe=true;
 			break;
 		}
@@ -220,13 +220,13 @@ void Oficina::removeVeiculo(Veiculo *&v){
 	veiculos.erase(veiculos.begin()+pos);
 }
 
-void Oficina:: removeServicoStandard(Standard s){
+void Oficina:: removeServicoStandard(Standard *s){
 	bool existe= false;
-	string nome= s.getNome();
+	string nome= s->getNome();
 	unsigned int i;
 
 	for(i=0; i<servicosStandard.size();i++){
-		if(servicosStandard[i].getNome()==nome){
+		if(servicosStandard[i]->getNome()==nome){
 			existe=true;
 		}
 	}
@@ -259,9 +259,9 @@ void Oficina::displayClientes() const{
 
 void Oficina:: displayServicosStandard() {
 	for(unsigned int i=0; i< servicosStandard.size();i++){
-		string n = servicosStandard[i].getNome();
-		float preco= servicosStandard[i].getPreco();
-		int duracao= servicosStandard[i].getDuracao();
+		string n = servicosStandard[i]->getNome();
+		float preco= servicosStandard[i]->getPreco();
+		int duracao= servicosStandard[i]->getDuracao();
 
 		cout<<"nome: "<<nome<<"preco: "<<preco<<"duração: "<<duracao << endl;
 	}
@@ -283,13 +283,23 @@ bool Oficina::leVeiculos(){
 	ifstream veicFile;
 	veicFile.open("veiculos.txt",ifstream::in);
 	if(veicFile.is_open()){
-		string marca, matricula, tipo;
-		int ano;
+		string marca, matricula, tipo, nome ,tipoServ;
+		float preco;
+		int ano, duracao;
 		while(veicFile >> tipo >> marca >> matricula >> ano){
 			if(tipo == "m"){
 				Veiculo *m = new Motorizada(marca,matricula,ano);
 				try{
 					addVeiculo(m);
+					while(veicFile >> tipoServ >> nome >> preco >> duracao){
+						if(tipoServ == "s"){
+							Servico *s = new Standard(nome,preco,duracao);
+							m->addServico(s,false);
+						}else if(tipoServ == "ns"){
+							Servico *s = new naoStandard(nome,preco,duracao);
+							m->addServico(s,false);
+						}
+					}
 				}catch(VeiculoExistente &e){
 					cout << e.getMatricula() << " já é um veículo existente.\n";
 				}
@@ -297,6 +307,15 @@ bool Oficina::leVeiculos(){
 				Veiculo *c = new Camiao(marca,matricula,ano);
 				try{
 					addVeiculo(c);
+					while(veicFile >> tipoServ >> nome >> preco >> duracao){
+						if(tipoServ == "s"){
+							Servico *s = new Standard(nome,preco,duracao);
+							c->addServico(s,false);
+						}else if(tipoServ == "ns"){
+							Servico *s = new naoStandard(nome,preco,duracao);
+							c->addServico(s,false);
+						}
+					}
 				}catch(VeiculoExistente &e){
 					cout << e.getMatricula() << " já é um veículo existente.\n";
 				}
@@ -304,6 +323,15 @@ bool Oficina::leVeiculos(){
 				Veiculo *at = new Autocarro(marca,matricula,ano);
 				try{
 					addVeiculo(at);
+					while(veicFile >> tipoServ >> nome >> preco >> duracao){
+						if(tipoServ == "s"){
+							Servico *s = new Standard(nome,preco,duracao);
+							at->addServico(s,false);
+						}else if(tipoServ == "ns"){
+							Servico *s = new naoStandard(nome,preco,duracao);
+							at->addServico(s,false);
+						}
+					}
 				}catch(VeiculoExistente &e){
 					cout << e.getMatricula() << " já é um veículo existente.\n";
 				}
@@ -311,6 +339,15 @@ bool Oficina::leVeiculos(){
 				Veiculo *am = new Automovel(marca,matricula,ano);
 				try{
 					addVeiculo(am);
+					while(veicFile >> tipoServ >> nome >> preco >> duracao){
+						if(tipoServ == "s"){
+							Servico *s = new Standard(nome,preco,duracao);
+							am->addServico(s,false);
+						}else if(tipoServ == "ns"){
+							Servico *s = new naoStandard(nome,preco,duracao);
+							am->addServico(s,false);
+						}
+					}
 				}catch(VeiculoExistente &e){
 					cout << e.getMatricula() << " já é um veículo existente.\n";
 				}
@@ -325,7 +362,7 @@ bool Oficina::guardaVeiculos(){
 	ofstream veicFile;
 	veicFile.open("veiculos.txt");
 	for(unsigned int i = 0; i < veiculos.size(); i++){
-		string tipo;
+		string tipo, tipoServ;
 		if(i!=0){veicFile << endl;}
 		if(veiculos[i]->classname() == "Motorizada"){
 			tipo = "m";
@@ -338,6 +375,19 @@ bool Oficina::guardaVeiculos(){
 		}
 		veicFile << tipo << " " << veiculos[i]->getMarca() << " " << veiculos[i]->getMatricula() <<
 				" " << veiculos[i]->getAno();
+		for(unsigned int j = 0; j < veiculos[i]->getServicos().size(); j++){
+			if(veiculos[i]->getServicos()[j]->classname() == "Standard"){
+				tipoServ = "s";
+				vector<Servico *> serv = veiculos[i]->getServicos();
+				if(j!=0){veicFile << endl;}
+				veicFile << " " << tipoServ << " " << serv[j]->getNome() << " " << serv[j]->getPreco() << " " << serv[j]->getDuracao();
+			}else if(veiculos[i]->getServicos()[j]->classname() == "naoStandard"){
+				tipoServ = "ns";
+				vector<Servico *> serv= veiculos[i]->getServicos();
+				if(j!=0){veicFile << endl;}
+				veicFile << " " << tipoServ << " " << serv[j]->getNome() << " " << serv[j]->getPreco() << " " << serv[j]->getDuracao();
+			}
+		}
 	}
 	veicFile.close();
 	return true;
@@ -498,7 +548,7 @@ bool Oficina::leServicos(){
 		float preco;
 		int duracao;
 		while(servFile >> n >> preco >> duracao){
-			Standard s(n,preco,duracao);
+			Standard *s = new Standard(n,preco,duracao);
 			addServicoStandard(s);
 		}
 		servFile.close();
@@ -511,8 +561,8 @@ bool Oficina::guardaServicos(){
 	servFile.open("standard.txt");
 	for(unsigned int i = 0; i < servicosStandard.size(); i++){
 		if(i!=0){servFile << endl;}
-		servFile << servicosStandard[i].getNome() << " " << servicosStandard[i].getPreco() << " "
-				<< servicosStandard[i].getDuracao();
+		servFile << servicosStandard[i]->getNome() << " " << servicosStandard[i]->getPreco() << " "
+				<< servicosStandard[i]->getDuracao();
 	}
 	servFile.close();
 	return true;
@@ -529,7 +579,7 @@ int Oficina:: posVeiculo(string mt){
 
 int Oficina:: isStandard(string nome){
 	for(unsigned int i=0; i< servicosStandard.size();i++){
-			if(servicosStandard[i].getNome() == nome) return i;
+			if(servicosStandard[i]->getNome() == nome) return i;
 		}
 
 		return -1;

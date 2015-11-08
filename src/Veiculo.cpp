@@ -31,7 +31,9 @@ void Veiculo::displayVeiculo() const{
 
 string Veiculo::classname() const{return "Veiculo";}
 
-void Veiculo:: addServico(Servico &s){}
+void Veiculo:: addServico(Servico *&s, bool control){}
+
+vector<Servico *> Veiculo::getServicos() const{}
 
 /**
  * Motorizada
@@ -40,10 +42,10 @@ Motorizada::Motorizada(string m, string mt, int a) : Veiculo(m,mt,a){}
 
 Motorizada::~Motorizada(){servicos.erase(servicos.begin(),servicos.end());}
 
-vector<Servico> Motorizada::getServicos() const{return servicos;}
+vector<Servico *> Motorizada::getServicos() const{return servicos;}
 
-void Motorizada::addServico(Servico & s){
-	s.addTaxa(taxa);
+void Motorizada::addServico(Servico * & s, bool control){
+	if(control){s->addTaxa(taxa);}
 	servicos.push_back(s);}
 
 string Motorizada::classname() const{return "Motorizada";}
@@ -54,10 +56,10 @@ Camiao::Camiao(string m, string mt,int a) : Veiculo(m,mt,a){}
 
 Camiao::~Camiao(){servicos.erase(servicos.begin(),servicos.end());}
 
-vector<Servico> Camiao::getServicos() const{return servicos;}
+vector<Servico *> Camiao::getServicos() const{return servicos;}
 
-void Camiao::addServico(Servico & s){
-	s.addTaxa(taxa);
+void Camiao::addServico(Servico * & s, bool control){
+	if(control){s->addTaxa(taxa);}
 	servicos.push_back(s);}
 
 string Camiao::classname() const{return "Camiao";}
@@ -68,10 +70,10 @@ Autocarro::Autocarro(string m, string mt,int a) : Veiculo(m,mt,a){}
 
 Autocarro::~Autocarro(){servicos.erase(servicos.begin(),servicos.end());}
 
-vector<Servico> Autocarro::getServicos() const{return servicos;}
+vector<Servico *> Autocarro::getServicos() const{return servicos;}
 
-void Autocarro::addServico(Servico & s){
-	s.addTaxa(taxa);
+void Autocarro::addServico(Servico * & s, bool control){
+	if(control){s->addTaxa(taxa);}
 	servicos.push_back(s);}
 
 string Autocarro::classname() const{return "Autocarro";}
@@ -82,10 +84,10 @@ Automovel::Automovel(string m, string mt,int a) : Veiculo(m,mt,a){}
 
 Automovel::~Automovel(){servicos.erase(servicos.begin(),servicos.end());}
 
-vector<Servico> Automovel::getServicos() const{return servicos;}
+vector<Servico *> Automovel::getServicos() const{return servicos;}
 
-void Automovel::addServico(Servico & s){
-	s.addTaxa(taxa);
+void Automovel::addServico(Servico * & s, bool control){
+	if(control){s->addTaxa(taxa);}
 	servicos.push_back(s);}
 
 string Automovel::classname() const{return "Automovel";}
