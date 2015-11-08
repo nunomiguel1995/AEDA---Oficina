@@ -164,9 +164,10 @@ void addMenu(Oficina &oficina, int opcao){
 				cout<<"Serviço Standard não oferecido pela oficina! \n";
 				break;
 			}
-			Standard s= oficina.getServicosStandard().at(i);
+			Servico *s;
+			s = oficina.getServicosStandard().at(i);
 			vector <Veiculo *> veic= oficina.getVeiculos();
-			veic[pos]->addServico(s);
+			veic[pos]->addServico(s,true);
 			oficina.setVeiculos(veic);
 			cout<<"Serviço adicionado com sucesso! \n";
 
@@ -189,9 +190,9 @@ void addMenu(Oficina &oficina, int opcao){
 			cin>>preco;
 			cout<<"Qual a descrição do serviço (0 para terminar): ";
 
-			naoStandard s1(nome,preco,duracao);
+			Servico *s1 = new naoStandard(nome,preco,duracao);
 			vector <Veiculo *> veic= oficina.getVeiculos();
-			veic[pos]->addServico(s1);
+			veic[pos]->addServico(s1,true);
 			oficina.setVeiculos(veic);
 			cout<<"Serviço adicionado com sucesso! \n";
 
@@ -322,6 +323,23 @@ case 4: //display veiculos do cliente
 	}
 }
 break;
+case 5: //display servicos do veiculo
+{
+	string matricula;
+	try{
+		cout << "Insira a matricula do veiculo: ";
+		cin >> matricula;
+		Veiculo *v = oficina.getVeiculoMatricula(matricula);
+		vector<Servico *> serv = v->getServicos();
+		for(unsigned int i = 0; i < serv.size(); i++){
+			serv[i]->displayServico();
+			cout << endl;
+		}
+	}catch(VeiculoInexistente &e){
+		cout << e.getMatricula() << " não existe.\n";
+	}
+}
+	break;
 default:
 	break;
 }
@@ -374,6 +392,7 @@ int main(){
 	oficina.leFuncionarios();
 	oficina.leClientes();
 	oficina.leVeiculos();
+	oficina.leServicos();
 
 	int opcao;
 	do{
@@ -386,6 +405,7 @@ int main(){
 	oficina.guardaFuncionarios();
 	oficina.guardaClientes();
 	oficina.guardaVeiculos();
+	oficina.guardaServicos();
 
 	return 0;
 }

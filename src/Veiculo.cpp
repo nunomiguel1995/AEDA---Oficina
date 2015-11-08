@@ -59,11 +59,17 @@ void Veiculo::displayVeiculo() const{
  */
 string Veiculo::classname() const{return "Veiculo";}
 
+<<<<<<< HEAD
 /**
  * Adiciona um serviço
  * @param s serviço a adicionar
  */
 void Veiculo:: addServico(Servico &s){}
+=======
+void Veiculo:: addServico(Servico *&s, bool control){}
+
+vector<Servico *> Veiculo::getServicos() const{}
+>>>>>>> 8c9c2daed4c4c1b0ee709b7d1b4ad9187d39e0a3
 
 /**
  * Motorizada
@@ -82,6 +88,7 @@ Motorizada::Motorizada(string m, string mt, int a) : Veiculo(m,mt,a){}
  */
 Motorizada::~Motorizada(){servicos.erase(servicos.begin(),servicos.end());}
 
+<<<<<<< HEAD
 /**
  * Retorna o vetor serviços associados ao objeto da classe motorizada
  */
@@ -93,6 +100,12 @@ vector<Servico> Motorizada::getServicos() const{return servicos;}
  */
 void Motorizada::addServico(Servico & s){
 	s.addTaxa(taxa);
+=======
+vector<Servico *> Motorizada::getServicos() const{return servicos;}
+
+void Motorizada::addServico(Servico * & s, bool control){
+	if(control){s->addTaxa(taxa);}
+>>>>>>> 8c9c2daed4c4c1b0ee709b7d1b4ad9187d39e0a3
 	servicos.push_back(s);}
 
 /**
@@ -118,6 +131,7 @@ Camiao::Camiao(string m, string mt,int a) : Veiculo(m,mt,a){}
  */
 Camiao::~Camiao(){servicos.erase(servicos.begin(),servicos.end());}
 
+<<<<<<< HEAD
 /**
  * Retorna os serviços do Camião
  */
@@ -129,6 +143,12 @@ vector<Servico> Camiao::getServicos() const{return servicos;}
  */
 void Camiao::addServico(Servico & s){
 	s.addTaxa(taxa);
+=======
+vector<Servico *> Camiao::getServicos() const{return servicos;}
+
+void Camiao::addServico(Servico * & s, bool control){
+	if(control){s->addTaxa(taxa);}
+>>>>>>> 8c9c2daed4c4c1b0ee709b7d1b4ad9187d39e0a3
 	servicos.push_back(s);}
 
 /**
@@ -152,6 +172,7 @@ Autocarro::Autocarro(string m, string mt,int a) : Veiculo(m,mt,a){}
  */
 Autocarro::~Autocarro(){servicos.erase(servicos.begin(),servicos.end());}
 
+<<<<<<< HEAD
 /**
  * Retorna o vetor serviços
  */
@@ -163,6 +184,12 @@ vector<Servico> Autocarro::getServicos() const{return servicos;}
  */
 void Autocarro::addServico(Servico & s){
 	s.addTaxa(taxa);
+=======
+vector<Servico *> Autocarro::getServicos() const{return servicos;}
+
+void Autocarro::addServico(Servico * & s, bool control){
+	if(control){s->addTaxa(taxa);}
+>>>>>>> 8c9c2daed4c4c1b0ee709b7d1b4ad9187d39e0a3
 	servicos.push_back(s);}
 
 /**
@@ -188,6 +215,7 @@ Automovel::Automovel(string m, string mt,int a) : Veiculo(m,mt,a){}
  */
 Automovel::~Automovel(){servicos.erase(servicos.begin(),servicos.end());}
 
+<<<<<<< HEAD
 
 /**
  * Retorna os serviços do automóvel
@@ -200,6 +228,12 @@ vector<Servico> Automovel::getServicos() const{return servicos;}
  */
 void Automovel::addServico(Servico & s){
 	s.addTaxa(taxa);
+=======
+vector<Servico *> Automovel::getServicos() const{return servicos;}
+
+void Automovel::addServico(Servico * & s, bool control){
+	if(control){s->addTaxa(taxa);}
+>>>>>>> 8c9c2daed4c4c1b0ee709b7d1b4ad9187d39e0a3
 	servicos.push_back(s);}
 
 /**
