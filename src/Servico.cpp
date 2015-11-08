@@ -35,6 +35,16 @@ void Standard:: setDuracao(int d1){
 	duracao=d1;
 }
 
+<<<<<<< HEAD
+Standard::Standard (string nome): Servico (nome){
+	//falt inicializar as variaveis DECIDIR
+};
+
+naoStandard:: naoStandard(string nome, float preco, int duracao, vector<string> descricao): Servico(nome){
+	this->preco=preco;
+	this->duracao=duracao;
+	this->descricao=descricao;
+=======
 void Standard:: setDescricao(vector<string> d1){
 	descricao= d1;
 }
@@ -57,6 +67,7 @@ void Standard:: displayServico() const{
 		cout<<descricao[i]<<", ";
 	}
 	cout<<endl;
+>>>>>>> 13b404b4d821ec0e2235f370e8dc33abef2f726e
 }
 
 void Standard:: addtaxa(float tx){

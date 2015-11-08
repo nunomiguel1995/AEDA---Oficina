@@ -91,8 +91,10 @@ void Oficina::addVeiculo(Veiculo * v){
 }
 
 void Oficina::removeFuncionario(Funcionario f){
+
 	bool existe=false;
 	unsigned int pos;
+
 	for(pos=0; pos<funcionarios.size();pos++){
 		if(funcionarios[pos].getNome()==f.getNome()){
 			existe=true;
