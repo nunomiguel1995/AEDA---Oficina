@@ -65,9 +65,11 @@ public:
 	bool guardaFuncionarios();
 	bool guardaVeiculos();
 	bool guardaClientes();
+	bool guardaServicos();
 	bool leFuncionarios();
 	bool leVeiculos();
 	bool leClientes();
+	bool leServicos();
 
 	void ordenaFuncionarios();
 	void ordenaVeiculos();

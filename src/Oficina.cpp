@@ -439,6 +439,15 @@ bool Oficina::guardaFuncionarios(){
 	return true;
 }
 
+bool Oficina::leServicos(){
+
+
+}
+
+bool Oficina::guardaServicos(){
+
+}
+
 int Oficina:: posVeiculo(string mt){
 
 	for(unsigned int i=0; i< veiculos.size();i++){
