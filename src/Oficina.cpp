@@ -40,6 +40,10 @@ void Oficina::setClientes(vector<Cliente> clnts){
 	clientes = clnts;
 }
 
+void Oficina:: setVeiculos(vector <Veiculo *> veic){
+	veiculos=veic;
+}
+
 vector<Veiculo *> Oficina::getVeiculos() const{return veiculos;}
 
 Veiculo * Oficina::getVeiculoMatricula(string mt) const{
@@ -444,4 +448,14 @@ bool Oficina::guardaFuncionarios(){
 	}
 	funcFile.close();
 	return true;
+}
+
+
+int Oficina:: posVeiculo(string mt){
+
+	for(unsigned int i=0; i< veiculos.size();i++){
+		if(veiculos[i]->getMatricula() == mt) return i;
+	}
+
+	return -1;
 }

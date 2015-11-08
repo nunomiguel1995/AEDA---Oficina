@@ -21,6 +21,7 @@ public:
 	friend bool operator <(const Veiculo v1, const Veiculo v2);
 	void displayVeiculo() const;
 	virtual string classname() const;
+	virtual void addServico(Servico &s);
 };
 
 class Motorizada: public Veiculo{
