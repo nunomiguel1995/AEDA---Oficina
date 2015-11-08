@@ -155,6 +155,7 @@ void addMenu(Oficina &oficina, int opcao){
 		switch(tiposervico){
 		case 1:
 		{
+			/*
 			string nome;
 			cout<<"Escolha um nome para o serviço: ";
 			cin>>nome;
@@ -166,10 +167,11 @@ void addMenu(Oficina &oficina, int opcao){
 			cout<<"Serviço adicionado com sucesso! \n";
 
 			break;
-
+			*/
 		}
 		case 2:
 		{
+			/*
 			string nome;
 			int duracao;
 			float preco;
@@ -198,6 +200,7 @@ void addMenu(Oficina &oficina, int opcao){
 			veic[pos]->addServico(s1);
 			oficina.setVeiculos(veic);
 			cout<<"Serviço adicionado com sucesso! \n";
+			*/
 		}
 		break;
 		default:
