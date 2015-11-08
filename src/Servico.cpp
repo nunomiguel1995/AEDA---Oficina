@@ -20,11 +20,6 @@ void Servico:: addTaxa(float tx){}
 /*
  * Standard
  */
-naoStandard:: naoStandard(string nome, float preco, int duracao, vector<string> descricao): Servico(nome){
-	this->preco=preco;
-	this->duracao=duracao;
-	this->descricao=descricao;
-}
 
 Standard:: Standard (string nome, float preco, int duracao): Servico(nome){
 	this->preco=preco;
@@ -41,15 +36,7 @@ int Standard:: getDuracao() const{
 
 
 void Standard:: displayServico() const{
-	cout<<"preco: "<< preco <<"duracao: "<< duracao <<"descricao: ";
-	for(unsigned int i=0; i< descricao.size();i++){
-		cout<<descricao[i]<<", ";
-	}
-	cout<<endl;
-
-	cout<<"preco: "<< preco<<" duracao: "<< duracao;
-
-	cout<<endl;
+	cout << "preco: "<< preco <<" duracao: "<< duracao << endl;
 }
 
 void Standard:: addTaxa(float tx){
