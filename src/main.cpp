@@ -138,18 +138,9 @@ void addMenu(Oficina &oficina, int opcao){
 	break;
 	case 5: //adicionar serviço a veículo
 	{
-		string nome, matricula;
-		try{
-			string nome;
-			cin.sync();
-			cout << "Insira o nome do cliente: ";
-			getline(cin,nome);
-			oficina.getClienteNome(nome);
-			cout << "Insira a matricula do veículo: ";
-			cin >> matricula;
-		}catch(ClienteInexistente &e){
-			cout << e.getNome() << " não é um cliente.\n";
-		}
+		/**
+		 * FALTA FAZER
+		 */
 	}
 	break;
 	default:
