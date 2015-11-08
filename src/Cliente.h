@@ -18,6 +18,8 @@ public:
 	string getNome() const;
 	int getId() const;
 	void setId(unsigned int id);
+	void setVeiculos(vector<Veiculo*> veiculos);
+	Veiculo * getVeiculoMatricula(string mt) const;
 	vector <Veiculo*> getVeiculos() const;
 	void addVeiculo(Veiculo *v1);
 	void removeVeiculo (Veiculo *v1);

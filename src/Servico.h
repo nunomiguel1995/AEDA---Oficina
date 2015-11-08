@@ -21,15 +21,11 @@ public:
 class Standard: public Servico{
 	float preco;
 	int duracao;
-	vector <string> descricao;
+
 public:
-	Standard (string nome);
-	void setPreco(float p1);
-	void setDuracao(int d1);
-	void setDescricao(vector<string> d1);
+	Standard (string nome, float preco, int duracao);
 	float getPreco() const;
 	int getDuracao() const;
-	vector<string> getDescricao() const;
 	void displayServico() const;
 	void addTaxa(float tx);
 };
@@ -38,12 +34,11 @@ public:
 class naoStandard: public Servico{
 	float preco;
 	int duracao;
-	vector <string> descricao;
+
 public:
-	naoStandard (string nome, float preco, int duracao, vector<string> descricao);
+	naoStandard (string nome, float preco, int duracao);
 	float getPreco() const;
 	int getDuracao() const;
-	vector<string> getDescricao() const;
 	void displayServico() const;
 	void addTaxa(float tx);
 };
