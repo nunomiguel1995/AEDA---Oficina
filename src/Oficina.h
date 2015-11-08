@@ -32,6 +32,7 @@ public:
 	void setClientes(vector<Cliente> clnts);
 	vector<Veiculo *> getVeiculos() const;
 	Veiculo * getVeiculoMatricula(string mt) const;
+	vector<Funcionario> getFuncionariosVeiculo(Veiculo *v) const;
 	vector<Cliente> getClientes() const;
 	vector<Servico *> getServicos() const;
 	void addFuncionario(Funcionario & f);
@@ -39,6 +40,7 @@ public:
 	void addVeiculo(Veiculo *v);
 	void addVeiculoCliente(Veiculo *v,string nome);
 	void addVeiculoFuncionario(Veiculo *v, string nome);
+	void addServicoVeiculo(Servico *&s, Veiculo *v);
 	void removeFuncionario(Funcionario f);
 	void removeCliente(Cliente c);
 	void removeVeiculo(Veiculo *v);

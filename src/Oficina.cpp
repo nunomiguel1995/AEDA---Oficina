@@ -51,6 +51,18 @@ Veiculo * Oficina::getVeiculoMatricula(string mt) const{
 	throw VeiculoInexistente(mt);
 }
 
+vector<Funcionario> Oficina::getFuncionariosVeiculo(Veiculo *v) const{
+	vector<Funcionario> f;
+	for(unsigned int i = 0; i < funcionarios.size(); i++){
+		for(unsigned int j = 0; j < funcionarios[i].getVeiculos().size();j++){
+			if(funcionarios[i].getVeiculos()[j]->getMatricula() == v->getMatricula()){
+				f.push_back(funcionarios[i]);
+			}
+		}
+	}
+	return f;
+}
+
 vector<Cliente> Oficina::getClientes() const{return clientes;}
 
 void Oficina::addFuncionario(Funcionario & f){
@@ -88,6 +100,23 @@ void Oficina::addVeiculo(Veiculo * v){
 		if(veiculos[i]->getMatricula() ==v->getMatricula()) throw(VeiculoExistente(v->getMatricula()));
 	}
 	veiculos.push_back(v);
+}
+
+void Oficina::addServicoVeiculo(Servico *&s, Veiculo *v){
+	for(unsigned int i = 0; i < veiculos.size(); i++){
+		if(veiculos[i]->getMatricula() == v->getMatricula()){
+			if(veiculos[i]->classname() == "Motorizada"){
+
+			}else if(veiculos[i]->classname() == "Camiao"){
+
+			}else if(veiculos[i]->classname() == "Autocarro"){
+
+			}else if(veiculos[i]->classname() == "Automovel"){
+
+			}
+		}
+	}
+	throw (VeiculoInexistente(v->getMatricula()));
 }
 
 void Oficina::removeFuncionario(Funcionario f){

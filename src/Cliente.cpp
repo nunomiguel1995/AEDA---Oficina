@@ -29,6 +29,15 @@ vector <Veiculo*> Cliente:: getVeiculos() const{
 	return veiculos;
 }
 
+Veiculo * Cliente::getVeiculoMatricula(string mt) const{
+	for(unsigned int i = 0; i < veiculos.size(); i++){
+		if(veiculos[i]->getMatricula() == mt){
+			return veiculos[i];
+		}
+	}
+	throw VeiculoInexistente(mt);
+}
+
 void Cliente:: addVeiculo(Veiculo *v1){
 	for(unsigned int i=0; i<veiculos.size();i++){
 		if(veiculos[i]->getMatricula() ==v1->getMatricula()) throw(VeiculoExistente(v1->getMatricula()));
