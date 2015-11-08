@@ -7,12 +7,12 @@
 Funcionario:: Funcionario(string n): nome(n){}
 
 /**
- * Retorna o vetor veículos pelos quais o funcionário é responsável
+ * Retorna o vetor veiculos pelos quais o funcionario e responsável
  */
 vector <Veiculo *> Funcionario:: getVeiculos() const{ return veiculos;}
 
 /**
- * Adiciona um veículo ao vetor de veículos de cada funcionário e lança uma exceção, caso ele já exista
+ * Adiciona um veiculo ao vetor de veiculos de cada funcionario e lança uma exceçao, caso ele ja exista
  * @param v1 veiculo a adicionar
  */
 void Funcionario:: addVeiculo(Veiculo * v1){
@@ -23,7 +23,7 @@ void Funcionario:: addVeiculo(Veiculo * v1){
 }
 
 /**
- * Remove um veículo do vetor de veículos de cada funcionário e lança uma exceção, caso ele não exista
+ * Remove um veiculo do vetor de veiculos de cada funcionario e lança uma exceçao, caso ele nao exista
  * @param v1 veiculo a adicionar
  */
 
@@ -42,14 +42,14 @@ void Funcionario:: removeVeiculo(Veiculo *v1){
 }
 
 /**
- * Retorna o nome do funcionário
+ * Retorna o nome do funcionario
  */
 string Funcionario:: getNome() const{
 	return nome;
 }
 
 /**
- * Mostra o vetor de veículos pelos quais o funcionário é responsável
+ * Mostra o vetor de veiculos pelos quais o funcionario é responsavel
  */
 
 void Funcionario::displayVeiculos() const{
@@ -59,7 +59,7 @@ void Funcionario::displayVeiculos() const{
 }
 
 /**
- * Modifica o vetor veículos, ficando este igual ao vetor passado como argumento
+ * Modifica o vetor veiculos, ficando este igual ao vetor passado como argumento
  * @param veic vetor de veiculos
  */
 

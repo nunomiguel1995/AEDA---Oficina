@@ -6,7 +6,7 @@
 using namespace std;
 
 /**
- * Excepção quando um cliente já existe
+ * Excepçao quando um cliente ja existe
  *
  */
 class ClienteExistente{
@@ -17,7 +17,7 @@ public:
 };
 
 /**
- * Excepção quando um cliente não existe
+ * Excepçao quando um cliente nao existe
  *
  */
 class ClienteInexistente{
@@ -28,7 +28,7 @@ public:
 };
 
 /**
- * Excepção quando um funcionário já existe
+ * Excepçao quando um funcionário ja existe
  *
  */
 class FuncionarioExistente{
@@ -39,7 +39,7 @@ public:
 };
 
 /**
- * Excepção quando um funcionário não existe
+ * Excepçao quando um funcionario nao existe
  *
  */
 class FuncionarioInexistente{
@@ -50,7 +50,7 @@ public:
 };
 
 /**
- * Excepção quando um veiculo já existe
+ * Excepçao quando um veiculo ja existe
  *
  */
 class VeiculoExistente{
@@ -61,7 +61,7 @@ public:
 };
 
 /**
- * Excepção quando um veiculo não existe
+ * Excepçao quando um veiculo nao existe
  *
  */
 class VeiculoInexistente{
@@ -72,7 +72,7 @@ public:
 };
 
 /**
- * Excepção quando um serviço standard já existe na oficina
+ * Excepçao quando um serviço standard ja existe na oficina
  *
  */
 class ServicoExistente{
@@ -84,7 +84,7 @@ public:
 };
 
 /**
- * Excepção quando um serviço standard não existe na oficina
+ * Excepçao quando um serviço standard nao existe na oficina
  *
  */
 class ServicoInexistente{

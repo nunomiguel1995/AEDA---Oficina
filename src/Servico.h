@@ -9,7 +9,7 @@
 using namespace std;
 
 /**
- * Classe Serviço- classe base
+ * Classe Servico- classe base
  */
 class Servico{
 	string nome;
@@ -39,7 +39,7 @@ public:
 
 
 /**
- * Classe não Standard- classe derivada
+ * Classe nao Standard- classe derivada
  */
 class naoStandard: public Servico{
 

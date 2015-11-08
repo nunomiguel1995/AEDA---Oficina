@@ -69,7 +69,7 @@ Veiculo * Cliente::getVeiculoMatricula(string mt) const{
 }
 
 /**
- * Adiciona o veículo ao vetor de veículos do cliente e lança uma exceção, caso o veículo já lá exista
+ * Adiciona o veículo ao vetor de veiculos do cliente e lança uma excecao, caso o veiculo ja exista
  * @param *v1
  */
 void Cliente:: addVeiculo(Veiculo *v1){
@@ -82,7 +82,7 @@ void Cliente:: addVeiculo(Veiculo *v1){
 }
 
 /**
- * Remove o veículo do vetor de vículos do cliente e lança uma exceçao, caso o veículo não exista
+ * Remove o veiculo do vetor de veiculos do cliente e lanca uma excecao, caso o veiculo nao exista
  * @param *v1
  */
 
@@ -119,7 +119,7 @@ bool operator <(const Cliente c1, const Cliente c2){
 
 
 /**
- * Mostra as informações do cliente - ID, nome e veículos que possui
+ * Mostra as informacoes do cliente - ID, nome e veiculos que possui
  */
 
 void Cliente:: displayCliente() const{

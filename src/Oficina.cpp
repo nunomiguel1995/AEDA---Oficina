@@ -24,13 +24,13 @@ Oficina::~Oficina(){
 string Oficina::getNome() const{return nome;}
 
 /**
- * Retorna os funcionários da Oficina
+ * Retorna os funcionarios da Oficina
  */
 vector<Funcionario> Oficina::getFuncionarios() const{return funcionarios;}
 
 /**
- * Retorna um Funcionário com o nome passado como parametro
- * @param nome nome do Funcionário a procurar
+ * Retorna um Funcionario com o nome passado como parametro
+ * @param nome nome do Funcionario a procurar
  */
 Funcionario Oficina::getFuncionarioNome(string nome) const{
 	for(unsigned int i = 0; i < funcionarios.size(); i++){
@@ -105,7 +105,7 @@ Veiculo * Oficina::getVeiculoMatricula(string mt) const{
 }
 
 /**
- * Retorna os Funcionários responsável pelo Veiculo passado como parametro
+ * Retorna os Funcionarios responsavel pelo Veiculo passado como parametro
  * @param v
  */
 vector<Funcionario> Oficina::getFuncionariosVeiculo(Veiculo *v) const{
@@ -133,14 +133,14 @@ void Oficina::addFuncionario(Funcionario & f){
 }
 
 /**
- * Retorna os serviços standard oferecidos pela Oficina
+ * Retorna os servicos standard oferecidos pela Oficina
  */
 vector <Standard *> Oficina:: getServicosStandard() const{
 	return servicosStandard;
 }
 
 /**
- * Adiciona um cliente; lança uma excepção caso esse cliente já exista
+ * Adiciona um cliente; lanca uma excepcao caso esse cliente ja exista
  * @param c cliente a adicionar
  */
 void Oficina::addCliente(Cliente &c){
@@ -188,7 +188,7 @@ void Oficina::addVeiculo(Veiculo *&v){
 }
 
 /**
- * Adiciona serviço standar à Oficina
+ * Adiciona serviço standard a Oficina
  * @param s serviço stantard a adicionar
  */
 void Oficina:: addServicoStandard(Standard *s){
@@ -208,7 +208,7 @@ void Oficina:: addServicoStandard(Standard *s){
 
 
 /**
- * Remove Funcionario fa oficina, lança exepção caso não exista
+ * Remove Funcionario da oficina, lança exepção caso nao exista
  * @param f
  */
 void Oficina::removeFuncionario(Funcionario & f){
@@ -276,7 +276,7 @@ void Oficina::removeCliente(Cliente &c){
 }
 
 /**
- * Remove um veiculo de um cliente, lança excepção caso o cliente ou veiculo não existam
+ * Remove um veiculo de um cliente, lança excepção caso o cliente ou veiculo nao existam
  *  @param v
  *  @param nome
  */
@@ -301,7 +301,7 @@ void Oficina::removeVeiculoCliente(Veiculo *&v, string nome){
 }
 
 /**
- * Remove veiculo da oficina, lança excepção caso não exista
+ * Remove veiculo da oficina, lanca excepçao caso nao exista
  */
 void Oficina::removeVeiculo(Veiculo *&v){
 	bool existe=false;
@@ -317,7 +317,7 @@ void Oficina::removeVeiculo(Veiculo *&v){
 }
 
 /**
- * Remove um serviço standard da oficina, lança excepção caso não exista
+ * Remove um servico standard da oficina, lança excepcao caso nao exista
  */
 void Oficina:: removeServicoStandard(Standard *s){
 	bool existe= false;
@@ -336,7 +336,7 @@ void Oficina:: removeServicoStandard(Standard *s){
 }
 
 /**
- * Mostra os funcionários da Oficina
+ * Mostra os funcionarios da Oficina
  */
 void Oficina::displayFuncionarios() const{
 	cout << "Funcionário(s) da oficina: \n";
@@ -379,7 +379,7 @@ void Oficina:: displayServicosStandard() {
 }
 
 /**
- * Ordena os funcionários da oficina por número crescente de veiculos a ele associado
+ * Ordena os funcionarios da oficina por numero crescente de veiculos a ele associado
  */
 void Oficina:: ordenaFuncionarios(){
 	insertionSort(funcionarios);
@@ -400,7 +400,7 @@ void Oficina:: ordenaClientes(){
 }
 
 /**
- * Lê veiculos de um ficheiro de texto e guarda-os na Oficina
+ * Le veiculos de um ficheiro de texto e guarda-os na Oficina
  */
 bool Oficina::leVeiculos(){
 	ifstream veicFile;
@@ -520,7 +520,7 @@ bool Oficina::guardaVeiculos(){
 }
 
 /**
- * Lê clientes de um ficheiro de texto e guarda-os na Oficina
+ * Le clientes de um ficheiro de texto e guarda-os na Oficina
  */
 bool Oficina::leClientes(){
 	ifstream clienteFile;
@@ -600,7 +600,7 @@ bool Oficina::guardaClientes(){
 }
 
 /**
- * Lê funcionários de um ficheiro de texto e guarda-os na Oficina
+ * Le funcionarios de um ficheiro de texto e guarda-os na Oficina
  */
 bool Oficina::leFuncionarios(){
 	ifstream funcFile;
@@ -651,7 +651,7 @@ bool Oficina::leFuncionarios(){
 }
 
 /**
- * Guarda os funcionários num ficheiro de texto
+ * Guarda os funcionarios num ficheiro de texto
  */
 bool Oficina::guardaFuncionarios(){
 	ofstream funcFile;
@@ -679,7 +679,7 @@ bool Oficina::guardaFuncionarios(){
 }
 
 /**
- * Lê serviços de um ficheiro de texto e guarda-os na Oficina
+ * Le serviços de um ficheiro de texto e guarda-os na Oficina
  */
 bool Oficina::leServicos(){
 	ifstream servFile;
@@ -713,7 +713,7 @@ bool Oficina::guardaServicos(){
 }
 
 /**
- * Retorna a posição de um veiculo no vetor veiculos; retorna -1 caso não exista
+ * Retorna a posicaoo de um veiculo no vetor veiculos; retorna -1 caso nao exista
  * @param mt matricula do veiculo a procurar
  */
 int Oficina:: posVeiculo(string mt){
@@ -726,7 +726,7 @@ int Oficina:: posVeiculo(string mt){
 }
 
 /**
- * Retorna a posição de um serviço standard no vetor veiculos; retorna -1 caso não exista
+ * Retorna a posiçao de um servico standard no vetor veiculos; retorna -1 caso nao exista
  * @param nome nome do serviço a procurar
  */
 int Oficina:: isStandard(string nome){
