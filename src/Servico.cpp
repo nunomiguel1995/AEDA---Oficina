@@ -21,21 +21,6 @@ void Servico:: addTaxa(float tx){}
  * Standard
  */
 
-<<<<<<< HEAD
-Standard:: Standard (string nome, float preco, int duracao): Servico(nome){
-	this->preco=preco;
-	this->duracao= duracao;
-}
-
-
-naoStandard:: naoStandard(string nome, float preco, int duracao): Servico(nome){
-	this->preco=preco;
-	this->duracao=duracao;
-}
-
-
-=======
->>>>>>> b77e5ef6ee156b41f250a2dec113aedcff8b5f58
 Standard:: Standard (string nome, float preco, int duracao): Servico(nome){
 	this->preco=preco;
 	this->duracao= duracao;
@@ -51,21 +36,14 @@ int Standard:: getDuracao() const{
 
 
 void Standard:: displayServico() const{
-<<<<<<< HEAD
 	cout<<"preco: "<< preco <<"duracao: "<< duracao;
-=======
-	cout << "preco: "<< preco <<" duracao: "<< duracao << endl;
->>>>>>> b77e5ef6ee156b41f250a2dec113aedcff8b5f58
 }
 
 void Standard:: addTaxa(float tx){
 	preco=preco+ preco*tx;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> b77e5ef6ee156b41f250a2dec113aedcff8b5f58
 /*
  * NaoStandard
  */
@@ -73,10 +51,7 @@ naoStandard:: naoStandard (string nome, float preco, int duracao): Servico(nome)
 	this-> preco= preco;
 	this-> duracao= duracao;
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> b77e5ef6ee156b41f250a2dec113aedcff8b5f58
 
 float naoStandard:: getPreco() const{
 	return preco;
