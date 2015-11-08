@@ -2,6 +2,7 @@
 
 /**
  * Construtor da classe Funcionario
+ * @param n nome do funcionario
  */
 Funcionario:: Funcionario(string n): nome(n){}
 
@@ -12,6 +13,7 @@ vector <Veiculo *> Funcionario:: getVeiculos() const{ return veiculos;}
 
 /**
  * Adiciona um veículo ao vetor de veículos de cada funcionário e lança uma exceção, caso ele já exista
+ * @param v1 veiculo a adicionar
  */
 void Funcionario:: addVeiculo(Veiculo * v1){
 	for(unsigned int i=0; i<veiculos.size();i++){
@@ -22,6 +24,7 @@ void Funcionario:: addVeiculo(Veiculo * v1){
 
 /**
  * Remove um veículo do vetor de veículos de cada funcionário e lança uma exceção, caso ele não exista
+ * @param v1 veiculo a adicionar
  */
 
 void Funcionario:: removeVeiculo(Veiculo *v1){
@@ -57,7 +60,7 @@ void Funcionario::displayVeiculos() const{
 
 /**
  * Modifica o vetor veículos, ficando este igual ao vetor passado como argumento
- * @param veic
+ * @param veic vetor de veiculos
  */
 
 void Funcionario::setVeiculos(vector<Veiculo*> veic){
@@ -80,6 +83,9 @@ bool operator<(const Funcionario f1, const Funcionario f2){
 	}
 }
 
+/**
+ * Mostra o nome do funcionario e todos os veiculos associado a ele
+ */
 void Funcionario:: displayFuncionario() const{
 	cout<< nome << " ";
 	this->displayVeiculos();

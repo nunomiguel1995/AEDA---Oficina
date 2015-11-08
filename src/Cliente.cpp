@@ -5,7 +5,7 @@ static int ID=1;
 
 /**
  * Construtor da classe Cliente
- * @param nome
+ * @param nome nome do cliente
  */
 
 Cliente:: Cliente(string nome){
@@ -31,7 +31,7 @@ int Cliente:: getId() const{
 }
 
 /**
- * Modifica o ID do cliente
+ * Atribui o ID ao cliente
  * @param id
  */
 
@@ -41,19 +41,23 @@ void Cliente::setId(unsigned int id){
 }
 
 /**
- * Retorna o vetor de veículos do cliente
+ * Atribui o vetor passado como parametro ao vetor de veiculos do Cliente
+ * @param veiculos
  */
 void Cliente::setVeiculos(vector<Veiculo*> veiculos){
 	this->veiculos = veiculos;
 }
 
+/**
+ * Retorna o vetor veiculos do Cliente
+ */
 vector <Veiculo*> Cliente:: getVeiculos() const{
 	return veiculos;
 }
 
 /**
- * Adiciona o veículo ao vetor de veículos do cliente e lança uma exceção, caso o veículo já lá exista
- * @param *v1
+ * Retorna o veiculo cuja matricula é igual a mt
+ * @param mt matricula do veiculo a procurar
  */
 Veiculo * Cliente::getVeiculoMatricula(string mt) const{
 	for(unsigned int i = 0; i < veiculos.size(); i++){
@@ -64,6 +68,10 @@ Veiculo * Cliente::getVeiculoMatricula(string mt) const{
 	throw VeiculoInexistente(mt);
 }
 
+/**
+ * Adiciona o veículo ao vetor de veículos do cliente e lança uma exceção, caso o veículo já lá exista
+ * @param *v1
+ */
 void Cliente:: addVeiculo(Veiculo *v1){
 	for(unsigned int i=0; i<veiculos.size();i++){
 		if(veiculos[i]->getMatricula() ==v1->getMatricula()) throw(VeiculoExistente(v1->getMatricula()));
@@ -94,7 +102,7 @@ void Cliente:: removeVeiculo (Veiculo *v1){
 
 /**
  * Overload do operador <
- * @param c1, c2
+ * @param c1 , c2
  */
 
 bool operator <(const Cliente c1, const Cliente c2){

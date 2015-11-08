@@ -8,6 +8,9 @@
 
 using namespace std;
 
+/**
+ * Classe Veiculo- classe base
+ */
 class Veiculo{
 	string marca;
 	string matricula;
@@ -24,6 +27,9 @@ public:
 	virtual void addServico(Servico &s);
 };
 
+/**
+ * Classe Motorizada- classe derivada
+ */
 class Motorizada: public Veiculo{
 	vector<Servico> servicos;
 	static const float taxa=0.1;
@@ -35,6 +41,9 @@ public:
 	string classname() const;
 };
 
+/**
+ * Classe Camião- classe derivada
+ */
 class Camiao: public Veiculo{
 	vector<Servico> servicos;
 	static const float taxa=0.5;
@@ -46,6 +55,9 @@ public:
 	string classname() const;
 };
 
+/**
+ * Classe Autocarro- classe derivada
+ */
 class Autocarro: public Veiculo{
 	vector<Servico> servicos;
 	static const float taxa=0.45;
@@ -57,6 +69,9 @@ public:
 	string classname() const;
 };
 
+/**
+ * Classe Automovel- classe derivada
+ */
 class Automovel: public Veiculo{
 	vector<Servico> servicos;
 	static const float taxa=0.3;

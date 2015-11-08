@@ -9,6 +9,7 @@
 
 using namespace std;
 
+
 class Funcionario {
 	string nome;
 	vector<Veiculo *> veiculos;
