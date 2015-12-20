@@ -12,9 +12,11 @@
 #include "insertionSort.h"
 #include "Servico.h"
 #include <typeinfo>
+#include <tr1/unordered_set>
 
 
 using namespace std;
+typedef tr1::unordered_set<Cliente> tabHInativos;
 
 class Oficina{
 	string nome;
@@ -22,6 +24,8 @@ class Oficina{
 	vector<Veiculo *> veiculos;
 	vector<Cliente> clientes;
 	vector <Standard *> servicosStandard;
+	tabHInativos inativos;
+
 
 public:
 	Oficina(string nome);
