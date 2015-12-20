@@ -1,5 +1,5 @@
-#ifndef SRC_DATA_H_
-#define SRC_DATA_H_
+#ifndef SRC_DATE_H_
+#define SRC_DATE_H_
 
 #include <iostream>
 
@@ -12,7 +12,7 @@ class Date{
 	int hora;
 	int minutos;
 public:
-	Date(int dia, int mes, int ano);
+	Date(int dia, int mes, int ano, int hora, int minutos);
 	bool &operator < (Date d1);
 };
 
