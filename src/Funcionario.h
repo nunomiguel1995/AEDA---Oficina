@@ -22,6 +22,7 @@ public:
 	void displayVeiculos() const;
 	friend bool operator<(const Funcionario f1, const Funcionario f2);
 	void displayFuncionario() const;
+	void setNome(string nome);
 };
 
 

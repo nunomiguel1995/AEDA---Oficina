@@ -128,3 +128,7 @@ void Cliente:: displayCliente() const{
 		veiculos[i]->displayVeiculo();
 	}
 }
+
+void Cliente:: setNome(string nome){
+ this->nome= nome;
+}
