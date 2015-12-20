@@ -90,3 +90,8 @@ void Funcionario:: displayFuncionario() const{
 	cout<< nome << " ";
 	this->displayVeiculos();
 }
+
+
+void Funcionario::setNome(string nome){
+	this->nome=nome;
+}

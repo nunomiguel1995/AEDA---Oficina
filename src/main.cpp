@@ -12,6 +12,7 @@ void showMenu(){
 	cout << "1 - Funções de adicionar \n" <<
 			"2 - Funções de remover \n" <<
 			"3 - Funções de display \n" <<
+			"4 - Funções de modificar \n"<<
 			"0 - Sair \n";
 }
 
@@ -39,6 +40,11 @@ void showDisplayMenu(){
 			"4 - Display Veículos do Cliente \n" <<
 			"5 - Display de Serviços do Veículo \n" <<
 			"0 - Sair \n";
+}
+
+void showModifyMenu(){
+	cout<<  "1 - Modificar nome Cliente \n"<<
+			"2 - Modificar nome Funcionario \n ";
 }
 
 //feito - funcemina
