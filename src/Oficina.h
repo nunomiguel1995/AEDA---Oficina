@@ -14,9 +14,11 @@
 #include "Servico.h"
 #include "BST.h"
 #include <typeinfo>
+#include <tr1/unordered_set>
 
 
 using namespace std;
+typedef tr1::unordered_set<Cliente> tabHInativos;
 
 class Oficina{
 	string nome;
@@ -24,6 +26,12 @@ class Oficina{
 	vector<Veiculo *> veiculos;
 	vector<Cliente> clientes;
 	vector <Standard *> servicosStandard;
+<<<<<<< HEAD
+=======
+	tabHInativos inativos;
+
+
+>>>>>>> 7eb8da0f7f587fdafb54d024fe835117b3b2344d
 public:
 	Oficina(string nome);
 	~Oficina();

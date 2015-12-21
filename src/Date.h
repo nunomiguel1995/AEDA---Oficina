@@ -16,6 +16,11 @@ public:
 	Date(int dia, int mes, int ano, int hora, int minutos);
 	void print();
 	bool operator < (Date &d1);
+	int getAno() const {return ano;};
+	int getMes() const{return mes;};
+	int getDia() const{return dia;};
+	int getHora() const{return hora;};
+	int getMinutos() const{return minutos;};
 };
 
 #endif
