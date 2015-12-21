@@ -9,11 +9,16 @@ Date::Date(int dia, int mes, int ano, int hora, int minutos){
 
 }
 
+<<<<<<< HEAD
 void printDate(){
 	cout << endl;
+=======
+void Date::print(){
+	cout << ano << "/" << mes << "/" << dia << " - " << hora << ":" << minutos << endl;
+>>>>>>> 26d659626a08f181032401100149ff3f25cd0da0
 }
 
-bool Date:: operator < (Date &d1){
+bool Date::operator <(Date &d1){
 
 	if (ano < d1.ano) return true;
 	if (ano > d1.ano) return false;
