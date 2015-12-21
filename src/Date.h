@@ -14,7 +14,11 @@ class Date{
 public:
 	Date(int dia, int mes, int ano, int hora, int minutos);
 	void print();
+<<<<<<< HEAD
 	bool operator < (Date &d1);
+=======
+	bool operator < (const Date &d1);
+>>>>>>> 18f74d9d6482af82c54432100f475bf64edc0abd
 	int getAno() const {return ano;};
 	int getMes() const{return mes;};
 	int getDia() const{return dia;};
