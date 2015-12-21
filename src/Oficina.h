@@ -67,7 +67,12 @@ public:
 	void displayServicosStandard();
 
 	Servico* createServico(string tipo, string nome, float preco, int duracao, Date date);
-	Veiculo*createVeiculo(string tipo, string marca, string matricula, int ano);
+	Veiculo* createVeiculo(string tipo, string marca, string matricula, int ano);
+
+	void criaServico();
+	void criaVeiculoCliente();
+	void criaFuncionario();
+	void criaCliente();
 
 	bool guardaFuncionarios();
 	bool guardaVeiculos();

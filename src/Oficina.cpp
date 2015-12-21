@@ -400,6 +400,78 @@ void Oficina:: ordenaClientes(){
 	insertionSort(clientes);
 }
 
+void Oficina::criaServico(){}
+
+void Oficina::criaVeiculoCliente(){
+	string marca, matricula, tipo, nome;
+	int ano;
+	try{
+		string nome;
+		cin.sync();
+		cout << "Insira o nome do cliente: ";
+		getline(cin,nome);
+		cout << "Insira o tipo do veiculo: ";
+		cin >> tipo;
+		cout << "Insira a marca do veiculo: ";
+		cin >> marca;
+		cout << "Insira a matricula do veiculo: ";
+		cin >> matricula;
+		cout << "Insira o ano do veiculo: ";
+		cin >> ano;
+		getClienteNome(nome);
+		if(tipo == "Motorizada"){
+			Veiculo *m = new Motorizada(marca,matricula,ano);
+			addVeiculo(m);
+			addVeiculoCliente(m,nome);
+		}else if(tipo == "Camião" || tipo == "Camiao"){
+			Veiculo *c = new Camiao(marca,matricula,ano);
+			addVeiculo(c);
+			addVeiculoCliente(c,nome);
+		}else if(tipo == "Autocarro"){
+			Veiculo *at = new Autocarro(marca,matricula,ano);
+			addVeiculo(at);
+			addVeiculoCliente(at,nome);
+		}else if(tipo == "Automóvel" || tipo == "Automovel"){
+			Veiculo *am = new Automovel(marca,matricula,ano);
+			addVeiculo(am);
+			addVeiculoCliente(am,nome);
+		}else{
+			cout << "Tipo de veículo inválido.\n";
+			return;
+		}
+	}catch(VeiculoExistente &e){
+		cout << e.getMatricula() << " já existe.\n";
+	}catch(ClienteInexistente &e){
+		cout << e.getNome() << " não é um cliente.\n";
+	}
+}
+
+void Oficina::criaFuncionario(){
+	string nomeF;
+	cin.sync();
+	cout << "Nome do funcionário: ";
+	getline(cin,nomeF);
+	Funcionario f(nomeF);
+	try{
+		addFuncionario(f);
+	}catch(FuncionarioExistente &e){
+		cout << e.getNome() << " já é um funcionário.\n";
+	}
+}
+
+void Oficina::criaCliente(){
+	string nomeC;
+	cin.sync();
+	cout << "Insira o nome do cliente: ";
+	getline(cin,nomeC);
+	Cliente c(nomeC);
+	try{
+		addCliente(c);
+	}catch(ClienteExistente &e){
+		cout << e.getNome() << " já é um cliente.\n";
+	}
+}
+
 /**
  * Funcao auxiliar para criacao de veiculos da Oficina
  */
