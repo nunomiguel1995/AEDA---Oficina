@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include "Excepcoes.h"
+#include "Date.h"
 
 using namespace std;
 
@@ -15,12 +16,15 @@ class Servico{
 	string nome;
 	float preco;
 	int duracao;
+	Date *date;
+
 public:
-	Servico (string nome, float preco, int duracao);
+	Servico (string nome, float preco, int duracao, Date d);
 	virtual ~Servico();
 	string getNome();
 	float getPreco() const;
 	int getDuracao() const;
+	Date getDate() const;
 	void displayServico() const;
 	void addTaxa(float tx);
 	virtual string classname() const;
@@ -32,7 +36,7 @@ public:
 class Standard: public Servico{
 
 public:
-	Standard (string nome, float preco, int duracao);
+	Standard (string nome, float preco, int duracao, Date data);
 	~Standard();
 	string classname() const;
 };
@@ -44,7 +48,7 @@ public:
 class naoStandard: public Servico{
 
 public:
-	naoStandard (string nome, float preco, int duracao);
+	naoStandard (string nome, float preco, int duracao, Date date);
 	~naoStandard();
 	string classname() const;
 };

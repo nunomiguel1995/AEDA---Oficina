@@ -26,6 +26,8 @@ class Oficina{
 	vector<Veiculo *> veiculos;
 	vector<Cliente> clientes;
 	vector <Standard *> servicosStandard;
+	tabHInativos inativos;
+
 public:
 	Oficina(string nome);
 	~Oficina();
@@ -65,7 +67,7 @@ public:
 	void displayClientes() const;
 	void displayServicosStandard();
 
-	Servico* createServico(string tipo, string nome, float preco, int duracao);
+	Servico* createServico(string tipo, string nome, float preco, int duracao, Date date);
 	Veiculo*createVeiculo(string tipo, string marca, string matricula, int ano);
 
 	bool guardaFuncionarios();

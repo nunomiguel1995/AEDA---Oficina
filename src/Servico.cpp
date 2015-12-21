@@ -10,10 +10,13 @@
  * @param preco
  * @param duracao
  */
-Servico:: Servico(string nome,float preco, int duracao){
+Servico:: Servico(string nome,float preco, int duracao, Date d){
 	this-> nome =nome;
 	this->preco = preco;
 	this->duracao = duracao;
+	Date *dt = d;
+	this->date = dt;
+
 }
 
 /**
@@ -42,6 +45,10 @@ int Servico:: getDuracao() const{
 	return duracao;
 }
 
+Date Servico::getDate() const{
+	return date;
+}
+
 /**
  * Mostra os atributos do servico- nome, preço e duracao
  */
@@ -65,7 +72,7 @@ string Servico::classname() const{}
 /**
  * Construtor da classe Standard
  */
-Standard:: Standard (string nome, float preco, int duracao): Servico(nome,preco,duracao){}
+Standard:: Standard (string nome, float preco, int duracao, Date date): Servico(nome,preco,duracao,date){}
 
 /**
  * Destrutor da classe Standard
@@ -84,7 +91,7 @@ string Standard::classname() const{return "Standard";}
 /**
  * Construtor da classe nao Standard
  */
-naoStandard:: naoStandard (string nome, float preco, int duracao): Servico(nome,preco,duracao){}
+naoStandard:: naoStandard (string nome, float preco, int duracao, Date date): Servico(nome,preco,duracao,date){}
 
 /**
  * Destrutor da classe nao Standard

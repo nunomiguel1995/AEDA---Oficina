@@ -421,13 +421,13 @@ Veiculo* Oficina::createVeiculo(string tipo, string marca, string matricula, int
 /**
  * Funcao auxiliar para criacao de servicos da Oficina
  */
-Servico* Oficina::createServico(string tipo, string nome, float preco, int duracao){
+Servico* Oficina::createServico(string tipo, string nome, float preco, int duracao, Date date){
 	Servico *s;
 
 	if(tipo == "Standard"){
-		s = new Standard(nome,preco,duracao);
+		s = new Standard(nome,preco,duracao,date);
 	}else if(tipo == "naoStandard"){
-		s = new naoStandard(nome,preco,duracao);
+		s = new naoStandard(nome,preco,duracao,date);
 	}
 
 	return s;
