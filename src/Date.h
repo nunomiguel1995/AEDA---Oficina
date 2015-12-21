@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-
 using namespace std;
 
 class Date{
@@ -14,6 +13,7 @@ class Date{
 	int minutos;
 public:
 	Date(int dia, int mes, int ano, int hora, int minutos);
+	void printDate();
 	bool operator < (Date &d1);
 };
 
