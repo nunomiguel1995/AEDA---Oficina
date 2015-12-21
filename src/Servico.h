@@ -13,6 +13,7 @@ using namespace std;
  */
 class Servico{
 	string nome;
+	string nomeCliente;
 	float preco;
 	int duracao;
 public:
