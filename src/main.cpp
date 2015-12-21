@@ -408,9 +408,9 @@ int main(){
 		option(oficina,opcao);
 	}while(opcao != 0);
 
+	oficina.guardaVeiculos();
 	oficina.guardaFuncionarios();
 	oficina.guardaClientes();
-	oficina.guardaVeiculos();
 	oficina.guardaServicos();
 
 	return 0;

@@ -5,12 +5,14 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <sstream>
 #include "Excepcoes.h"
 #include "Funcionario.h"
 #include "Veiculo.h"
 #include "Cliente.h"
 #include "insertionSort.h"
 #include "Servico.h"
+#include "BST.h"
 #include <typeinfo>
 
 
@@ -22,7 +24,6 @@ class Oficina{
 	vector<Veiculo *> veiculos;
 	vector<Cliente> clientes;
 	vector <Standard *> servicosStandard;
-
 public:
 	Oficina(string nome);
 	~Oficina();
@@ -61,6 +62,9 @@ public:
 	void displayVeiculos() const;
 	void displayClientes() const;
 	void displayServicosStandard();
+
+	Servico* createServico(string tipo, string nome, float preco, int duracao);
+	Veiculo*createVeiculo(string tipo, string marca, string matricula, int ano);
 
 	bool guardaFuncionarios();
 	bool guardaVeiculos();

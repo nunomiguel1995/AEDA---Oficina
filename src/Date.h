@@ -14,6 +14,7 @@ class Date{
 	int minutos;
 public:
 	Date(int dia, int mes, int ano, int hora, int minutos);
+	void print();
 	bool operator < (Date &d1);
 };
 

@@ -1,1 +1,10 @@
-1 2 Nuno Miguel c Mercedes 2000 11-22-33 c Mercedes 2000 11-22-44
+Número de clientes: 1
+
+Nome: Nuno
+1 veiculo:
+	Tipo: Camiao
+	Marca: Mercedes
+	Matricula: 11-22-33
+	Ano: 2000
+
+Fim do ficheiro
