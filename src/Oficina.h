@@ -47,7 +47,6 @@ class Oficina{
 	vector<Cliente> clientes;
 	vector <Standard *> servicosStandard;
 	tabHInativos inativos;
-
 public:
 	Oficina(string nome);
 	~Oficina();

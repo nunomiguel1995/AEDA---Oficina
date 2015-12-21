@@ -14,14 +14,16 @@ using namespace std;
  */
 class Servico{
 	string nome;
+	string nomeCliente;
 	float preco;
 	int duracao;
-	Date *date;
-
+	Date date;
 public:
-	Servico (string nome, float preco, int duracao, Date d);
+	Servico (string n, float p, int dur, Date d);
 	virtual ~Servico();
+	void setCliente(string nome){this->nomeCliente = nome;};
 	string getNome();
+	void setDate(Date d);
 	float getPreco() const;
 	int getDuracao() const;
 	Date getDate() const;
@@ -36,7 +38,7 @@ public:
 class Standard: public Servico{
 
 public:
-	Standard (string nome, float preco, int duracao, Date data);
+	Standard (string n, float p, int dur, Date d);
 	~Standard();
 	string classname() const;
 };
@@ -48,7 +50,7 @@ public:
 class naoStandard: public Servico{
 
 public:
-	naoStandard (string nome, float preco, int duracao, Date date);
+	naoStandard (string n, float p, int dur, Date d);
 	~naoStandard();
 	string classname() const;
 };

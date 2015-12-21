@@ -8,7 +8,8 @@ using namespace std;
  * Construtor da Oficina
  * @param n nome da oficina
  */
-Oficina::Oficina(string n) : nome(n){}
+Oficina::Oficina(string n) : nome(n){
+}
 
 /**
  * Destrutor da classe Oficina
@@ -443,8 +444,9 @@ bool Oficina::leVeiculos(){
 	veiculoFile.open("veiculos.txt",ifstream::in);
 
 	string lixo;
-	string tipo, tipoS, marca, matricula, nomeS;
+	string tipo, tipoS, marca, matricula, nomeS, prop;
 	int ano, duracao;
+	int anoD,mesD,diaD,horaD,minutosD;
 	unsigned int numVeic, numServ;
 	float precoS;
 
@@ -452,6 +454,7 @@ bool Oficina::leVeiculos(){
 		veiculoFile >> lixo >> lixo >> lixo >> numVeic;
 
 		for(unsigned int i = 0; i < numVeic; i++){
+			veiculoFile >> lixo >> prop;
 			veiculoFile >> lixo >> tipo;
 			veiculoFile >> lixo >> marca;
 			veiculoFile >> lixo >> matricula;
@@ -466,8 +469,12 @@ bool Oficina::leVeiculos(){
 				veiculoFile >> lixo >> nomeS;
 				veiculoFile >> lixo >> precoS;
 				veiculoFile >> lixo >> duracao;
+				veiculoFile >> lixo >> anoD >> lixo >> mesD >> lixo >> diaD;
+				veiculoFile >> lixo >> horaD >> lixo >> minutosD;
 
-				Servico *s = createServico(tipo,nomeS,precoS,duracao);
+				Date d(anoD,mesD,diaD,horaD,minutosD);
+				Servico *s = createServico(tipo,nomeS,precoS,duracao,d);
+				s->setCliente(prop);
 				v->addServico(s,true);
 			}
 		}
@@ -489,9 +496,19 @@ bool Oficina::guardaVeiculos(){
 
 	for(unsigned int i = 0; i < veiculos.size(); i++){
 		vector<Servico *> servVeiculo = veiculos[i]->getServicos();
+		string prop;
 
 		if(i != 0) veiculoFile << endl;
 
+		for(unsigned int c = 0; c < clientes.size(); c++){
+			for(unsigned int v = 0; v < clientes[c].getVeiculos().size(); v++){
+				if(veiculos[i]->getMatricula() == clientes[c].getVeiculos()[v]->getMatricula()){
+					prop = clientes[c].getNome();
+				}
+			}
+		}
+
+		veiculoFile << "Proprietario: " << prop << endl;
 		veiculoFile << "Tipo: " << veiculos[i]->classname() << endl;
 		veiculoFile << "Marca: " << veiculos[i]->getMarca() << endl;
 		veiculoFile << "Matricula: " << veiculos[i]->getMatricula() << endl;
@@ -504,10 +521,13 @@ bool Oficina::guardaVeiculos(){
 			}
 		}
 		for(unsigned int j = 0; j < servVeiculo.size(); j++){
+			Date d = servVeiculo[j]->getDate();
 			veiculoFile << "\tTipo: " << servVeiculo[j]->classname() << endl;
 			veiculoFile << "\tNome: " << servVeiculo[j]->getNome() << endl;
 			veiculoFile << "\tPreco: " << servVeiculo[j]->getPreco() << endl;
 			veiculoFile << "\tDuração: " << servVeiculo[j]->getDuracao() << endl;
+			veiculoFile << "\tData: " << d.getAno()<< " / " << d.getMes() << " / " << d.getDia() << endl;
+			veiculoFile << "\tMarcação: " << d.getHora() << " : " << d.getMinutos() << endl;
 		}
 	}
 
@@ -673,12 +693,13 @@ bool Oficina::guardaFuncionarios(){
 bool Oficina::leServicos(){
 	ifstream servFile;
 	servFile.open("standard.txt",ifstream::in);
+	Date d(0,0,0,0,0);
 	if(servFile.is_open()){
 		string n;
 		float preco;
 		int duracao;
 		while(servFile >> n >> preco >> duracao){
-			Standard *s = new Standard(n,preco,duracao);
+			Standard *s = new Standard(n,preco,duracao,d);
 			addServicoStandard(s);
 		}
 		servFile.close();
