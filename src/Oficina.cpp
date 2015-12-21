@@ -620,7 +620,7 @@ bool Oficina::leFuncionarios(){
 				funcFile >> lixo >> ano;
 
 				Veiculo *v = createVeiculo(tipo,marca,matricula,ano);
-				f.addVeiculo(v);
+				addVeiculoFuncionario(v,nomeF);
 			}
 		}
 	}

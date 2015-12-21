@@ -26,12 +26,6 @@ class Oficina{
 	vector<Veiculo *> veiculos;
 	vector<Cliente> clientes;
 	vector <Standard *> servicosStandard;
-<<<<<<< HEAD
-=======
-	tabHInativos inativos;
-
-
->>>>>>> 7eb8da0f7f587fdafb54d024fe835117b3b2344d
 public:
 	Oficina(string nome);
 	~Oficina();
