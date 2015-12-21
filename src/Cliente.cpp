@@ -1,5 +1,4 @@
 #include "Cliente.h"
-#include <math.h>
 
 
 static int ID=1;
@@ -113,7 +112,7 @@ bool operator <(const Cliente c1, const Cliente c2){
 	if(size1 < size2) return true;
 	if(size1> size2) return false;
 	if(size1 == size2){
-		if(c1.getNome()<c2.getNome()) return true;
+		if(c1.getNome() < c2.getNome()) return true;
 		else return false;
 	}
 }
@@ -136,8 +135,7 @@ void Cliente:: setNome(string nome){
 
 
 bool Cliente::isInativo(Date &d1){
-
-bool inativo= true;
+	bool inativo= true;
 
 	for (unsigned int i=0; i<veiculos.size();i++){
 		vector<Servico*> servicos = veiculos[i]->getServicos();
@@ -146,5 +144,6 @@ bool inativo= true;
 			if (dif < 1) return false;
 		}
 	}
+
 	return inativo;
 }

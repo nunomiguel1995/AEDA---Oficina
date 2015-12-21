@@ -8,8 +8,7 @@ using namespace std;
  * Construtor da Oficina
  * @param n nome da oficina
  */
-Oficina::Oficina(string n) : nome(n){
-}
+Oficina::Oficina(string n) : nome(n){}
 
 /**
  * Destrutor da classe Oficina
@@ -146,7 +145,7 @@ vector <Standard *> Oficina:: getServicosStandard() const{
  * @param c cliente a adicionar
  */
 void Oficina::addCliente(Cliente &c){
-	for(unsigned int i=0; i<clientes.size();i++){
+	for(unsigned int i = 0; i < clientes.size(); i++){
 		if(clientes[i].getNome() == c.getNome()) throw(ClienteExistente(c.getNome()));
 	}
 	clientes.push_back(c);
@@ -184,7 +183,7 @@ void Oficina::addVeiculoFuncionario(Veiculo *&v, string nome){
  */
 void Oficina::addVeiculo(Veiculo *&v){
 	for(unsigned int i=0; i<veiculos.size();i++){
-		if(veiculos[i]->getMatricula() ==v->getMatricula()) throw(VeiculoExistente(v->getMatricula()));
+		if(veiculos[i]->getMatricula() == v->getMatricula()) throw(VeiculoExistente(v->getMatricula()));
 	}
 	veiculos.push_back(v);
 }
@@ -214,13 +213,12 @@ void Oficina:: addServicoStandard(Standard *s){
  * @param f
  */
 void Oficina::removeFuncionario(Funcionario & f){
-
 	bool existe=false;
 	unsigned int pos;
 
 	for(pos=0; pos<funcionarios.size();pos++){
-		if(funcionarios[pos].getNome()==f.getNome()){
-			existe=true;
+		if(funcionarios[pos].getNome() == f.getNome()){
+			existe = true;
 			funcionarios.erase(funcionarios.begin()+pos);
 			break;
 		}
@@ -401,7 +399,83 @@ void Oficina:: ordenaClientes(){
 	insertionSort(clientes);
 }
 
-void Oficina::criaServico(){}
+void Oficina::criaServicoVeiculo(){
+	string matricula;
+	cout<<"Insira a matricula do Veiculo: ";
+	cin>>matricula;
+
+	int pos= posVeiculo(matricula);
+	if(pos==-1){
+		cout<<"Veiculo não existe na Oficina! \n";
+		return;
+	}
+
+	int tiposervico;
+	cout<<"Que tipo de serviço deseja adicionar? \n"<<"1 Standard \n"<<"2 Não Standard\n "<<"Opcção: ";
+	cin>>tiposervico;
+
+	switch(tiposervico){
+	case 1:
+	{
+		string nome;
+		cout << "Qual o nome para o Serviço Standard: ";
+		cin >> nome;
+
+		int i = isStandard(nome);
+
+		if(i == -1){
+			cout << "Serviço Standard não oferecido pela oficina!\n";
+			break;
+		}
+
+		Servico *s = getServicosStandard().at(i);
+		vector <Veiculo *> veic = getVeiculos();
+		veic[pos]->addServico(s,true);
+		setVeiculos(veic);
+		cout<<"Serviço adicionado com sucesso! \n";
+		break;
+	}
+	case 2:
+	{
+		string nome;
+		int duracao;
+		float preco;
+		vector <string> descricao;
+
+		cout<<"Escolha um nome para o serviço: ";
+		cin>>nome;
+		cout<<"Qual a duração do serviço: ";
+		cin>>duracao;
+		cout<<"Qual o preço do serviço: ";
+		cin>>preco;
+		cout<<"Qual a descrição do serviço (0 para terminar): ";
+
+		int ano,mes,dia,hora,minutos;
+		cout << "Data para agendamento" << endl;
+		cout << "Ano: ";
+		cin >> ano;
+		cout << "\nMês: ";
+		cin >> mes;
+		cout << "\nDia: ";
+		cin >> dia;
+		cout << "\nHora: ";
+		cin >> hora;
+		cout << "\nMinuto: ";
+		cin >> minutos;
+
+		Date d(ano,mes,dia,hora,minutos);
+
+		Servico *s1 = new naoStandard(nome,preco,duracao,d);
+		vector <Veiculo *> veic= getVeiculos();
+		veic[pos]->addServico(s1,true);
+		setVeiculos(veic);
+		cout<<"Serviço adicionado com sucesso! \n";
+	}
+	break;
+	default:
+		break;
+	}
+}
 
 void Oficina::criaVeiculoCliente(){
 	string marca, matricula, tipo, nome;
@@ -444,6 +518,26 @@ void Oficina::criaVeiculoCliente(){
 		cout << e.getMatricula() << " já existe.\n";
 	}catch(ClienteInexistente &e){
 		cout << e.getNome() << " não é um cliente.\n";
+	}
+}
+
+void Oficina::criaVeiculoFuncionario(){
+	string matricula, nome;
+	cin.sync();
+	cout << "Insira o nome do funcionário: ";
+	getline(cin,nome);
+	try{
+		getFuncionarioNome(nome);
+	}catch(FuncionarioInexistente &e){
+		cout << e.getNome() << " não é um funcionário.\n";
+	}
+	cout << "Insira a matrícula do veículo: ";
+	cin >> matricula;
+	try{
+		Veiculo *v = getVeiculoMatricula(matricula);
+		addVeiculoFuncionario(v,nome);
+	}catch(VeiculoInexistente &e){
+		cout << e.getMatricula() << " não existe.\n";
 	}
 }
 
@@ -799,11 +893,9 @@ bool Oficina::guardaServicos(){
  * @param mt matricula do veiculo a procurar
  */
 int Oficina:: posVeiculo(string mt){
-
 	for(unsigned int i=0; i< veiculos.size();i++){
 		if(veiculos[i]->getMatricula() == mt) return i;
 	}
-
 	return -1;
 }
 
@@ -813,10 +905,9 @@ int Oficina:: posVeiculo(string mt){
  */
 int Oficina:: isStandard(string nome){
 	for(unsigned int i=0; i< servicosStandard.size();i++){
-			if(servicosStandard[i]->getNome() == nome) return i;
-		}
-
-		return -1;
+		if(servicosStandard[i]->getNome() == nome) return i;
+	}
+	return -1;
 }
 
 
@@ -827,28 +918,27 @@ void Oficina::addClienteInativo(Cliente & c1, Date &d1){
 }
 
 void Oficina::removeClienteInativo(Cliente &c){
-
 	tabHInativos::const_iterator it = inativos.begin();
-
-	for (it; it != inativos.end(); it++){
+	while(it != inativos.end()){
 		if ((*it).getId() == c.getId()){
 			inativos.erase(c);
+			return;
 		}
-		else throw ClienteInativoNaoExistente(c.getId());
+		it++;
 	}
+	throw ClienteInativoNaoExistente(c.getId());
 }
 
 
-void Oficina::addServico(Cliente *c, Veiculo *v, Servico*s, Date &d){
+void Oficina::addServico(Cliente &c, Veiculo *v, Servico*s, Date &d){
 
 	int posCli = -1, posVeic = -1;
 
-	for (unsigned int i=0; i<clientes.size();i++){
-		if (clientes[i].getId() == c->getId())
-			posCli = i;
+	for (unsigned int i=0; i < clientes.size(); i++){
+		if (clientes[i].getId() == c.getId()) posCli = i;
 	}
 
-	if (posCli == -1 ) throw ClienteInexistente(c->getNome());
+	if (posCli == -1 ) throw ClienteInexistente(c.getNome());
 
 	Cliente c1 = clientes[posCli];
 	vector<Veiculo*> veic = c1.getVeiculos();
@@ -866,19 +956,15 @@ void Oficina::addServico(Cliente *c, Veiculo *v, Servico*s, Date &d){
 
 	//remover da tabela de dispersao
 
-	if(clientes[posCli].isInativo(d)) inativos.erase(*c);
+	if(clientes[posCli].isInativo(d)) inativos.erase(c);
 
 }
 
-
-
 void Oficina::displayClientesInativos(){
-
 	tabHInativos::const_iterator it= inativos.begin();
-
-	for (it; it!= inativos.end(); it++){
-
+	while(it != inativos.end()){
 		cout << (*it).getNome() << ", " << (*it).getEmail()<< ", " << (*it).getTelef() << ", " << (*it).getMorada() << endl;
+		it++;
 	}
 }
 

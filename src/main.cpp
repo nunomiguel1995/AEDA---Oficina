@@ -207,10 +207,7 @@ int main(){
 		//option(oficina,opcao);
 	//}while(opcao != 0);
 
-	oficina.guardaVeiculos();
-	oficina.guardaFuncionarios();
-	oficina.guardaClientes();
-	oficina.guardaServicos();
+
 
 	return 0;
 }

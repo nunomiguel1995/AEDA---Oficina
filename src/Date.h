@@ -26,7 +26,7 @@ public:
 	void setDia(int d){this->dia = d;};
 	void setHora(int h){this->hora = h;};
 	void setMinutos(int m){this->minutos = m;};
-	bool operator ==(const Date &d);
+	bool operator ==(const Date &d1) const;
 };
 
 #endif

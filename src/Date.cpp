@@ -8,8 +8,7 @@ void Date::print(){
 	cout << ano << " / " << mes << " / " << dia << " - " << hora << " : " << minutos << endl;
 }
 
-bool Date::operator <( const Date &d1){
-
+bool Date::operator <(const Date &d1){
 	if (ano < d1.ano) return true;
 	if (ano > d1.ano) return false;
 	else{
@@ -30,6 +29,6 @@ bool Date::operator <( const Date &d1){
 	}
 }
 
-bool Date::operator ==(const Date &d){
-	return (ano == d.getAno() && mes == d.getMes() && dia == d.getDia() && hora == d.getHora() && minutos == d.getMinutos());
+bool Date::operator==(const Date &d1) const{
+	return (ano == d1.getAno()) && (mes == d1.getMes()) && (dia == d1.getDia()) && (hora == d1.getHora()) && (minutos == d1.getMinutos());
 }

@@ -7,6 +7,7 @@
 #include "Veiculo.h"
 #include "Excepcoes.h"
 #include "Date.h"
+#include <stdlib.h>
 
 using namespace std;
 
