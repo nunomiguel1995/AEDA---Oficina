@@ -96,5 +96,12 @@ public:
 
 };
 
+class ClienteInativoNaoExistente{
+	int id;
+public:
+	ClienteInativoNaoExistente (int id){this->id=id;}
+	int getId() const {return id;}
+};
+
 
 #endif /* SRC_EXCEPCOES_H_ */

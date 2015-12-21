@@ -1,6 +1,7 @@
 #include "Oficina.h"
 
 
+
 using namespace std;
 
 /**
@@ -724,3 +725,69 @@ int Oficina:: isStandard(string nome){
 
 		return -1;
 }
+
+
+void Oficina::addClienteInativo(Cliente & c1, Date &d1){
+	if (c1.isInativo(d1)){
+		inativos.insert(c1);
+	}
+}
+
+void Oficina::removeClienteInativo(Cliente &c){
+
+	tabHInativos::const_iterator it = inativos.begin();
+
+	for (it; it != inativos.end(); it++){
+		if ((*it).getId() == c.getId()){
+			inativos.erase(c);
+		}
+		else throw ClienteInativoNaoExistente(c.getId());
+	}
+}
+
+
+void Oficina::addServico(Cliente *c, Veiculo *v, Servico*s, Date &d){
+
+	int posCli = -1, posVeic = -1;
+
+	for (unsigned int i=0; i<clientes.size();i++){
+		if (clientes[i].getId() == c->getId())
+			posCli = i;
+	}
+
+	if (posCli == -1 ) throw ClienteInexistente(c->getNome());
+
+	Cliente c1 = clientes[posCli];
+	vector<Veiculo*> veic = c1.getVeiculos();
+
+	for (unsigned int j=0; j<veiculos.size();j++){
+		if (veiculos[j]->getMatricula() == v->getMatricula())
+			posVeic=j;
+	}
+
+	if (posVeic == -1) throw VeiculoInexistente(v->getMatricula());
+
+	veiculos[posVeic]->addServico(s, false);
+
+	//adiconar à arvore
+
+	//remover da tabela de dispersao
+
+	if(clientes[posCli].isInativo(d)) inativos.erase(*c);
+
+}
+
+
+
+void Oficina::displayClientesInativos(){
+
+	tabHInativos::const_iterator it= inativos.begin();
+
+	for (it; it!= inativos.end(); it++){
+
+		cout << (*it).getNome() << ", " << (*it).getEmail()<< ", " << (*it).getTelef() << ", " << (*it).getMorada() << endl;
+	}
+}
+
+
+
