@@ -1,17 +1,9 @@
 #include "Date.h"
 
-Date::Date(int dia, int mes, int ano, int hora, int minutos){
-	this->dia=dia;
-	this->mes=mes;
-	this->ano=ano;
-	this->hora=hora;
-	this->minutos=minutos;
-
-}
-
+Date::Date(int a, int m, int d, int h, int min) : ano(a),mes(m),dia(d),hora(h),minutos(min){}
 
 void Date::print(){
-	cout << ano << "/" << mes << "/" << dia << " - " << hora << ":" << minutos << endl;
+	cout << ano << " / " << mes << " / " << dia << " - " << hora << " : " << minutos << endl;
 }
 
 bool Date::operator <( const Date &d1){
