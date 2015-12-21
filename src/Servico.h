@@ -23,6 +23,7 @@ public:
 	virtual ~Servico();
 	void setCliente(string nome){this->nomeCliente = nome;};
 	string getNome();
+	void setDate(Date d);
 	float getPreco() const;
 	int getDuracao() const;
 	Date getDate() const;

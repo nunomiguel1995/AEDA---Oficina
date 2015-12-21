@@ -13,6 +13,7 @@ class Date{
 	int minutos;
 public:
 	Date(int a, int m, int d, int h, int min);
+	Date();
 	void print();
 	bool operator < (const Date &d1);
 	int getAno() const {return ano;};
@@ -25,6 +26,7 @@ public:
 	void setDia(int d){this->dia = d;};
 	void setHora(int h){this->hora = h;};
 	void setMinutos(int m){this->minutos = m;};
+	bool operator ==(const Date &d);
 };
 
 #endif

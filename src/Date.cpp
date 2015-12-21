@@ -2,6 +2,8 @@
 
 Date::Date(int a, int m, int d, int h, int min) : ano(a),mes(m),dia(d),hora(h),minutos(min){}
 
+Date::Date(){}
+
 void Date::print(){
 	cout << ano << " / " << mes << " / " << dia << " - " << hora << " : " << minutos << endl;
 }
@@ -28,4 +30,6 @@ bool Date::operator <( const Date &d1){
 	}
 }
 
-
+bool Date::operator ==(const Date &d){
+	return (ano == d.getAno() && mes == d.getMes() && dia == d.getDia() && hora == d.getHora() && minutos == d.getMinutos());
+}

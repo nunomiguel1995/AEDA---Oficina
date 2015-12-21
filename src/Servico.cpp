@@ -62,6 +62,10 @@ string Servico::classname() const{}
  * Standard
  */
 
+void Servico::setDate(Date d){
+	this->date = d;
+}
+
 /**
  * Construtor da classe Standard
  */
