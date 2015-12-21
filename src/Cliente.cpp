@@ -1,4 +1,5 @@
 #include "Cliente.h"
+#include <math.h>
 
 
 static int ID=1;
@@ -131,4 +132,19 @@ void Cliente:: displayCliente() const{
 
 void Cliente:: setNome(string nome){
  this->nome= nome;
+}
+
+
+bool Cliente::isInativo(Date &d1){
+
+bool inativo= true;
+
+	for (unsigned int i=0; i<veiculos.size();i++){
+		vector<Servico*> servicos = veiculos[i]->getServicos();
+		for (unsigned int j=0; j<servicos.size(); j++){
+			int dif = abs(d1.getAno() - servicos[j]->getDate().getAno());
+			if (dif < 1) return false;
+		}
+	}
+	return inativo;
 }
