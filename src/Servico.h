@@ -24,6 +24,7 @@ public:
 	void displayServico() const;
 	void addTaxa(float tx);
 	virtual string classname() const;
+	void removeServico(Servico* s);
 };
 
 /**

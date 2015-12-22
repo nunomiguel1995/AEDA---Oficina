@@ -13,11 +13,7 @@ class Date{
 	int minutos;
 public:
 	Date(int dia, int mes, int ano, int hora, int minutos);
-<<<<<<< HEAD
-	void printDate();
-=======
 	void print();
->>>>>>> 26d659626a08f181032401100149ff3f25cd0da0
 	bool operator < (Date &d1);
 	int getAno() const {return ano;};
 	int getMes() const{return mes;};

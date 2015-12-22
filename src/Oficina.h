@@ -13,12 +13,17 @@
 #include "insertionSort.h"
 #include "Servico.h"
 #include "BST.h"
+#include <stdlib.h>
+#include <time.h>
 #include <typeinfo>
 #include <tr1/unordered_set>
+#include <queue>
+#include <math.h>
 
 
 using namespace std;
 typedef tr1::unordered_set<Cliente> tabHInativos;
+typedef priority_queue<Cliente> FilaPrioridade;
 
 class Oficina{
 	string nome;
@@ -26,6 +31,7 @@ class Oficina{
 	vector<Veiculo *> veiculos;
 	vector<Cliente> clientes;
 	vector <Standard *> servicosStandard;
+	FilaPrioridade maisPontos;
 public:
 	Oficina(string nome);
 	~Oficina();
@@ -83,6 +89,9 @@ public:
 
 	int posVeiculo(string mt);
 	int isStandard(string nome);
+
+	void HappyHour();
+	void AtualizaPontos(Date d);
 };
 
 

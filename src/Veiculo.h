@@ -26,6 +26,7 @@ public:
 	virtual vector<Servico *> getServicos() const;
 	virtual string classname() const;
 	virtual void addServico(Servico *&s, bool control);
+	virtual void removeServico(Servico* s);
 };
 
 /**
@@ -40,6 +41,7 @@ public:
 	vector<Servico *> getServicos() const;
 	void addServico(Servico * &s, bool control);
 	string classname() const;
+	void removeServico(Servico* s);
 };
 
 /**
@@ -54,6 +56,7 @@ public:
 	vector<Servico *> getServicos() const;
 	void addServico(Servico * & s, bool control);
 	string classname() const;
+	void removeServico(Servico* s);
 };
 
 /**
@@ -68,6 +71,7 @@ public:
 	vector<Servico *> getServicos() const;
 	void addServico(Servico * & s, bool control);
 	string classname() const;
+	void removeServico(Servico* s);
 };
 
 /**
@@ -82,6 +86,7 @@ public:
 	vector<Servico *> getServicos() const;
 	void addServico(Servico * & s, bool control);
 	string classname() const;
+	void removeServico(Servico* s);
 };
 
 #endif /* SRC_VEICULO_H_ */

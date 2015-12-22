@@ -148,6 +148,7 @@ void Oficina::addCliente(Cliente &c){
 		if(clientes[i].getNome() == c.getNome()) throw(ClienteExistente(c.getNome()));
 	}
 	clientes.push_back(c);
+	maisPontos.push(c);
 }
 
 /**
@@ -723,4 +724,85 @@ int Oficina:: isStandard(string nome){
 		}
 
 		return -1;
+}
+
+
+void Oficina:: HappyHour(){
+	srand (time(NULL));
+
+	int n=3;
+	int servico, veiculo;
+	vector<Cliente> ofertas;
+
+	while(n!=0){
+		Cliente c= maisPontos.top();
+		maisPontos.pop();
+
+		veiculo= rand() % (c.getVeiculos().size());
+		Veiculo * v= c.getVeiculos().at(veiculo);
+
+		servico= rand() % (v->getServicos().size());
+		Servico * s=v->getServicos().at(servico);
+
+		cout<< "O cliente aceita o servico "<<s->getNome() <<" por "<<c.getPontos()<<" pontos? (s/n) \n";
+
+		char resposta;
+		cin>>resposta;
+
+		if(resposta == 's'){
+			c.removeServicoCliente(v,s);
+			c.incServicosRealizados();
+			c.setPontos(0);
+			c.erasePontosData();
+			ofertas.push_back(c);
+			n--;
+		}
+		if(resposta=='n'){
+			ofertas.push_back(c);
+		}
+	}
+
+	vector<Cliente>::iterator it= ofertas.begin();
+
+	while(it != ofertas.end()){
+		maisPontos.push(*it);
+	}
+}
+
+bool Caducou(Date atual, Date servico){
+	int difAno= atual.getAno() - servico.getAno();
+	int difMes= atual.getMes()- servico.getMes();
+	int difDia= atual.getDia()- servico.getDia();
+
+
+	if(difAno > 1) return true;
+	if(difAno < 1)return false;
+	if(difAno == 1){
+		if(difMes < 0) return true;
+		if(difMes > 0) return false;
+		if(difMes == 0){
+			if(difDia <= 0) return true;
+			else return false;
+		}
+	}
+}
+
+void Oficina:: AtualizaPontos(Date d){
+
+	for(unsigned int i=0; i<clientes.size();i++){
+		int pontosCliente=clientes[i].getPontos();
+		int pontosRetirar=0;
+		vector <pair <int, Date > > p= clientes[i].getPontosData();
+		for(unsigned int j=0; j< p.size();j++){
+			Date data= p[j].second;
+			int pontos= p[j].first;
+
+			if(Caducou(d,data)){
+				pontosRetirar += pontos;
+				p.erase(p.begin()+j);
+			}
+		}
+		clientes[i].setPontos(pontosCliente - pontosRetirar);
+		clientes[i].setPontosData(p);
+	}
 }
