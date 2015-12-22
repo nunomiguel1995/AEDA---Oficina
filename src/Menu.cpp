@@ -17,41 +17,185 @@ void Menu::addMenu(Oficina &oficina){
 	case 0:
 		menu(oficina);
 		break;
-	case 1:
-		oficina.criaFuncionario();
-		oficina.guardaVeiculos();
-		oficina.guardaClientes();
-		oficina.guardaServicos();
-		oficina.guardaFuncionarios();
+	case 1:{
+		string nomeF;
+		cin.sync();
+		cout << "Nome do funcionário: ";
+		getline(cin,nomeF);
+		Funcionario f(nomeF);
+		try{
+			oficina.addFuncionario(f);
+		}catch(FuncionarioExistente &e){
+			cout << e.getNome() << " já é um funcionário.\n";
+		}
+	}
+	oficina.guardaFuncionarios();
+	addMenu(oficina);
+	break;
+	case 2:{
+		string matricula, nome;
+		cin.sync();
+		cout << "Insira o nome do funcionário: ";
+		getline(cin,nome);
+		try{
+			oficina.getFuncionarioNome(nome);
+		}catch(FuncionarioInexistente &e){
+			cout << e.getNome() << " não é um funcionário.\n";
+		}
+		cout << "Insira a matrícula do veículo: ";
+		cin >> matricula;
+		try{
+			Veiculo *v = oficina.getVeiculoMatricula(matricula);
+			oficina.addVeiculoFuncionario(v,nome);
+		}catch(VeiculoInexistente &e){
+			cout << e.getMatricula() << " não existe.\n";
+		}
+	}
+	oficina.guardaFuncionarios();
+	addMenu(oficina);
+	break;
+	case 3:{
+		string nomeC;
+		cin.sync();
+		cout << "Insira o nome do cliente: ";
+		getline(cin,nomeC);
+		Cliente c(nomeC);
+		try{
+			oficina.addCliente(c);
+		}catch(ClienteExistente &e){
+			cout << e.getNome() << " já é um cliente.\n";
+		}
+	}
+	oficina.guardaClientes();
+	addMenu(oficina);
+	break;
+	case 4:{
+		string marca, matricula, tipo, nome;
+		int ano;
+		try{
+			string nome;
+			cin.sync();
+			cout << "Insira o nome do cliente: ";
+			getline(cin,nome);
+			cout << "Insira o tipo do veiculo: ";
+			cin >> tipo;
+			cout << "Insira a marca do veiculo: ";
+			cin >> marca;
+			cout << "Insira a matricula do veiculo: ";
+			cin >> matricula;
+			cout << "Insira o ano do veiculo: ";
+			cin >> ano;
+			oficina.getClienteNome(nome);
+			if(tipo == "Motorizada"){
+				Veiculo *m = new Motorizada(marca,matricula,ano);
+				oficina.addVeiculo(m);
+				oficina.addVeiculoCliente(m,nome);
+			}else if(tipo == "Camião" || tipo == "Camiao"){
+				Veiculo *c = new Camiao(marca,matricula,ano);
+				oficina.addVeiculo(c);
+				oficina.addVeiculoCliente(c,nome);
+			}else if(tipo == "Autocarro"){
+				Veiculo *at = new Autocarro(marca,matricula,ano);
+				oficina.addVeiculo(at);
+				oficina.addVeiculoCliente(at,nome);
+			}else if(tipo == "Automóvel" || tipo == "Automovel"){
+				Veiculo *am = new Automovel(marca,matricula,ano);
+				oficina.addVeiculo(am);
+				oficina.addVeiculoCliente(am,nome);
+			}else{
+				cout << "Tipo de veículo inválido.\n";
+				return;
+			}
+		}catch(VeiculoExistente &e){
+			cout << e.getMatricula() << " já existe.\n";
+		}catch(ClienteInexistente &e){
+			cout << e.getNome() << " não é um cliente.\n";
+		}
+	}
+	oficina.guardaVeiculos();
+	oficina.guardaClientes();
+	addMenu(oficina);
+	break;
+	case 5:{
+		string matricula;
+		cout<<"Insira a matricula do Veiculo: ";
+		cin>>matricula;
+
+		int pos = oficina.posVeiculo(matricula);
+		if(pos==-1){
+			cout<<"Veiculo não existe na Oficina! \n";
+			return;
+		}
+
+		int tiposervico;
+		cout<<"Que tipo de serviço deseja adicionar? \n"<<"1 Standard \n"<<"2 Não Standard\n "<<"Opcção: ";
+		cin>>tiposervico;
+
+		switch(tiposervico){
+		case 1:
+		{
+			string nome;
+			cout << "Qual o nome para o Serviço Standard: ";
+			cin >> nome;
+
+			int i = oficina.isStandard(nome);
+
+			if(i == -1){
+				cout << "Serviço Standard não oferecido pela oficina!\n";
+				break;
+			}
+
+			Servico *s = oficina.getServicosStandard().at(i);
+			vector <Veiculo *> veic = oficina.getVeiculos();
+			veic[pos]->addServico(s,true);
+			oficina.setVeiculos(veic);
+			cout<<"Serviço adicionado com sucesso! \n";
+			break;
+		}
+		case 2:
+		{
+			string nome;
+			int duracao;
+			float preco;
+			vector <string> descricao;
+
+			cout<<"Escolha um nome para o serviço: ";
+			cin>>nome;
+			cout<<"Qual a duração do serviço: ";
+			cin>>duracao;
+			cout<<"Qual o preço do serviço: ";
+			cin>>preco;
+
+			int ano,mes,dia,hora,minutos;
+			cout << "Data para agendamento" << endl;
+			cout << "Ano: ";
+			cin >> ano;
+			cout << "Mês: ";
+			cin >> mes;
+			cout << "Dia: ";
+			cin >> dia;
+			cout << "Hora: ";
+			cin >> hora;
+			cout << "Minuto: ";
+			cin >> minutos;
+
+			Date d(ano,mes,dia,hora,minutos);
+
+			Servico *s1 = new naoStandard(nome,preco,duracao,d);
+			vector <Veiculo *> veic = oficina.getVeiculos();
+			veic[pos]->addServico(s1,true);
+			oficina.setVeiculos(veic);
+			cout<<"Serviço adicionado com sucesso! \n";
+		}
 		break;
-	case 2:
-		oficina.criaVeiculoFuncionario();
-		oficina.guardaVeiculos();
-		oficina.guardaClientes();
-		oficina.guardaServicos();
-		oficina.guardaFuncionarios();
-		break;
-	case 3:
-		oficina.criaCliente();
-		oficina.guardaVeiculos();
-		oficina.guardaClientes();
-		oficina.guardaServicos();
-		oficina.guardaFuncionarios();
-		break;
-	case 4:
-		oficina.criaVeiculoCliente();
-		oficina.guardaVeiculos();
-		oficina.guardaClientes();
-		oficina.guardaServicos();
-		oficina.guardaFuncionarios();
-		break;
-	case 5:
-		oficina.criaServicoVeiculo();
-		oficina.guardaVeiculos();
-		oficina.guardaClientes();
-		oficina.guardaServicos();
-		oficina.guardaFuncionarios();
-		break;
+		default:
+			break;
+		}
+	}
+	oficina.guardaVeiculos();
+	oficina.guardaServicos();
+	addMenu(oficina);
+	break;
 	default:
 		cout << "Opção inválida. Insira outra vez." << endl;
 		addMenu(oficina);
@@ -84,10 +228,8 @@ void Menu::removeMenu(Oficina &oficina){
 		}catch(FuncionarioInexistente &e){
 			cout << e.getNome() << " não é um funcionário.\n";
 		}
-		oficina.guardaVeiculos();
-		oficina.guardaClientes();
-		oficina.guardaServicos();
 		oficina.guardaFuncionarios();
+		removeMenu(oficina);
 		break;
 	}
 	case 2:{
@@ -106,10 +248,8 @@ void Menu::removeMenu(Oficina &oficina){
 		}catch(VeiculoInexistente &e){
 			cout << e.getMatricula() << " não existe.\n";
 		}
-		oficina.guardaVeiculos();
-		oficina.guardaClientes();
-		oficina.guardaServicos();
 		oficina.guardaFuncionarios();
+		removeMenu(oficina);
 		break;
 	}
 	case 3:{
@@ -128,8 +268,8 @@ void Menu::removeMenu(Oficina &oficina){
 		}
 		oficina.guardaVeiculos();
 		oficina.guardaClientes();
-		oficina.guardaServicos();
 		oficina.guardaFuncionarios();
+		removeMenu(oficina);
 		break;
 	}
 	case 4:{
@@ -155,8 +295,8 @@ void Menu::removeMenu(Oficina &oficina){
 		}
 		oficina.guardaVeiculos();
 		oficina.guardaClientes();
-		oficina.guardaServicos();
 		oficina.guardaFuncionarios();
+		removeMenu(oficina);
 		break;
 	}
 	default:
@@ -183,6 +323,7 @@ void Menu::displayMenu(Oficina &oficina){
 		break;
 	case 1:
 		oficina.displayFuncionarios();
+		displayMenu(oficina);
 		break;
 	case 2:{
 		string nome;
@@ -195,6 +336,7 @@ void Menu::displayMenu(Oficina &oficina){
 		}catch(FuncionarioInexistente &e){
 			cout << e.getNome() << " não é um funcionário.\n";
 		}
+		displayMenu(oficina);
 		break;
 	}
 	case 3:
@@ -211,6 +353,7 @@ void Menu::displayMenu(Oficina &oficina){
 		}catch(ClienteInexistente &e){
 			cout << e.getNome() << " não é um cliente.\n";
 		}
+		displayMenu(oficina);
 		break;
 	}
 	case 5:	{
@@ -227,6 +370,7 @@ void Menu::displayMenu(Oficina &oficina){
 		}catch(VeiculoInexistente &e){
 			cout << e.getMatricula() << " não existe.\n";
 		}
+		displayMenu(oficina);
 		break;
 	}
 	default:
