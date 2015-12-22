@@ -49,12 +49,9 @@ public:
 	void incServicosRealizados();
 	void erasePontosData();
 	bool isInativo(Date &d1);
-<<<<<<< HEAD
-	friend bool operator == (const Cliente c1, const Cliente c2);
-=======
 
 	friend bool operator <( const Cliente  c1, const Cliente c2);
->>>>>>> 1a5bdd22eb4be958695e1c05dba912f416800698
+
 };
 
 #endif /* SRC_CLIENTE_H_ */
