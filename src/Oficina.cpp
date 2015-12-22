@@ -912,12 +912,6 @@ int Oficina:: isStandard(string nome){
 }
 
 
-void Oficina::addClienteInativo(Cliente & c1, Date &d1){
-	if (c1.isInativo(d1)){
-		inativos.insert(c1);
-	}
-}
-
 void Oficina::removeClienteInativo(Cliente &c){
 	tabHInativos::const_iterator it = inativos.begin();
 	while(it != inativos.end()){
@@ -930,6 +924,13 @@ void Oficina::removeClienteInativo(Cliente &c){
 	throw ClienteInativoNaoExistente(c.getId());
 }
 
+int calculaPontos(Servico* s){
+	float preco= s->getPreco();
+
+	if(preco<100) return 20;
+	if(preco>=100 && preco<200) return 50;
+	else return 100;
+}
 
 void Oficina::addServico(Cliente &c, Veiculo *v, Servico*s, Date &d){
 
@@ -963,6 +964,9 @@ void Oficina::addServico(Cliente &c, Veiculo *v, Servico*s, Date &d){
 	//remover da tabela de dispersao
 
 	if(clientes[posCli].isInativo(d)) inativos.erase(c);
+	int pontos= clientes[posCli].getPontos(), novos= calculaPontos(s);
+	clientes[posCli].setPontos(pontos+novos);
+
 
 }
 
@@ -974,7 +978,7 @@ void Oficina::displayClientesInativos(){
 	}
 }
 
-void Oficina:: HappyHour(){
+void Oficina:: happyHour(){
 	srand (time(NULL));
 
 	int n=3;
@@ -1029,12 +1033,12 @@ bool Caducou(Date atual, Date servico){
 		if(difMes > 0) return false;
 		if(difMes == 0){
 			if(difDia <= 0) return true;
-			else return false;
 		}
 	}
+	return false;
 }
 
-void Oficina:: AtualizaPontos(Date d){
+void Oficina:: atualizaPontos(Date d){
 
 	for(unsigned int i=0; i<clientes.size();i++){
 		int pontosCliente=clientes[i].getPontos();
@@ -1053,3 +1057,26 @@ void Oficina:: AtualizaPontos(Date d){
 		clientes[i].setPontosData(p);
 	}
 }
+
+bool Oficina:: pertenceInativos(Cliente c){
+	tabHInativos::iterator it= inativos.begin();
+
+	for(it; it!= inativos.end();it++){
+		if((*it).getId() == c.getId())
+			return true;
+	}
+
+	return false;
+}
+
+void Oficina::atualizaInativos(Date d){
+
+	for(unsigned int i=0; i< clientes.size();i++){
+		if(clientes[i].isInativo(d)){
+			if(pertenceInativos(clientes[i]) == false){
+				inativos.insert(clientes[i]);
+			}
+		}
+	}
+}
+

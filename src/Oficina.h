@@ -6,7 +6,6 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
-#include "Excepcoes.h"
 #include "Funcionario.h"
 #include "Veiculo.h"
 #include "Cliente.h"
@@ -21,6 +20,7 @@
 #include <math.h>
 
 #include "Date.h"
+#include "Excepcoes.h"
 
 using namespace std;
 
@@ -114,6 +114,7 @@ public:
 	bool leClientes();
 	bool leServicos();
 	int getNumInativos();
+	bool pertenceInativos(Cliente c);
 
 	void ordenaFuncionarios();
 	void ordenaVeiculos();
@@ -122,8 +123,9 @@ public:
 	int posVeiculo(string mt);
 	int isStandard(string nome);
 
-	void HappyHour();
-	void AtualizaPontos(Date d);
+	void happyHour();
+	void atualizaPontos(Date d);
+	void atualizaInativos(Date d);
 };
 
 

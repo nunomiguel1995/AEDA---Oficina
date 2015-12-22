@@ -2,9 +2,12 @@
 #define SRC_EXCEPCOES_H_
 
 #include <iostream>
+#include "Date.h"
 
 using namespace std;
-
+/*
+ * Excepcoes
+ */
 /**
  * Excepçao quando um cliente ja existe
  *
@@ -103,5 +106,18 @@ public:
 	int getId() const {return id;}
 };
 
+class BadIterator { };
 
-#endif /* SRC_EXCEPCOES_H_ */
+class NoMoreSpace { };
+
+class BadPosition { };
+
+class ErroInterno { };
+
+class Underflow { };
+
+class Overflow { };
+
+class BadArgs { };
+
+#endif /* SRC_EXCEPCOES_E_AUXILIARES_H_ */
