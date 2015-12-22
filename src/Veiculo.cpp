@@ -210,4 +210,43 @@ void Automovel::addServico(Servico * & s, bool control){
  */
 string Automovel::classname() const{return "Automovel";}
 
+void Veiculo:: removeServico(Servico* s){
 
+}
+
+void Motorizada:: removeServico(Servico* s){
+
+	for(unsigned int i=0; i< servicos.size();i++){
+		if(servicos[i]->getNome() == s->getNome()){
+			servicos.erase(servicos.begin()+i);
+			return;
+		}
+	}
+}
+
+void Camiao:: removeServico(Servico* s){
+	for(unsigned int i=0; i< servicos.size();i++){
+		if(servicos[i]->getNome() == s->getNome()){
+			servicos.erase(servicos.begin()+i);
+			return;
+		}
+	}
+}
+
+void Autocarro:: removeServico(Servico* s){
+	for(unsigned int i=0; i< servicos.size();i++){
+		if(servicos[i]->getNome() == s->getNome()){
+			servicos.erase(servicos.begin()+i);
+			return;
+		}
+	}
+}
+
+void Automovel:: removeServico(Servico* s){
+	for(unsigned int i=0; i< servicos.size();i++){
+		if(servicos[i]->getNome() == s->getNome()){
+			servicos.erase(servicos.begin()+i);
+			return;
+		}
+	}
+}

@@ -2,10 +2,17 @@
 
 Date::Date(int a, int m, int d, int h, int min) : ano(a),mes(m),dia(d),hora(h),minutos(min){}
 
+<<<<<<< HEAD
+}
+void Date::print(){
+	cout << ano << "/" << mes << "/" << dia << " - " << hora << ":" << minutos << endl;
+
+=======
 Date::Date(){}
 
 void Date::print(){
 	cout << ano << " / " << mes << " / " << dia << " - " << hora << " : " << minutos << endl;
+>>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
 }
 
 bool Date::operator <(const Date &d1){

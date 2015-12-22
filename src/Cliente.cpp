@@ -11,6 +11,8 @@ static int ID=1;
 Cliente:: Cliente(string nome){
 	this->nome=nome;
 	this->id=ID;
+	cartaoFidelizacao=0;
+	servicosRealizados=0;
 	ID++;
 }
 
@@ -105,6 +107,12 @@ void Cliente:: removeVeiculo (Veiculo *v1){
  * @param c1 , c2
  */
 
+<<<<<<< HEAD
+bool operator <(const Cliente   c1, const  Cliente c2) {
+	if(c1.getPontos() < c2.getPontos()) return true;
+	if(c1.getPontos() == c2.getPontos()){
+		return (c1.getServicosRealizados() < c2.getServicosRealizados());
+=======
 bool operator <(const Cliente c1, const Cliente c2){
 	int size1= c1.getVeiculos().size();
 	int size2= c2.getVeiculos().size();
@@ -114,7 +122,9 @@ bool operator <(const Cliente c1, const Cliente c2){
 	if(size1 == size2){
 		if(c1.getNome() < c2.getNome()) return true;
 		else return false;
+>>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
 	}
+	else return false;
 }
 
 
@@ -133,6 +143,41 @@ void Cliente:: setNome(string nome){
  this->nome= nome;
 }
 
+<<<<<<< HEAD
+void Cliente:: removeServicoCliente(Veiculo* v, Servico* s){
+	int posVeic=-1;
+
+	//encontra veiculo
+	for(unsigned int i=0; i< veiculos.size();i++){
+		if(veiculos[i]->getMatricula() == v->getMatricula()) {
+			posVeic=i;
+			break;
+		}
+	}
+	if(posVeic == -1) throw( VeiculoInexistente(v->getMatricula()));
+
+	veiculos[posVeic]->removeServico(s);
+}
+
+void Cliente:: incServicosRealizados(){
+	servicosRealizados++;
+}
+
+void Cliente:: setPontos(int pontos){
+	cartaoFidelizacao=pontos;
+}
+
+vector <pair <int, Date > > Cliente:: getPontosData(){
+	return pontosData;
+}
+
+void Cliente:: setPontosData(vector<pair < int, Date > > p){
+	pontosData= p;
+}
+
+void Cliente:: erasePontosData(){
+	pontosData.erase(pontosData.begin(), pontosData.end());
+=======
 
 bool Cliente::isInativo(Date &d1){
 	bool inativo= true;
@@ -146,4 +191,5 @@ bool Cliente::isInativo(Date &d1){
 	}
 
 	return inativo;
+>>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
 }

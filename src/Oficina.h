@@ -13,13 +13,22 @@
 #include "insertionSort.h"
 #include "Servico.h"
 #include "BST.h"
+#include <stdlib.h>
+#include <time.h>
 #include <typeinfo>
 #include <tr1/unordered_set>
+<<<<<<< HEAD
+#include <queue>
+#include <math.h>
+
+=======
 #include "Date.h"
+>>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
 
 using namespace std;
 
 typedef tr1::unordered_set<Cliente> tabHInativos;
+typedef priority_queue<Cliente> FilaPrioridade;
 
 struct eq {
 	bool operator() (const Cliente &c1, const Cliente &c2) const {
@@ -44,7 +53,11 @@ class Oficina{
 	vector<Veiculo *> veiculos;
 	vector<Cliente> clientes;
 	vector <Standard *> servicosStandard;
+<<<<<<< HEAD
+	FilaPrioridade maisPontos;
+=======
 	tabHInativos inativos;
+>>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
 public:
 	Oficina(string nome);
 	~Oficina();
@@ -114,6 +127,9 @@ public:
 
 	int posVeiculo(string mt);
 	int isStandard(string nome);
+
+	void HappyHour();
+	void AtualizaPontos(Date d);
 };
 
 
