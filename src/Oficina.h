@@ -24,9 +24,6 @@
 
 using namespace std;
 
-typedef tr1::unordered_set<Cliente> tabHInativos;
-typedef priority_queue<Cliente> FilaPrioridade;
-
 struct eq {
 	bool operator() (const Cliente &c1, const Cliente &c2) const {
 		return (c1.getId() == c2.getId());
@@ -43,6 +40,9 @@ struct h {
 		return v;
 	}
 };
+
+typedef tr1::unordered_set<Cliente,h,eq> tabHInativos;
+typedef priority_queue<Cliente> FilaPrioridade;
 
 class Oficina{
 	string nome;

@@ -24,29 +24,33 @@ class Cliente{
 	string morada;
 public:
 	Cliente(string nome);
-	string getNome() const;
-	int getId() const;
-	string getEmail() const {return email;};
-	int getTelef() const {return telef;};
+
+	string getNome() const {return nome;};
 	string getMorada() const {return morada;};
+	string getEmail() const {return email;};
+	int getId() const {return id;};
+	int getTelef() const {return telef;};
+	int getPontos() const {return cartaoFidelizacao;};
+	int getServicosRealizados() const {return servicosRealizados;};
+	Veiculo * getVeiculoMatricula(string mt) const;
+	vector <Veiculo*> getVeiculos() const;
+	vector <pair <int, Date > > getPontosData();
+
 	void setId(unsigned int id);
 	void setVeiculos(vector<Veiculo*> veiculos);
 	void setNome(string nome);
-	Veiculo * getVeiculoMatricula(string mt) const;
-	vector <Veiculo*> getVeiculos() const;
+	void setPontos(int pontos);
+	void setPontosData(vector <pair < int,Date > > p);
+
 	void addVeiculo(Veiculo *v1);
 	void removeVeiculo (Veiculo *v1);
 	void displayCliente() const;
-	int getPontos() const {return cartaoFidelizacao;};
-	int getServicosRealizados() const {return servicosRealizados;};
-	friend bool operator <( const Cliente  c1, const Cliente c2);
 	void removeServicoCliente(Veiculo* v, Servico* s);
 	void incServicosRealizados();
-	void setPontos(int pontos);
-	vector <pair <int, Date > > getPontosData();
-	void setPontosData(vector <pair < int,Date > > p);
 	void erasePontosData();
 	bool isInativo(Date &d1);
+
+	friend bool operator <( const Cliente  c1, const Cliente c2);
 };
 
 #endif /* SRC_CLIENTE_H_ */

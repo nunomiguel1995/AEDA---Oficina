@@ -17,26 +17,9 @@ Cliente:: Cliente(string nome){
 }
 
 /**
- * Retorna o nome do cliente
- */
-
-string Cliente:: getNome()const{
-	return nome;
-}
-
-/**
- * Retorna o id do cliente
- */
-
-int Cliente:: getId() const{
-	return id;
-}
-
-/**
  * Atribui o ID ao cliente
  * @param id
  */
-
 void Cliente::setId(unsigned int id){
 	this->id = id;
 	ID = id;
@@ -53,7 +36,7 @@ void Cliente::setVeiculos(vector<Veiculo*> veiculos){
 /**
  * Retorna o vetor veiculos do Cliente
  */
-vector <Veiculo*> Cliente:: getVeiculos() const{
+vector<Veiculo*> Cliente::getVeiculos() const{
 	return veiculos;
 }
 
@@ -75,12 +58,10 @@ Veiculo * Cliente::getVeiculoMatricula(string mt) const{
  * @param *v1
  */
 void Cliente:: addVeiculo(Veiculo *v1){
-	for(unsigned int i=0; i<veiculos.size();i++){
-		if(veiculos[i]->getMatricula() ==v1->getMatricula()) throw(VeiculoExistente(v1->getMatricula()));
+	for(unsigned int i = 0; i < veiculos.size(); i++){
+		if(veiculos[i]->getMatricula() == v1->getMatricula()) throw VeiculoExistente(v1->getMatricula());
 	}
-
 	veiculos.push_back(v1);
-
 }
 
 /**
@@ -88,18 +69,17 @@ void Cliente:: addVeiculo(Veiculo *v1){
  * @param *v1
  */
 
-void Cliente:: removeVeiculo (Veiculo *v1){
+void Cliente::removeVeiculo (Veiculo *v1){
 	bool existe=false;
 	unsigned int pos;
-	for(pos=0; pos<veiculos.size();pos++){
-		if(veiculos[pos]->getMatricula()==v1->getMatricula()){
-			existe=true;
+	for(pos = 0; pos < veiculos.size(); pos++){
+		if(veiculos[pos]->getMatricula() == v1->getMatricula()){
+			existe = true;
 			veiculos.erase(veiculos.begin()+pos);
 			break;
 		}
 	}
-
-	if(!existe) throw(VeiculoInexistente(v1->getMatricula()));
+	if(!existe) throw VeiculoInexistente(v1->getMatricula());
 }
 
 /**
@@ -117,63 +97,58 @@ bool operator <(const Cliente   c1, const  Cliente c2) {
 /**
  * Mostra as informacoes do cliente - ID, nome e veiculos que possui
  */
-
-void Cliente:: displayCliente() const{
+void Cliente::displayCliente() const{
 	cout << "Cliente nº" << id << " -> "<<  nome << ";\nVeiculos: \n";
 	for(unsigned int i=0; i< veiculos.size();i++){
 		veiculos[i]->displayVeiculo();
 	}
 }
 
-void Cliente:: setNome(string nome){
- this->nome= nome;
+void Cliente::setNome(string nome){
+ this->nome = nome;
 }
 
-void Cliente:: removeServicoCliente(Veiculo* v, Servico* s){
+void Cliente::removeServicoCliente(Veiculo* v, Servico* s){
 	int posVeic=-1;
-
 	//encontra veiculo
-	for(unsigned int i=0; i< veiculos.size();i++){
+	for(unsigned int i = 0; i < veiculos.size(); i++){
 		if(veiculos[i]->getMatricula() == v->getMatricula()) {
-			posVeic=i;
+			posVeic = i;
 			break;
 		}
 	}
-	if(posVeic == -1) throw( VeiculoInexistente(v->getMatricula()));
-
+	if(posVeic == -1) throw VeiculoInexistente(v->getMatricula());
 	veiculos[posVeic]->removeServico(s);
 }
 
-void Cliente:: incServicosRealizados(){
+void Cliente::incServicosRealizados(){
 	servicosRealizados++;
 }
 
-void Cliente:: setPontos(int pontos){
-	cartaoFidelizacao=pontos;
+void Cliente::setPontos(int pontos){
+	cartaoFidelizacao = pontos;
 }
 
-vector <pair <int, Date > > Cliente:: getPontosData(){
+vector<pair <int, Date > > Cliente::getPontosData(){
 	return pontosData;
 }
 
-void Cliente:: setPontosData(vector<pair < int, Date > > p){
-	pontosData= p;
+void Cliente::setPontosData(vector<pair < int, Date > > p){
+	pontosData = p;
 }
 
-void Cliente:: erasePontosData(){
+void Cliente::erasePontosData(){
 	pontosData.erase(pontosData.begin(), pontosData.end());
 }
 
 bool Cliente::isInativo(Date &d1){
 	bool inativo= true;
-
-	for (unsigned int i=0; i<veiculos.size();i++){
+	for (unsigned int i=0; i < veiculos.size(); i++){
 		vector<Servico*> servicos = veiculos[i]->getServicos();
-		for (unsigned int j=0; j<servicos.size(); j++){
+		for (unsigned int j = 0; j < servicos.size(); j++){
 			int dif = abs(d1.getAno() - servicos[j]->getDate().getAno());
 			if (dif < 1) return false;
 		}
 	}
-
 	return inativo;
 }
