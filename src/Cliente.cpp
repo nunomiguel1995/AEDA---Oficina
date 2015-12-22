@@ -106,25 +106,11 @@ void Cliente:: removeVeiculo (Veiculo *v1){
  * Overload do operador <
  * @param c1 , c2
  */
-
-<<<<<<< HEAD
 bool operator <(const Cliente   c1, const  Cliente c2) {
 	if(c1.getPontos() < c2.getPontos()) return true;
 	if(c1.getPontos() == c2.getPontos()){
 		return (c1.getServicosRealizados() < c2.getServicosRealizados());
-=======
-bool operator <(const Cliente c1, const Cliente c2){
-	int size1= c1.getVeiculos().size();
-	int size2= c2.getVeiculos().size();
-
-	if(size1 < size2) return true;
-	if(size1> size2) return false;
-	if(size1 == size2){
-		if(c1.getNome() < c2.getNome()) return true;
-		else return false;
->>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
-	}
-	else return false;
+	}else return false;
 }
 
 
@@ -143,7 +129,6 @@ void Cliente:: setNome(string nome){
  this->nome= nome;
 }
 
-<<<<<<< HEAD
 void Cliente:: removeServicoCliente(Veiculo* v, Servico* s){
 	int posVeic=-1;
 
@@ -177,7 +162,7 @@ void Cliente:: setPontosData(vector<pair < int, Date > > p){
 
 void Cliente:: erasePontosData(){
 	pontosData.erase(pontosData.begin(), pontosData.end());
-=======
+}
 
 bool Cliente::isInativo(Date &d1){
 	bool inativo= true;
@@ -191,5 +176,4 @@ bool Cliente::isInativo(Date &d1){
 	}
 
 	return inativo;
->>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
 }

@@ -17,13 +17,10 @@
 #include <time.h>
 #include <typeinfo>
 #include <tr1/unordered_set>
-<<<<<<< HEAD
 #include <queue>
 #include <math.h>
 
-=======
 #include "Date.h"
->>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
 
 using namespace std;
 
@@ -53,11 +50,8 @@ class Oficina{
 	vector<Veiculo *> veiculos;
 	vector<Cliente> clientes;
 	vector <Standard *> servicosStandard;
-<<<<<<< HEAD
 	FilaPrioridade maisPontos;
-=======
 	tabHInativos inativos;
->>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
 public:
 	Oficina(string nome);
 	~Oficina();

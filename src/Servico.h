@@ -30,11 +30,8 @@ public:
 	void displayServico() const;
 	void addTaxa(float tx);
 	virtual string classname() const;
-<<<<<<< HEAD
 	void removeServico(Servico* s);
-=======
 	bool operator < (const Servico *s) const;
->>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
 };
 
 /**
