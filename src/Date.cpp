@@ -1,20 +1,21 @@
 #include "Date.h"
 
-Date::Date(int dia, int mes, int ano, int hora, int minutos){
-	this->dia=dia;
-	this->mes=mes;
-	this->ano=ano;
-	this->hora=hora;
-	this->minutos=minutos;
+Date::Date(int a, int m, int d, int h, int min) : ano(a),mes(m),dia(d),hora(h),minutos(min){}
 
+<<<<<<< HEAD
 }
 void Date::print(){
 	cout << ano << "/" << mes << "/" << dia << " - " << hora << ":" << minutos << endl;
 
+=======
+Date::Date(){}
+
+void Date::print(){
+	cout << ano << " / " << mes << " / " << dia << " - " << hora << " : " << minutos << endl;
+>>>>>>> 43f711f759709609df12b97f64e2fb90762f02a6
 }
 
-bool Date::operator <(Date &d1){
-
+bool Date::operator <(const Date &d1){
 	if (ano < d1.ano) return true;
 	if (ano > d1.ano) return false;
 	else{
@@ -33,4 +34,8 @@ bool Date::operator <(Date &d1){
 			}
 		}
 	}
+}
+
+bool Date::operator==(const Date &d1) const{
+	return (ano == d1.getAno()) && (mes == d1.getMes()) && (dia == d1.getDia()) && (hora == d1.getHora()) && (minutos == d1.getMinutos());
 }

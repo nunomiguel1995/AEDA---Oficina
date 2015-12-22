@@ -1,6 +1,6 @@
 
-#ifndef _XCEPTIONS_H
-#define _XCEPTIONS_H
+#ifndef _EXCEPTIONS_H
+#define _EXCEPTIONS_H
 
 class BadIterator { };
 
