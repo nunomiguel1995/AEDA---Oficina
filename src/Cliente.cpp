@@ -188,3 +188,7 @@ bool operator == (const Cliente c1, const Cliente c2){
 	if(c1.getId()== c2.getId()) return true;
 	else return false;
 }
+
+void Cliente:: adicionaPontosData(pair<int, Date> p){
+	pontosData.push_back(p);
+}

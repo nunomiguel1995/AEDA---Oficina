@@ -49,6 +49,7 @@ public:
 	void incServicosRealizados();
 	void erasePontosData();
 	bool isInativo(Date &d1);
+	void adicionaPontosData(pair<int, Date> p);
 
 	friend bool operator <( const Cliente  c1, const Cliente c2);
 

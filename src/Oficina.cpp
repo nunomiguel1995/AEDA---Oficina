@@ -842,7 +842,8 @@ void Oficina::addServico(Cliente &c, Veiculo *v, Servico *s, Date &d){
 	int pontos= clientes[posCli].getPontos(), novos= calculaPontos(s);
 	clientes[posCli].setPontos(pontos+novos);
 
-
+	pair<int, Date> p(novos, d);
+	clientes[posCli].adicionaPontosData(p);
 }
 
 /**
