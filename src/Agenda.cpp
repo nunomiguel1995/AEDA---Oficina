@@ -4,7 +4,7 @@ BST<Servico *> Agenda::getServicos() const{
 	return arvoreServicos;
 }
 
-vector<Servico *> Agenda::getServicos(Date d) const{
+vector<Servico *> Agenda::getServicos(const Date d) const{
 	BSTItrIn<Servico *> it(arvoreServicos);
 	vector<Servico *> servData;
 	while(!it.isAtEnd()){
@@ -21,7 +21,7 @@ bool Agenda::adicionaServico(Servico *s){
 	return true;
 }
 
-bool Agenda::remarcaServico(Servico *s, Date d){
+bool Agenda::remarcaServico(Servico *s, const Date &d){
 	BSTItrIn<Servico *> it(arvoreServicos);
 	while(!it.isAtEnd()){
 		if(it.retrieve() == s){

@@ -29,6 +29,6 @@ bool Date::operator <(const Date &d1){
 	}
 }
 
-bool Date::operator==(const Date &d1) const{
-	return (ano == d1.getAno()) && (mes == d1.getMes()) && (dia == d1.getDia()) && (hora == d1.getHora()) && (minutos == d1.getMinutos());
+bool operator==(const Date d1, const Date d2){
+	return (d1.getAno() == d2.getAno()) && (d1.getMes() == d2.getMes()) && (d1.getDia() == d2.getDia()) && (d1.getHora() == d2.getHora()) && (d1.getMinutos() == d2.getMinutos());
 }

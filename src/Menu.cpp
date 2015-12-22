@@ -55,6 +55,7 @@ void addMenu(Oficina &oficina){
 		break;
 	default:
 		cout << "Opção inválida. Insira outra vez." << endl;
+		addMenu(oficina);
 		break;
 	}
 }
