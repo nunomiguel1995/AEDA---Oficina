@@ -936,7 +936,10 @@ void Oficina::addServico(Cliente &c, Veiculo *v, Servico*s, Date &d){
 	int posCli = -1, posVeic = -1;
 
 	for (unsigned int i=0; i < clientes.size(); i++){
-		if (clientes[i].getId() == c.getId()) posCli = i;
+		if (clientes[i].getId() == c.getId()){
+			posCli = i;
+			break;
+		}
 	}
 
 	if (posCli == -1 ) throw ClienteInexistente(c.getNome());
@@ -945,8 +948,10 @@ void Oficina::addServico(Cliente &c, Veiculo *v, Servico*s, Date &d){
 	vector<Veiculo*> veic = c1.getVeiculos();
 
 	for (unsigned int j=0; j<veiculos.size();j++){
-		if (veiculos[j]->getMatricula() == v->getMatricula())
+		if (veiculos[j]->getMatricula() == v->getMatricula()){
 			posVeic=j;
+			break;
+		}
 	}
 
 	if (posVeic == -1) throw VeiculoInexistente(v->getMatricula());

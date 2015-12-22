@@ -28,13 +28,13 @@ typedef tr1::unordered_set<Cliente> tabHInativos;
 typedef priority_queue<Cliente> FilaPrioridade;
 
 struct eq {
-	bool operator() (const Cliente &c1, const Cliente &c2) const {
+	bool operator() (const Cliente c1, const Cliente c2)  {
 		return (c1.getId() == c2.getId());
 	}
 };
 
 struct h {
-	int operator() (const Cliente &c1) const {
+	int operator() (const Cliente c1) {
 		string s1 = c1.getNome();
 		int v = 0;
 		for ( unsigned int i = 0; i < s1.size(); i++){

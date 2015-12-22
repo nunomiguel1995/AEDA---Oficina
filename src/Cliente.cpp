@@ -177,3 +177,9 @@ bool Cliente::isInativo(Date &d1){
 
 	return inativo;
 }
+
+
+bool operator == (const Cliente c1, const Cliente c2){
+	if(c1.getId()== c2.getId()) return true;
+	else return false;
+}

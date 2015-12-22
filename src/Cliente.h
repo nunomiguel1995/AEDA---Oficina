@@ -47,6 +47,7 @@ public:
 	void setPontosData(vector <pair < int,Date > > p);
 	void erasePontosData();
 	bool isInativo(Date &d1);
+	friend bool operator == (const Cliente c1, const Cliente c2);
 };
 
 #endif /* SRC_CLIENTE_H_ */
