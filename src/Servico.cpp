@@ -66,14 +66,10 @@ void Servico::setDate(Date d){
 	this->date = d;
 }
 
-//organizados na árvore a partir da dada e hora do seu
-//agendamento.
-//Para agendamentos marcados para o mesmo dia e hora, estes deverão ser
-//organizados pelo nome dos seus clientes.
-bool Servico::operator < (const Servico *s) const {
-	if(getDate() < s->getDate()){
+bool Servico::operator < (const Servico *s){
+	if(date < s->getDate()){
 		return true;
-	}else if(nomeCliente < s->nomeCliente){
+	}else if(duracao < s->getDuracao()){
 		return true;
 	}
 	return false;

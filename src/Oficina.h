@@ -60,7 +60,7 @@ public:
 	string getNome() const;
 	vector<Funcionario> getFuncionarios() const;
 	Funcionario getFuncionarioNome(string nome) const;
-	Cliente getClienteNome(string nome) const;
+	Cliente getClienteNome(string nome)const;
 	tabHInativos getInativos() const {return inativos;};
 
 	void setFuncionarios(vector<Funcionario> func);
@@ -96,9 +96,7 @@ public:
 	void displayClientes() const;
 	void displayServicosStandard();
 	void displayClientesInativos();
-
-	Servico* createServico(string tipo, string nome, float preco, int duracao, Date date);
-	Veiculo* createVeiculo(string tipo, string marca, string matricula, int ano);
+	void displayFila();
 
 	bool guardaFuncionarios();
 	bool guardaVeiculos();
@@ -121,7 +119,6 @@ public:
 	void happyHour();
 	void atualizaPontos(Date d);
 	void atualizaInativos(Date d);
-
 
 	BST<Servico *> getServicos() const;
 	vector<Servico *> getServicos(const Date d) const;

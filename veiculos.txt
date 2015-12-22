@@ -1,2 +1,1 @@
-c Mercede 11-22-33 2000 ns Revisao 75 2 0 0 0 0 0
- ns joinha 45 2 2001 3 2 5 4
+c mercedes 11-22-33 2000 ns huehue 10 2 2 2 2 2 2

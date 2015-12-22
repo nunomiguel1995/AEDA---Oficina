@@ -118,6 +118,10 @@ void Menu::addMenu(Oficina &oficina){
 	break;
 	case 5:{
 		string matricula;
+		string nomeC;
+		cin.sync();
+		cout << "Insira o nome do cliente: ";
+		getline(cin,nomeC);
 		cout<<"Insira a matricula do Veiculo: ";
 		cin>>matricula;
 
@@ -145,9 +149,25 @@ void Menu::addMenu(Oficina &oficina){
 				break;
 			}
 
+			try{
+				oficina.getClienteNome(nomeC);
+			}catch(ClienteInexistente &e){
+				cout << e.getNome() << "não é um cliente.\n";
+				addMenu(oficina);
+			}
+			Cliente c = oficina.getClienteNome(nomeC);
 			Servico *s = oficina.getServicosStandard().at(i);
 			vector <Veiculo *> veic = oficina.getVeiculos();
-			veic[pos]->addServico(s,true);
+			Date d = s->getDate();
+			try{
+				oficina.addServico(c,veic[pos],s,d);
+			}catch(ClienteInexistente &e){
+				cout << e.getNome() << "não é um cliente.\n";
+				addMenu(oficina);
+			}catch(VeiculoInexistente &e){
+				cout << e.getMatricula() << " já existe.\n";
+				addMenu(oficina);
+			}
 			oficina.setVeiculos(veic);
 			cout<<"Serviço adicionado com sucesso! \n";
 			break;
@@ -179,11 +199,26 @@ void Menu::addMenu(Oficina &oficina){
 			cout << "Minuto: ";
 			cin >> minutos;
 
-			Date d(ano,mes,dia,hora,minutos);
+			try{
+				oficina.getClienteNome(nomeC);
+			}catch(ClienteInexistente &e){
+				cout << e.getNome() << "não é um cliente.\n";
+				addMenu(oficina);
+			}
 
+			Date d(ano,mes,dia,hora,minutos);
+			Cliente c = oficina.getClienteNome(nomeC);
 			Servico *s1 = new naoStandard(nome,preco,duracao,d);
 			vector <Veiculo *> veic = oficina.getVeiculos();
-			veic[pos]->addServico(s1,true);
+			try{
+				oficina.addServico(c,veic[pos],s1,d);
+			}catch(ClienteInexistente &e){
+				cout << e.getNome() << "não é um cliente.\n";
+				addMenu(oficina);
+			}catch(VeiculoInexistente &e){
+				cout << e.getMatricula() << "não existe.\n";
+				addMenu(oficina);
+			}
 			oficina.setVeiculos(veic);
 			cout<<"Serviço adicionado com sucesso! \n";
 		}
@@ -208,6 +243,7 @@ void Menu::removeMenu(Oficina &oficina){
 	cout <<	"2 - Remover Veiculo de Funcionário" << endl;
 	cout <<	"3 - Remover Cliente" << endl;
 	cout <<	"4 - Remover Veiculo de Cliente" << endl;
+	cout << "5 - Remover Servico de veiculo" << endl;
 	cout << "0 - Sair" << endl;
 
 	int opcao;
@@ -299,6 +335,28 @@ void Menu::removeMenu(Oficina &oficina){
 		removeMenu(oficina);
 		break;
 	}
+	case 5:{
+		int ano,mes,dia,hora,minutos;
+		cout << "Data para agendamento" << endl;
+		cout << "Ano: ";
+		cin >> ano;
+		cout << "Mês: ";
+		cin >> mes;
+		cout << "Dia: ";
+		cin >> dia;
+		cout << "Hora: ";
+		cin >> hora;
+		cout << "Minuto: ";
+		cin >> minutos;
+		Date d(ano,mes,dia,hora,minutos);
+		vector<Servico *> ls = oficina.getServicos(d);
+		for(unsigned int i = 0; i < ls.size(); i++){
+			oficina.removeServico(ls[i]);
+		}
+		oficina.guardaVeiculos();
+		removeMenu(oficina);
+		break;
+	}
 	default:
 		cout << "Opção inválida. Insira outra vez." << endl;
 		removeMenu(oficina);
@@ -312,6 +370,9 @@ void Menu::displayMenu(Oficina &oficina){
 	cout <<	"3 - Display Clientes" << endl;
 	cout <<	"4 - Display Veículos do Cliente" << endl;
 	cout <<	"5 - Display de Serviços do Veículo" << endl;
+	cout << "6 - Display da Agenda" << endl;
+	cout << "7 - Display cliente inativo" << endl;
+	cout << "8 - Display fila de clientes" << endl;
 	cout <<	"0 - Sair" << endl;
 
 	int opcao;
@@ -341,6 +402,7 @@ void Menu::displayMenu(Oficina &oficina){
 	}
 	case 3:
 		oficina.displayClientes();
+		displayMenu(oficina);
 		break;
 	case 4:{
 		string nome;
@@ -373,6 +435,22 @@ void Menu::displayMenu(Oficina &oficina){
 		displayMenu(oficina);
 		break;
 	}
+	case 6:
+		oficina.printArvore();
+		displayMenu(oficina);
+		break;
+	case 7:{
+		Date d(2010,12,31,23,59);
+		oficina.atualizaInativos(d);
+		oficina.displayClientesInativos();
+		displayMenu(oficina);
+		break;
+	}
+	case 8:{
+		oficina.displayFila();
+		displayMenu(oficina);
+		break;
+	}
 	default:
 		cout << "Opção inválida. Insira outra vez." << endl;
 		displayMenu(oficina);
@@ -383,6 +461,92 @@ void Menu::displayMenu(Oficina &oficina){
 void Menu::modifyMenu(Oficina &oficina){
 	cout << "1 - Modificar nome Cliente" << endl;
 	cout <<	"2 - Modificar nome Funcionario" << endl;
+	cout << "3 - Modificar data de serviço" << endl;
+	cout << "0 - Sair" << endl;
+
+	int opcao;
+		cin >> opcao;
+
+		switch(opcao){
+		case 0:
+			menu(oficina);
+			break;
+		case 1:{
+			string nome;
+			try{
+				cin.sync();
+				cout << "Insira o nome do cliente: ";
+				getline(cin,nome);
+				Cliente f = oficina.getClienteNome(nome);
+				string nomeF;
+				cin.sync();
+				cout << "Insira o novo nome do cliente: ";
+				getline(cin,nomeF);
+				f.setNome(nomeF);
+				oficina.setClientes(oficina.getClientes());
+			}catch(ClienteInexistente &e){
+				cout << e.getNome() << " não é um cliente.\n";
+			}
+			oficina.guardaClientes();
+			modifyMenu(oficina);
+			break;
+		}
+		case 2:{
+			string nome;
+			try{
+				cin.sync();
+				cout << "Insira o nome do funcionário: ";
+				getline(cin,nome);
+				Funcionario f = oficina.getFuncionarioNome(nome);
+				string nomeF;
+				cin.sync();
+				cout << "Insira o novo nome do funcionário: ";
+				getline(cin,nomeF);
+				f.setNome(nomeF);
+				oficina.setFuncionarios(oficina.getFuncionarios());
+			}catch(FuncionarioInexistente &e){
+				cout << e.getNome() << " não é um funcionário.\n";
+			}
+			oficina.guardaFuncionarios();
+			modifyMenu(oficina);
+			break;
+		}
+		case 3:{
+			int ano,mes,dia,hora,minutos;
+			cout << "Data do servico: " << endl;
+			cout << "Ano: ";
+			cin >> ano;
+			cout << "Mês: ";
+			cin >> mes;
+			cout << "Dia: ";
+			cin >> dia;
+			cout << "Hora: ";
+			cin >> hora;
+			cout << "Minuto: ";
+			cin >> minutos;
+			Date d(ano,mes,dia,hora,minutos);
+			Servico *s = new Servico("",0,0,d);
+			cout << "Data nova: " << endl;
+			cout << "Ano: ";
+			cin >> ano;
+			cout << "Mês: ";
+			cin >> mes;
+			cout << "Dia: ";
+			cin >> dia;
+			cout << "Hora: ";
+			cin >> hora;
+			cout << "Minuto: ";
+			cin >> minutos;
+			Date d2(ano,mes,dia,hora,minutos);
+			oficina.remarcaServico(s,d2);
+			modifyMenu(oficina);
+			break;
+		}
+		default:
+			cout << "Opção inválida. Insira outra vez." << endl;
+			modifyMenu(oficina);
+			break;
+		}
 }
 
 void Menu::menu(Oficina &oficina){

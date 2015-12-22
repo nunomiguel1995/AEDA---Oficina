@@ -31,7 +31,7 @@ public:
 	void addTaxa(float tx);
 	virtual string classname() const;
 	void removeServico(Servico* s);
-	bool operator < (const Servico *s) const;
+	bool operator < (const Servico *s);
 	bool alteraDataServico(Date s);
 	void print();
 };
