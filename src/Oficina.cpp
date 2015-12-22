@@ -8,7 +8,7 @@ using namespace std;
  * Construtor da Oficina
  * @param n nome da oficina
  */
-Oficina::Oficina(string n) : nome(n){}
+Oficina::Oficina(string n) : nome(n),arvoreServicos(new Servico("",0,0,Date(0,0,0,0,0))){}
 
 /**
  * Destrutor da classe Oficina
@@ -400,6 +400,181 @@ void Oficina:: ordenaClientes(){
 	insertionSort(clientes);
 }
 
+<<<<<<< HEAD
+=======
+void Oficina::adicionaServicoArvore(Servico *s){
+	arvoreServicos.insert(s);
+}
+
+void Oficina::criaServicoVeiculo(){
+	string matricula;
+	cout<<"Insira a matricula do Veiculo: ";
+	cin>>matricula;
+
+	int pos= posVeiculo(matricula);
+	if(pos==-1){
+		cout<<"Veiculo não existe na Oficina! \n";
+		return;
+	}
+
+	int tiposervico;
+	cout<<"Que tipo de serviço deseja adicionar? \n"<<"1 Standard \n"<<"2 Não Standard\n "<<"Opcção: ";
+	cin>>tiposervico;
+
+	switch(tiposervico){
+	case 1:
+	{
+		string nome;
+		cout << "Qual o nome para o Serviço Standard: ";
+		cin >> nome;
+
+		int i = isStandard(nome);
+
+		if(i == -1){
+			cout << "Serviço Standard não oferecido pela oficina!\n";
+			break;
+		}
+
+		Servico *s = getServicosStandard().at(i);
+		vector <Veiculo *> veic = getVeiculos();
+		veic[pos]->addServico(s,true);
+		setVeiculos(veic);
+		cout<<"Serviço adicionado com sucesso! \n";
+		break;
+	}
+	case 2:
+	{
+		string nome;
+		int duracao;
+		float preco;
+		vector <string> descricao;
+
+		cout<<"Escolha um nome para o serviço: ";
+		cin>>nome;
+		cout<<"Qual a duração do serviço: ";
+		cin>>duracao;
+		cout<<"Qual o preço do serviço: ";
+		cin>>preco;
+		cout<<"Qual a descrição do serviço (0 para terminar): ";
+
+		int ano,mes,dia,hora,minutos;
+		cout << "Data para agendamento" << endl;
+		cout << "Ano: ";
+		cin >> ano;
+		cout << "\nMês: ";
+		cin >> mes;
+		cout << "\nDia: ";
+		cin >> dia;
+		cout << "\nHora: ";
+		cin >> hora;
+		cout << "\nMinuto: ";
+		cin >> minutos;
+
+		Date d(ano,mes,dia,hora,minutos);
+
+		Servico *s1 = new naoStandard(nome,preco,duracao,d);
+		vector <Veiculo *> veic= getVeiculos();
+		veic[pos]->addServico(s1,true);
+		setVeiculos(veic);
+		cout<<"Serviço adicionado com sucesso! \n";
+	}
+	break;
+	default:
+		break;
+	}
+}
+
+void Oficina::criaVeiculoCliente(){
+	string marca, matricula, tipo, nome;
+	int ano;
+	try{
+		string nome;
+		cin.sync();
+		cout << "Insira o nome do cliente: ";
+		getline(cin,nome);
+		cout << "Insira o tipo do veiculo: ";
+		cin >> tipo;
+		cout << "Insira a marca do veiculo: ";
+		cin >> marca;
+		cout << "Insira a matricula do veiculo: ";
+		cin >> matricula;
+		cout << "Insira o ano do veiculo: ";
+		cin >> ano;
+		getClienteNome(nome);
+		if(tipo == "Motorizada"){
+			Veiculo *m = new Motorizada(marca,matricula,ano);
+			addVeiculo(m);
+			addVeiculoCliente(m,nome);
+		}else if(tipo == "Camião" || tipo == "Camiao"){
+			Veiculo *c = new Camiao(marca,matricula,ano);
+			addVeiculo(c);
+			addVeiculoCliente(c,nome);
+		}else if(tipo == "Autocarro"){
+			Veiculo *at = new Autocarro(marca,matricula,ano);
+			addVeiculo(at);
+			addVeiculoCliente(at,nome);
+		}else if(tipo == "Automóvel" || tipo == "Automovel"){
+			Veiculo *am = new Automovel(marca,matricula,ano);
+			addVeiculo(am);
+			addVeiculoCliente(am,nome);
+		}else{
+			cout << "Tipo de veículo inválido.\n";
+			return;
+		}
+	}catch(VeiculoExistente &e){
+		cout << e.getMatricula() << " já existe.\n";
+	}catch(ClienteInexistente &e){
+		cout << e.getNome() << " não é um cliente.\n";
+	}
+}
+
+void Oficina::criaVeiculoFuncionario(){
+	string matricula, nome;
+	cin.sync();
+	cout << "Insira o nome do funcionário: ";
+	getline(cin,nome);
+	try{
+		getFuncionarioNome(nome);
+	}catch(FuncionarioInexistente &e){
+		cout << e.getNome() << " não é um funcionário.\n";
+	}
+	cout << "Insira a matrícula do veículo: ";
+	cin >> matricula;
+	try{
+		Veiculo *v = getVeiculoMatricula(matricula);
+		addVeiculoFuncionario(v,nome);
+	}catch(VeiculoInexistente &e){
+		cout << e.getMatricula() << " não existe.\n";
+	}
+}
+
+void Oficina::criaFuncionario(){
+	string nomeF;
+	cin.sync();
+	cout << "Nome do funcionário: ";
+	getline(cin,nomeF);
+	Funcionario f(nomeF);
+	try{
+		addFuncionario(f);
+	}catch(FuncionarioExistente &e){
+		cout << e.getNome() << " já é um funcionário.\n";
+	}
+}
+
+void Oficina::criaCliente(){
+	string nomeC;
+	cin.sync();
+	cout << "Insira o nome do cliente: ";
+	getline(cin,nomeC);
+	Cliente c(nomeC);
+	try{
+		addCliente(c);
+	}catch(ClienteExistente &e){
+		cout << e.getNome() << " já é um cliente.\n";
+	}
+}
+
+>>>>>>> dc4be3dfdc9f7b0c2f1f1fde61857b806783891b
 /**
  * Funcao auxiliar para criacao de veiculos da Oficina
  */
@@ -783,12 +958,6 @@ int Oficina:: isStandard(string nome){
 }
 
 
-void Oficina::addClienteInativo(Cliente & c1, Date &d1){
-	if (c1.isInativo(d1)){
-		inativos.insert(c1);
-	}
-}
-
 void Oficina::removeClienteInativo(Cliente &c){
 	tabHInativos::const_iterator it = inativos.begin();
 	while(it != inativos.end()){
@@ -801,6 +970,36 @@ void Oficina::removeClienteInativo(Cliente &c){
 	throw ClienteInativoNaoExistente(c.getId());
 }
 
+int calculaPontos(Servico* s){
+	float preco= s->getPreco();
+
+	if(preco<100) return 20;
+	if(preco>=100 && preco<200) return 50;
+	else return 100;
+}
+
+
+bool Oficina:: pertenceInativos(Cliente c){
+	tabHInativos::iterator it= inativos.begin();
+
+	for(it; it!= inativos.end();it++){
+		if((*it).getId() == c.getId())
+			return true;
+	}
+
+	return false;
+}
+
+void Oficina::atualizaInativos(Date d){
+
+	for(unsigned int i=0; i< clientes.size();i++){
+		if(clientes[i].isInativo(d)){
+			if(pertenceInativos(clientes[i]) == false){
+				inativos.insert(clientes[i]);
+			}
+		}
+	}
+}
 
 void Oficina::addServico(Cliente &c, Veiculo *v, Servico*s, Date &d){
 
@@ -829,11 +1028,13 @@ void Oficina::addServico(Cliente &c, Veiculo *v, Servico*s, Date &d){
 
 	veiculos[posVeic]->addServico(s, false);
 
-	//adiconar à arvore
-
-	//remover da tabela de dispersao
+	arvoreServicos.insert(s);
 
 	if(clientes[posCli].isInativo(d)) inativos.erase(c);
+
+	int pontos= clientes[posCli].getPontos(), novos= calculaPontos(s);
+	clientes[posCli].setPontos(pontos+novos);
+
 
 }
 
@@ -845,7 +1046,7 @@ void Oficina::displayClientesInativos(){
 	}
 }
 
-void Oficina:: HappyHour(){
+void Oficina:: happyHour(){
 	srand (time(NULL));
 
 	int n=3;
@@ -900,12 +1101,12 @@ bool Caducou(Date atual, Date servico){
 		if(difMes > 0) return false;
 		if(difMes == 0){
 			if(difDia <= 0) return true;
-			else return false;
 		}
 	}
+	return false;
 }
 
-void Oficina:: AtualizaPontos(Date d){
+void Oficina:: atualizaPontos(Date d){
 
 	for(unsigned int i=0; i<clientes.size();i++){
 		int pontosCliente=clientes[i].getPontos();
@@ -924,3 +1125,60 @@ void Oficina:: AtualizaPontos(Date d){
 		clientes[i].setPontosData(p);
 	}
 }
+
+
+BST<Servico *> Oficina::getServicos() const{
+	return arvoreServicos;
+}
+
+vector<Servico *> Oficina::getServicos(const Date d) const{
+	BSTItrIn<Servico *> it(arvoreServicos);
+	vector<Servico *> servData;
+	while(!it.isAtEnd()){
+		if(it.retrieve()->getDate() == d){
+			servData.push_back(it.retrieve());
+		}
+		it.advance();
+	}
+	return servData;
+}
+
+
+
+bool Oficina::remarcaServico(Servico *s, const Date &d){
+	BSTItrIn<Servico *> it(arvoreServicos);
+	while(!it.isAtEnd()){
+		if(it.retrieve() == s){
+			it.retrieve()->setDate(d);
+			return true;
+		}
+		it.advance();
+	}
+	return false;
+}
+
+bool Oficina::removeServico(Servico *s){
+	BSTItrIn<Servico *> it(arvoreServicos);
+	while(!it.isAtEnd()){
+		if(it.retrieve() == s){
+			arvoreServicos.remove(it.retrieve());
+			return true;
+		}
+		it.advance();
+	}
+	return false;
+}
+
+void Oficina:: printArvore(){
+	BSTItrIn<Servico *> it(arvoreServicos);
+	int n=0;
+
+	while(!it.isAtEnd()){
+		cout<<"Servico "<<n<<":";
+		(it.retrieve())->print();
+		cout<<"\n";
+		it.advance();
+		n++;
+	}
+}
+

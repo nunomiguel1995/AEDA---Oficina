@@ -32,6 +32,8 @@ public:
 	virtual string classname() const;
 	void removeServico(Servico* s);
 	bool operator < (const Servico *s) const;
+	bool alteraDataServico(Date s);
+	void print();
 };
 
 /**

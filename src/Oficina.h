@@ -6,21 +6,20 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
-#include "Excepcoes.h"
 #include "Funcionario.h"
 #include "Veiculo.h"
 #include "Cliente.h"
+#include "BST.h"
 #include "insertionSort.h"
 #include "Servico.h"
-#include "BST.h"
 #include <stdlib.h>
 #include <time.h>
 #include <typeinfo>
 #include <tr1/unordered_set>
 #include <queue>
 #include <math.h>
-
 #include "Date.h"
+#include "Excepcoes.h"
 
 using namespace std;
 
@@ -41,6 +40,7 @@ struct h {
 	}
 };
 
+
 typedef tr1::unordered_set<Cliente,h,eq> tabHInativos;
 typedef priority_queue<Cliente> FilaPrioridade;
 
@@ -52,6 +52,7 @@ class Oficina{
 	vector <Standard *> servicosStandard;
 	FilaPrioridade maisPontos;
 	tabHInativos inativos;
+	BST<Servico *> arvoreServicos;
 public:
 	Oficina(string nome);
 	~Oficina();
@@ -108,6 +109,7 @@ public:
 	bool leClientes();
 	bool leServicos();
 	int getNumInativos();
+	bool pertenceInativos(Cliente c);
 
 	void ordenaFuncionarios();
 	void ordenaVeiculos();
@@ -116,8 +118,18 @@ public:
 	int posVeiculo(string mt);
 	int isStandard(string nome);
 
-	void HappyHour();
-	void AtualizaPontos(Date d);
+	void happyHour();
+	void atualizaPontos(Date d);
+	void atualizaInativos(Date d);
+
+
+	BST<Servico *> getServicos() const;
+	vector<Servico *> getServicos(const Date d) const;
+
+	void adicionaServicoArvore(Servico *s);
+	bool remarcaServico(Servico *s, const Date &d);
+	bool removeServico(Servico *s);
+	void printArvore();
 };
 
 
