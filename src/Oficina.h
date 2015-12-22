@@ -9,16 +9,15 @@
 #include "Funcionario.h"
 #include "Veiculo.h"
 #include "Cliente.h"
+#include "BST.h"
 #include "insertionSort.h"
 #include "Servico.h"
-#include "BST.h"
 #include <stdlib.h>
 #include <time.h>
 #include <typeinfo>
 #include <tr1/unordered_set>
 #include <queue>
 #include <math.h>
-
 #include "Date.h"
 #include "Excepcoes.h"
 
@@ -41,6 +40,7 @@ struct h {
 	}
 };
 
+
 typedef tr1::unordered_set<Cliente,h,eq> tabHInativos;
 typedef priority_queue<Cliente> FilaPrioridade;
 
@@ -52,6 +52,7 @@ class Oficina{
 	vector <Standard *> servicosStandard;
 	FilaPrioridade maisPontos;
 	tabHInativos inativos;
+	BST<Servico *> arvoreServicos;
 public:
 	Oficina(string nome);
 	~Oficina();
@@ -126,6 +127,15 @@ public:
 	void happyHour();
 	void atualizaPontos(Date d);
 	void atualizaInativos(Date d);
+
+
+	BST<Servico *> getServicos() const;
+	vector<Servico *> getServicos(const Date d) const;
+
+	void adicionaServicoArvore(Servico *s);
+	bool remarcaServico(Servico *s, const Date &d);
+	bool removeServico(Servico *s);
+	void printArvore();
 };
 
 

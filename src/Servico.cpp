@@ -114,3 +114,19 @@ naoStandard::~naoStandard(){}
  * Nome da Classe
  */
 string naoStandard:: classname() const{return "naoStandard";}
+
+/**
+ * Altera a data do servico para a data passada como parametro
+ */
+bool Servico::alteraDataServico(Date s){
+	if( s == date) return false;
+
+	date=s;
+	return true;
+}
+
+void Servico:: print(){
+	cout<<"Nome: "<< nome << " Data: ";
+	date.print() ;
+	cout << endl;
+}

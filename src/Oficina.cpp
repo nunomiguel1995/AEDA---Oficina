@@ -8,7 +8,7 @@ using namespace std;
  * Construtor da Oficina
  * @param n nome da oficina
  */
-Oficina::Oficina(string n) : nome(n){}
+Oficina::Oficina(string n) : nome(n),arvoreServicos(new Servico("",0,0,Date(0,0,0,0,0))){}
 
 /**
  * Destrutor da classe Oficina
@@ -398,6 +398,10 @@ void Oficina:: ordenaVeiculos(){
  */
 void Oficina:: ordenaClientes(){
 	insertionSort(clientes);
+}
+
+void Oficina::adicionaServicoArvore(Servico *s){
+	arvoreServicos.insert(s);
 }
 
 void Oficina::criaServicoVeiculo(){
@@ -932,6 +936,29 @@ int calculaPontos(Servico* s){
 	else return 100;
 }
 
+
+bool Oficina:: pertenceInativos(Cliente c){
+	tabHInativos::iterator it= inativos.begin();
+
+	for(it; it!= inativos.end();it++){
+		if((*it).getId() == c.getId())
+			return true;
+	}
+
+	return false;
+}
+
+void Oficina::atualizaInativos(Date d){
+
+	for(unsigned int i=0; i< clientes.size();i++){
+		if(clientes[i].isInativo(d)){
+			if(pertenceInativos(clientes[i]) == false){
+				inativos.insert(clientes[i]);
+			}
+		}
+	}
+}
+
 void Oficina::addServico(Cliente &c, Veiculo *v, Servico*s, Date &d){
 
 	int posCli = -1, posVeic = -1;
@@ -959,11 +986,10 @@ void Oficina::addServico(Cliente &c, Veiculo *v, Servico*s, Date &d){
 
 	veiculos[posVeic]->addServico(s, false);
 
-	//adiconar à arvore
-
-	//remover da tabela de dispersao
+	arvoreServicos.insert(s);
 
 	if(clientes[posCli].isInativo(d)) inativos.erase(c);
+
 	int pontos= clientes[posCli].getPontos(), novos= calculaPontos(s);
 	clientes[posCli].setPontos(pontos+novos);
 
@@ -1058,25 +1084,59 @@ void Oficina:: atualizaPontos(Date d){
 	}
 }
 
-bool Oficina:: pertenceInativos(Cliente c){
-	tabHInativos::iterator it= inativos.begin();
 
-	for(it; it!= inativos.end();it++){
-		if((*it).getId() == c.getId())
-			return true;
+BST<Servico *> Oficina::getServicos() const{
+	return arvoreServicos;
+}
+
+vector<Servico *> Oficina::getServicos(const Date d) const{
+	BSTItrIn<Servico *> it(arvoreServicos);
+	vector<Servico *> servData;
+	while(!it.isAtEnd()){
+		if(it.retrieve()->getDate() == d){
+			servData.push_back(it.retrieve());
+		}
+		it.advance();
 	}
+	return servData;
+}
 
+
+
+bool Oficina::remarcaServico(Servico *s, const Date &d){
+	BSTItrIn<Servico *> it(arvoreServicos);
+	while(!it.isAtEnd()){
+		if(it.retrieve() == s){
+			it.retrieve()->setDate(d);
+			return true;
+		}
+		it.advance();
+	}
 	return false;
 }
 
-void Oficina::atualizaInativos(Date d){
-
-	for(unsigned int i=0; i< clientes.size();i++){
-		if(clientes[i].isInativo(d)){
-			if(pertenceInativos(clientes[i]) == false){
-				inativos.insert(clientes[i]);
-			}
+bool Oficina::removeServico(Servico *s){
+	BSTItrIn<Servico *> it(arvoreServicos);
+	while(!it.isAtEnd()){
+		if(it.retrieve() == s){
+			arvoreServicos.remove(it.retrieve());
+			return true;
 		}
+		it.advance();
+	}
+	return false;
+}
+
+void Oficina:: printArvore(){
+	BSTItrIn<Servico *> it(arvoreServicos);
+	int n=0;
+
+	while(!it.isAtEnd()){
+		cout<<"Servico "<<n<<":";
+		(it.retrieve())->print();
+		cout<<"\n";
+		it.advance();
+		n++;
 	}
 }
 
