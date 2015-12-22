@@ -25,13 +25,13 @@
 using namespace std;
 
 struct eq {
-	bool operator() (const Cliente c1, const Cliente c2)  {
+	bool operator() (const Cliente &c1, const Cliente &c2) const{
 		return (c1.getId() == c2.getId());
 	}
 };
 
 struct h {
-	int operator() (const Cliente c1) {
+	int operator() (const Cliente &c1) const{
 		string s1 = c1.getNome();
 		int v = 0;
 		for ( unsigned int i = 0; i < s1.size(); i++){
