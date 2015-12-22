@@ -16,9 +16,8 @@ vector<Servico *> Agenda::getServicos(const Date d) const{
 	return servData;
 }
 
-bool Agenda::adicionaServico(Servico *s){
+void Agenda::adicionaServico(Servico *s){
 	arvoreServicos.insert(s);
-	return true;
 }
 
 bool Agenda::remarcaServico(Servico *s, const Date &d){

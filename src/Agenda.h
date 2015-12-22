@@ -9,9 +9,11 @@ class Agenda{
 	BST<Servico *> arvoreServicos;
 public:
 	Agenda() : arvoreServicos(new Servico("",0,0,Date())){};
+
 	BST<Servico *> getServicos() const;
 	vector<Servico *> getServicos(const Date d) const;
-	bool adicionaServico(Servico *s);
+
+	void adicionaServico(Servico *s);
 	bool remarcaServico(Servico *s, const Date &d);
 	bool removeServico(Servico *s);
 };

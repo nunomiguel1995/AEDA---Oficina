@@ -96,7 +96,8 @@ vector<Servico *> Motorizada::getServicos() const{return servicos;}
 
 void Motorizada::addServico(Servico * & s, bool control){
 	if(control){s->addTaxa(taxa);}
-	servicos.push_back(s);}
+	servicos.push_back(s);
+}
 
 /**
  * Retorna o nome da classe Motorizada
@@ -133,7 +134,8 @@ vector<Servico *> Camiao::getServicos() const{return servicos;}
 
 void Camiao::addServico(Servico * & s, bool control){
 	if(control){s->addTaxa(taxa);}
-	servicos.push_back(s);}
+	servicos.push_back(s);
+}
 
 /**
  * Retorna o nome da classe
@@ -167,7 +169,8 @@ vector<Servico *> Autocarro::getServicos() const{return servicos;}
  */
 void Autocarro::addServico(Servico * & s, bool control){
 	if(control){s->addTaxa(taxa);}
-	servicos.push_back(s);}
+	servicos.push_back(s);
+}
 
 /**
  * Retorna o nome da classe
@@ -203,7 +206,8 @@ vector<Servico *> Automovel::getServicos() const{return servicos;}
  */
 void Automovel::addServico(Servico * & s, bool control){
 	if(control){s->addTaxa(taxa);}
-	servicos.push_back(s);}
+	servicos.push_back(s);
+}
 
 /**
  * Retorna o nome da classe
@@ -215,7 +219,6 @@ void Veiculo:: removeServico(Servico* s){
 }
 
 void Motorizada:: removeServico(Servico* s){
-
 	for(unsigned int i=0; i< servicos.size();i++){
 		if(servicos[i]->getNome() == s->getNome()){
 			servicos.erase(servicos.begin()+i);

@@ -16,7 +16,7 @@ vector <Veiculo *> Funcionario:: getVeiculos() const{ return veiculos;}
  * @param v1 veiculo a adicionar
  */
 void Funcionario:: addVeiculo(Veiculo * v1){
-	for(unsigned int i=0; i<veiculos.size();i++){
+	for(unsigned int i = 0; i < veiculos.size(); i++){
 		if(veiculos[i]->getMatricula()== v1->getMatricula()) throw (VeiculoExistente(v1->getMatricula()));
 	}
 	veiculos.push_back(v1);
