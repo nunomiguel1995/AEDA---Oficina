@@ -62,10 +62,16 @@ string Servico::classname() const{}
  * Standard
  */
 
+/**
+ * Modifica a data do Servico para a data passada como parametro
+ */
 void Servico::setDate(Date d){
 	this->date = d;
 }
 
+/**
+ * Overload do operador <
+ */
 bool Servico::operator < (const Servico *s){
 	if(date < s->getDate()){
 		return true;
@@ -121,6 +127,9 @@ bool Servico::alteraDataServico(Date s){
 	return true;
 }
 
+/**
+ * Imprime os dados de um servico
+ */
 void Servico:: print(){
 	cout<<"Nome: "<< nome << " Data: ";
 	date.print() ;

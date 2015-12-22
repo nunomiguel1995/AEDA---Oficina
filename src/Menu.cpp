@@ -1,5 +1,8 @@
 #include "Menu.h"
 
+/**
+ * Funcoes para imprimir menu da aplicacao
+ */
 void Menu::addMenu(Oficina &oficina){
 	cout << "1 - Adicionar Funcionário" << endl; //
 	cout <<	"2 - Adicionar Veiculo a Funcionário" << endl; //

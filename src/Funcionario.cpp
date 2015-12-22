@@ -91,7 +91,10 @@ void Funcionario:: displayFuncionario() const{
 	this->displayVeiculos();
 }
 
-
+/**
+ * Mofica um nome do funcionario
+ * @param nome
+ */
 void Funcionario::setNome(string nome){
 	this->nome=nome;
 }

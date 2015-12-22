@@ -748,7 +748,9 @@ int Oficina:: isStandard(string nome){
 	return -1;
 }
 
-
+/**
+ * Remove da Tabela de Dispersao um Cliente de deixou de ser inativo
+ */
 void Oficina::removeClienteInativo(Cliente &c){
 	tabHInativos::const_iterator it = inativos.begin();
 	while(it != inativos.end()){
@@ -761,6 +763,9 @@ void Oficina::removeClienteInativo(Cliente &c){
 	throw ClienteInativoNaoExistente(c.getId());
 }
 
+/**
+ * Funcao auxiliar: calcula os pontos que a oficina oferece ao cliente quando este realiza um servico
+ */
 int calculaPontos(Servico* s){
 	float preco= s->getPreco();
 
@@ -769,7 +774,9 @@ int calculaPontos(Servico* s){
 	else return 100;
 }
 
-
+/**
+ * Verifica se o cliente pertence a Tabela de Dispersao de clientes inativos
+ */
 bool Oficina:: pertenceInativos(Cliente c){
 	tabHInativos::iterator it= inativos.begin();
 
@@ -783,6 +790,9 @@ bool Oficina:: pertenceInativos(Cliente c){
 	return false;
 }
 
+/**
+ * Atualiza a Tabela de Dispersao de cliente inativos; adiciona os clientes inativos que ainda nao pertencam a tabela
+ */
 void Oficina::atualizaInativos(Date d){
 
 	for(unsigned int i=0; i< clientes.size();i++){
@@ -794,6 +804,10 @@ void Oficina::atualizaInativos(Date d){
 	}
 }
 
+/**
+ * Adiciona um servico a um veiculo do cliente, lancando expecoes quando o cliente ou veiculo nao existe
+ * Se o cliente fosse inativo retira-o da Tabela de Dispersao de clientes inativos
+ */
 void Oficina::addServico(Cliente &c, Veiculo *v, Servico *s, Date &d){
 
 	int posCli = -1, posVeic = -1;
@@ -831,6 +845,9 @@ void Oficina::addServico(Cliente &c, Veiculo *v, Servico *s, Date &d){
 
 }
 
+/**
+ * Imprime todos os clientes que estao inativos
+ */
 void Oficina::displayClientesInativos(){
 	tabHInativos::const_iterator it= inativos.begin();
 	while(it != inativos.end()){
@@ -839,6 +856,9 @@ void Oficina::displayClientesInativos(){
 	}
 }
 
+/**
+ * Oferece um servico aleatorio aos 3 clientes com mais pontos em troca dos seus pontos
+ */
 void Oficina:: happyHour(){
 	srand (time(NULL));
 
@@ -881,6 +901,9 @@ void Oficina:: happyHour(){
 	}
 }
 
+/**
+ * Funcao auxiliar: verifica se os pontos com dada data caducaram (nao foram utilizados durante 1 ano)
+ */
 bool Caducou(Date atual, Date servico){
 	int difAno= atual.getAno() - servico.getAno();
 	int difMes= atual.getMes()- servico.getMes();
@@ -899,6 +922,9 @@ bool Caducou(Date atual, Date servico){
 	return false;
 }
 
+/**
+ * Atualiza os pontos dos cliente da Oficina retirando aqueles que caducaram
+ */
 void Oficina:: atualizaPontos(Date d){
 
 	for(unsigned int i=0; i<clientes.size();i++){
@@ -919,11 +945,16 @@ void Oficina:: atualizaPontos(Date d){
 	}
 }
 
-
+/**
+ * Retorna todos os servicos da oficina presentes na Arvore Binaria de Pesquisa
+ */
 BST<Servico *> Oficina::getServicos() const{
 	return arvoreServicos;
 }
 
+/**
+ * Retorna todos os servicos a serem efetuados na data passada como parametro
+ */
 vector<Servico *> Oficina::getServicos(const Date d) const{
 	BSTItrIn<Servico *> it(arvoreServicos);
 	vector<Servico *> servData;
@@ -937,7 +968,9 @@ vector<Servico *> Oficina::getServicos(const Date d) const{
 }
 
 
-
+/**
+ * Modifica a data de um dado servico para a data passada como parametro
+ */
 bool Oficina::remarcaServico(Servico *s, const Date &d){
 	BSTItrIn<Servico *> it(arvoreServicos);
 	while(!it.isAtEnd()){
@@ -950,6 +983,9 @@ bool Oficina::remarcaServico(Servico *s, const Date &d){
 	return false;
 }
 
+/**
+ * Remove um servico da Oficina
+ */
 bool Oficina::removeServico(Servico *s){
 	BSTItrIn<Servico *> it(arvoreServicos);
 	while(!it.isAtEnd()){
@@ -962,6 +998,9 @@ bool Oficina::removeServico(Servico *s){
 	return false;
 }
 
+/**
+ * Imprime todos os servicos da Oficina presentes na Arvore Binaria
+ */
 void Oficina:: printArvore(){
 	BSTItrIn<Servico *> it(arvoreServicos);
 	int n=0;
@@ -975,6 +1014,9 @@ void Oficina:: printArvore(){
 	}
 }
 
+/**
+ * Imprime os clientes por ordem de pontos dispostos na Fila de Prioridade
+ */
 void Oficina::displayFila(){
 	FilaPrioridade copy= maisPontos;
 

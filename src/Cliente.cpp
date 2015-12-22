@@ -104,10 +104,18 @@ void Cliente::displayCliente() const{
 	}
 }
 
+/**
+ * Muda o nome do cliente
+ * @param nome novo nome do cliente
+ */
 void Cliente::setNome(string nome){
  this->nome = nome;
 }
 
+/*
+ * Remove um servico associado a um veiculo do cliente
+ * @param v, s
+ */
 void Cliente::removeServicoCliente(Veiculo* v, Servico* s){
 	int posVeic=-1;
 	//encontra veiculo
@@ -121,26 +129,46 @@ void Cliente::removeServicoCliente(Veiculo* v, Servico* s){
 	veiculos[posVeic]->removeServico(s);
 }
 
+/**
+ * Incrementa o numero de servicos realizados
+ */
 void Cliente::incServicosRealizados(){
 	servicosRealizados++;
 }
 
+/**
+ * Muda os pontos do cliente para o int passado como parametro
+ * @param pontos novos pontos do cliente
+ */
 void Cliente::setPontos(int pontos){
 	cartaoFidelizacao = pontos;
 }
 
+/**
+ * Retorna os pontos do cliente
+ */
 vector<pair <int, Date > > Cliente::getPontosData(){
 	return pontosData;
 }
 
+/**
+ * Altera o vetor de pares que contem quantos pontos foram adicionados numa dada data, para um novo vetor passado
+ * @param p
+ */
 void Cliente::setPontosData(vector<pair < int, Date > > p){
 	pontosData = p;
 }
 
+/**
+ * Retiras os pares do vetor pontosData , quando os pontos sao utilizados numa oferta
+ */
 void Cliente::erasePontosData(){
 	pontosData.erase(pontosData.begin(), pontosData.end());
 }
 
+/**
+ * Verifica se o cliente esta inativo (nao realiza servicos pelo menos a um ano)
+ */
 bool Cliente::isInativo(Date &d1){
 	bool inativo= true;
 	for (unsigned int i=0; i < veiculos.size(); i++){
@@ -153,7 +181,9 @@ bool Cliente::isInativo(Date &d1){
 	return inativo;
 }
 
-
+/**
+ * Overload do operador ==
+ */
 bool operator == (const Cliente c1, const Cliente c2){
 	if(c1.getId()== c2.getId()) return true;
 	else return false;

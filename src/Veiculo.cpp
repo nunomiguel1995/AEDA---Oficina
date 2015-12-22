@@ -214,10 +214,16 @@ void Automovel::addServico(Servico * & s, bool control){
  */
 string Automovel::classname() const{return "Automovel";}
 
+/**
+ * Funcao Virtual; retira do vetor servicos o servico passado como parametro
+ */
 void Veiculo:: removeServico(Servico* s){
 
 }
 
+/**
+ * retira do vetor servicos o servico passado como parametro
+ */
 void Motorizada:: removeServico(Servico* s){
 	for(unsigned int i=0; i< servicos.size();i++){
 		if(servicos[i]->getNome() == s->getNome()){
@@ -227,6 +233,9 @@ void Motorizada:: removeServico(Servico* s){
 	}
 }
 
+/**
+ * retira do vetor servicos o servico passado como parametro
+ */
 void Camiao:: removeServico(Servico* s){
 	for(unsigned int i=0; i< servicos.size();i++){
 		if(servicos[i]->getNome() == s->getNome()){
@@ -236,6 +245,9 @@ void Camiao:: removeServico(Servico* s){
 	}
 }
 
+/**
+ * retira do vetor servicos o servico passado como parametro
+ */
 void Autocarro:: removeServico(Servico* s){
 	for(unsigned int i=0; i< servicos.size();i++){
 		if(servicos[i]->getNome() == s->getNome()){
@@ -245,6 +257,9 @@ void Autocarro:: removeServico(Servico* s){
 	}
 }
 
+/**
+ * retira do vetor servicos o servico passado como parametro
+ */
 void Automovel:: removeServico(Servico* s){
 	for(unsigned int i=0; i< servicos.size();i++){
 		if(servicos[i]->getNome() == s->getNome()){
